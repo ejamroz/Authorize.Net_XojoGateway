@@ -62,6 +62,7 @@ Begin Window Window1
       LockedInPosition=   False
       Scope           =   0
       TabPanelIndex   =   0
+      ValidateCertificates=   False
    End
    Begin TextArea TextArea1
       AcceptTabs      =   False

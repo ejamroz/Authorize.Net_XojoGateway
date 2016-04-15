@@ -125,11 +125,51 @@ Protected Class ANetResponse
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="accountNumber"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="accountType"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="authCode"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="avsResultCode"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="cavvResultCode"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="cvvResultCode"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="errorMessage"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="lastErrorCode"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -147,7 +187,8 @@ Protected Class ANetResponse
 		#tag ViewProperty
 			Name="responseCode"
 			Group="Behavior"
-			Type="Integer"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
@@ -161,6 +202,16 @@ Protected Class ANetResponse
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="transHash"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="transId"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

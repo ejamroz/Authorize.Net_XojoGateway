@@ -48,6 +48,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -82,6 +83,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Address:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -116,6 +118,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "City"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -150,6 +153,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "State:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -184,6 +188,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   4
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Country:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -218,6 +223,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Zip:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -252,6 +258,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "total:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -286,6 +293,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "CC:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -320,6 +328,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "EXP:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -810,6 +819,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   20
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Phone:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -886,6 +896,7 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   22
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Last"
       TextAlign       =   0
       TextColor       =   &c00000000
