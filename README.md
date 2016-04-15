@@ -1,2 +1,2 @@
 # Authorize.Net_XojoGateway
-A module for working integrating Xojo applications with Authorize.net's CIM and payment gateways
+A module for  integrating Xojo applications with Authorize.net's CIM and payment gateways
