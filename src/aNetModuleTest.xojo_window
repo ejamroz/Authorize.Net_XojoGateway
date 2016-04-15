@@ -48,7 +48,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -83,7 +82,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Address:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -118,7 +116,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "City"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -153,7 +150,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "State:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -188,7 +184,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   4
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Country:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -223,7 +218,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Zip:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -258,7 +252,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "total:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -293,7 +286,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "CC:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -328,7 +320,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "EXP:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -819,7 +810,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   20
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Phone:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -896,7 +886,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   22
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Last"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -969,17 +958,17 @@ End
 		  dim auth as new AuthorizeNetAPI.MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
 		  dim cc as new AuthorizeNetAPI.CreditCard("4111111111111111", "0120")
 		  dim billing as new AuthorizeNetAPI.BillingProfile("tom", "jones", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
-		  dim req as new AuthorizeNetAPI.TransactionRequest(AuthorizeNetAPI.REQUEST_TYPE_AUTH_AND_CHARGE, 42.40, cc, billing)
-		  dim response as AuthorizeNetAPI.ANetResponse
-		  response = self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.TX_SANDBOX)
-		  self.TextArea1.text = response.toString()
+		  dim req as new AuthorizeNetAPI.Request_AuthorizeAndCapture(42.40, cc, billing)
+		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.TX_SANDBOX)
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events ANetController1
 	#tag Event
-		Sub RequestMessageRecieved()
-		  
+		Sub MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
+		  'dim response as AuthorizeNetAPI.ANetResponse
+		  'self.TextArea1.text = response.toString()
 		End Sub
 	#tag EndEvent
 #tag EndEvents

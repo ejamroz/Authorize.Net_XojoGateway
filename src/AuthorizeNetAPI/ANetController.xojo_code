@@ -2,13 +2,50 @@
 Protected Class ANetController
 	#tag Method, Flags = &h0
 		Sub constructor()
-		  self.aNetSocket = new HTTPSecureSocket()
-		  self.aNetSocket.Secure = true 
+		  self.aNetSocket = new Xojo.Net.HTTPSocket()
+		  AddHandler self.aNetSocket.PageReceived, AddressOf handlePageReceived
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub handlePageReceived(caller as Xojo.Net.HTTPSocket, URL As Text, HTTPStatus As Integer, content As Xojo.Core.MemoryBlock)
+		  dim test as integer
+		  
+		  //PARSE RESPONSE 
+		  'dim retValue as AuthorizeNetAPI.ANetResponse
+		  'dim err as new JSONItem()
+		  'Select case self.aNetSocket.ErrorCode
+		  'case 0
+		  'try 
+		  'dim test as dictionary = Xojo.data.ParseJSON(response)
+		  'retValue = new AuthorizeNetAPI.ANetResponse(response)
+		  '
+		  'Catch e as JSONException
+		  'err.Value("errorCode") = "404"
+		  'err.value("errorText") = "Error parsing response from gateway"
+		  'retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
+		  '
+		  'end try 
+		  '
+		  'case -1
+		  'err.Value("errorCode") = "-1"
+		  'err.Value("errorText") = "Connection timeout with gateway"
+		  'retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
+		  '
+		  'else
+		  'err.Value("errorCode") = str(Self.aNetSocket.ErrorCode)
+		  'err.Value("errorText") = "Error connecting to gateway"
+		  'retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
+		  '
+		  'end select
+		  '
+		  'return retValue
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function processRequest(auth as AuthorizeNetAPI.MerchantAuthentication, theRequest as AuthorizeNetAPI.TransactionRequest, gateway as Text) As AuthorizeNetAPI.ANetResponse
+		Sub processRequest(auth as AuthorizeNetAPI.MerchantAuthentication, theRequest as AuthorizeNetAPI.TransactionRequest_, gateway as Text)
 		  //Processes a transaction request
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
@@ -17,59 +54,20 @@ Protected Class ANetController
 		  using Xojo.Core
 		  using xojo.Data
 		  
-		  const JSON_HEAD = "createTransactionRequest"
-		  dim requestBody as new JSONItem()
-		  dim request as new JSONItem()
-		  
-		  //FORM BODY OF REQUEST
-		  requestBody.Value(self.MERCHANT_TOKEN) = auth.getJson()
-		  requestBody.Value(self.REQUEST_TOKEN) = theRequest.getJson()
-		  
-		  //FORM REQUEST
-		  request.Value(JSON_HEAD) = requestBody
-		  
-		  //CONVERT TO String
-		  dim json as string = request.ToString()
-		  
-		  //PROCESS GATEWAY 
-		  self.aNetSocket.SetRequestContent(json, "application/x-www-form-urlencoded")
-		  dim r1 as string = DefineEncoding(self.aNetSocket.sendrequest("POST", gateway, 5), Encodings.UTF8)
-		  dim response as Text = r1.ToText()
-		  
-		  //PARSE RESPONSE 
-		  dim retValue as AuthorizeNetAPI.ANetResponse
-		  dim err as new JSONItem()
-		  Select case self.aNetSocket.ErrorCode
-		  case 0
-		    try 
-		      dim test as dictionary = Xojo.data.ParseJSON(response)
-		      retValue = new AuthorizeNetAPI.ANetResponse(response)
-		      
-		    Catch e as JSONException
-		      err.Value("errorCode") = "404"
-		      err.value("errorText") = "Error parsing response from gateway"
-		      retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		      
-		    end try 
-		    
-		  case -1
-		    err.Value("errorCode") = "-1"
-		    err.Value("errorText") = "Connection timeout with gateway"
-		    retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
+		  if theRequest isa AuthorizeNetAPI.Request_AuthorizeAndCapture then
+		    self.process_AuthCapture(auth, AuthorizeNetAPI.Request_AuthorizeAndCapture(theRequest), gateway)
 		    
 		  else
-		    err.Value("errorCode") = str(Self.aNetSocket.ErrorCode)
-		    err.Value("errorText") = "Error connecting to gateway"
-		    retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
+		    dim err as new InvalidArgumentException
+		    err.ErrorNumber = 1
+		    err.Message = "Unknown transaction Request submitted"
 		    
-		  end select
-		  
-		  return retValue
-		End Function
+		  end if
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub process_AuthCapure(auth as AuthorizeNetAPI.MerchantAuthentication, theRequest as AuthorizeNetAPI.RT_AuthorizeAndCapture, gateway as Text)
+		Private Sub process_AuthCapture(auth as AuthorizeNetAPI.MerchantAuthentication, theRequest as AuthorizeNetAPI.Request_AuthorizeAndCapture, gateway as Text)
 		  //Processes a transaction of type Authenticate and Capure 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
@@ -89,54 +87,28 @@ Protected Class ANetController
 		  //FORM REQUEST
 		  request.Value(JSON_HEAD) = requestBody
 		  
-		  //CONVERT TO String
-		  dim json as string = request.ToString()
+		  //CONVERT TO DATA
+		  dim j1 as string = DefineEncoding(request.ToString(), Encodings.UTF8)
+		  dim json as text = j1.ToText()
+		  dim data as MemoryBlock = TextEncoding.UTF8.ConvertTextToData(json)
 		  
 		  //PROCESS GATEWAY 
-		  self.aNetSocket.SetRequestContent(json, "application/x-www-form-urlencoded")
-		  dim r1 as string = DefineEncoding(self.aNetSocket.sendrequest("POST", gateway, 5), Encodings.UTF8)
-		  dim response as Text = r1.ToText()
+		  self.aNetSocket.SetRequestContent(data, "application/x-www-form-urlencoded")
+		  self.aNetSocket.send("POST", gateway)
 		  
-		  //PARSE RESPONSE 
-		  dim retValue as AuthorizeNetAPI.ANetResponse
-		  dim err as new JSONItem()
-		  Select case self.aNetSocket.ErrorCode
-		  case 0
-		    try 
-		      dim test as dictionary = Xojo.data.ParseJSON(response)
-		      retValue = new AuthorizeNetAPI.ANetResponse(response)
-		      
-		    Catch e as JSONException
-		      err.Value("errorCode") = "404"
-		      err.value("errorText") = "Error parsing response from gateway"
-		      retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		      
-		    end try 
-		    
-		  case -1
-		    err.Value("errorCode") = "-1"
-		    err.Value("errorText") = "Connection timeout with gateway"
-		    retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		    
-		  else
-		    err.Value("errorCode") = str(Self.aNetSocket.ErrorCode)
-		    err.Value("errorText") = "Error connecting to gateway"
-		    retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		    
-		  end select
 		  
-		  return retValue
+		  
 		End Sub
 	#tag EndMethod
 
 
 	#tag Hook, Flags = &h0
-		Event RequestMessageRecieved()
+		Event MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
 	#tag EndHook
 
 
 	#tag Property, Flags = &h21
-		Private aNetSocket As HTTPSecureSocket
+		Private aNetSocket As xojo.Net.HTTPSocket
 	#tag EndProperty
 
 

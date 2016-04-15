@@ -30,6 +30,7 @@ Implements Tokenizable
 	#tag Property, Flags = &h21
 		#tag Note
 			Key value pairs for merchant key and transaction key
+			
 		#tag EndNote
 		Private name As String
 	#tag EndProperty

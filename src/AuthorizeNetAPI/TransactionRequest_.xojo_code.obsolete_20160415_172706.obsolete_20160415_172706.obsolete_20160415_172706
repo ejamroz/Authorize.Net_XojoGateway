@@ -1,42 +1,33 @@
 #tag Class
-Protected Class MerchantAuthentication
+Protected Class TransactionRequest_
 Implements Tokenizable
-	#tag Method, Flags = &h0
-		Sub constructor(name as string, transactionkey as string)
-		  self.name = name
-		  Self.transactionId = transactionKey
+	#tag Method, Flags = &h21
+		Private Sub constructor()
+		  
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  //@return: The name of this token : the information stored by it
-		  
-		  using Xojo.Core
-		  
-		  dim jsonBody as new JSONItem()
-		  
-		  //FORM TOKEN DATA
-		  jsonBody.Value("name") = self.name
-		  jsonBody.Value("transactionKey") = self.transactionID
-		  
-		  //FORM TOKEN
-		  return jsonBody
-		  
+		  return new JSONItem()
 		End Function
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h21
-		#tag Note
-			Key value pairs for merchant key and transaction key
-		#tag EndNote
-		Private name As String
+	#tag Note, Name = Description
+		This is an abstract super class for all transaction types. It can not be instantiated
+		
+	#tag EndNote
+
+
+	#tag Property, Flags = &h1
+		Protected type As string
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private transactionID As String
-	#tag EndProperty
+
+	#tag Constant, Name = AUTH_AND_CAPTURE, Type = Text, Dynamic = False, Default = \"authCaptureTransaction", Scope = Protected
+	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -55,7 +46,7 @@ Implements Tokenizable
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="name"
+			Name="Name"
 			Visible=true
 			Group="ID"
 			Type="String"
