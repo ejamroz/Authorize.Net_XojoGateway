@@ -8,13 +8,14 @@ Protected Class ANetResponse_
 
 	#tag Method, Flags = &h0
 		Function isSuccess() As boolean
-		  return false
+		  
+		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function toString() As string
-		  return ""
+		  
 		  
 		End Function
 	#tag EndMethod

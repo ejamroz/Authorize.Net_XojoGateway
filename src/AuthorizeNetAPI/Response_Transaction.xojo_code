@@ -2,38 +2,60 @@
 Protected Class Response_Transaction
 Inherits AuthorizeNetAPI.ANetResponse_
 	#tag Method, Flags = &h0
-		Sub constructor(json as string)
-		  //@param json: JSON string returned from ANet gateway
+		Sub constructor(json as variant)
+		  //@param json: Object representing JSON string. This method currently accepts JSONItems and Xojo.Core.Dictionaries
+		  //@throws BadDataException for improperly formatted JSON
+		  //@throws UnsupportedFormatException for objects passed that are passed that can not be parsed 
 		  
 		  using xojo.core
 		  using xojo.data
 		  
-		  try 
-		    dim data as Dictionary = ParseJSON(json.ToText())
-		    self.accountNumber = data.Lookup("accountNumber", "")
-		    self.accountType = data.Lookup("accountType", "")
-		    self.authCode = data.Lookup("authCode", "")
-		    self.avsResultCode = data.Lookup("avsResultCode", "")
-		    self.cavvResultCode = data.Lookup("cavvResultCode", "")
-		    self.cvvResultCode = data.Lookup("cvvResultCode", "")
-		    self.responseCode = data.Lookup("responseCode", "")
-		    self.transHash = data.Lookup("transHash", "")
-		    self.transId = data.Lookup("transId", "")
-		    if data.HasKey("errors") then
-		      dim err as new Dictionary
-		      err = data.Value("error")
-		      self.lastErrorCode = err.Lookup("errorCode", "")
-		      self.errorMessage = err.Lookup("errorText", "")
+		  dim data as Dictionary
+		  
+		  if json isa JSONItem then
+		    dim myjson as JSONItem = JSONItem(json) 
+		    try 
+		      dim jString as string = DefineEncoding(myjson.toString(), Encodings.UTF8)
+		      data = ParseJSON(jString.toText())
 		      
-		    end if
+		    catch err as JSONException
+		      dim e as new BadDataException()
+		      e.ErrorNumber = 2
+		      e.Message = "Improper JSON string passed to constructor: " + err.Reason
+		      raise e
+		      
+		    end try 
 		    
-		  catch err as JSONException
-		    dim e as new InvalidArgumentException
+		  elseif json isa Dictionary then
+		    data = json
+		    
+		  else
+		    dim e as new UnsupportedFormatException()
 		    e.ErrorNumber = 1
-		    e.Message = "Invalid JSON string passed to object constructor"
+		    e.Message = "Non-parsable object passed to constructor"
 		    raise e
 		    
-		  end try 
+		  end if
+		  
+		  //EXTRACT AND STORE DATA 
+		  self.accountNumber = data.Lookup("accountNumber", "")
+		  self.accountType = data.Lookup("accountType", "")
+		  self.authCode = data.Lookup("authCode", "")
+		  self.avsResultCode = data.Lookup("avsResultCode", "")
+		  self.cavvResultCode = data.Lookup("cavvResultCode", "")
+		  self.cvvResultCode = data.Lookup("cvvResultCode", "")
+		  self.responseCode = data.Lookup("responseCode", "")
+		  self.transHash = data.Lookup("transHash", "")
+		  self.transId = data.Lookup("transId", "")
+		  if data.HasKey("errors") then
+		    dim temp() as Auto = data.Value("errors")
+		    dim err as Dictionary = temp(0) 
+		    self.lastErrorCode = err.Lookup("errorCode", "")
+		    self.errorMessage = err.Lookup("errorText", "")
+		    
+		  end if
+		  
+		  
 		  
 		  
 		End Sub

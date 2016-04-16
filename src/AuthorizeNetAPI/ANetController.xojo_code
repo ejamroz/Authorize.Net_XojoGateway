@@ -3,44 +3,66 @@ Protected Class ANetController
 	#tag Method, Flags = &h0
 		Sub constructor()
 		  self.aNetSocket = new Xojo.Net.HTTPSocket()
-		  AddHandler self.aNetSocket.PageReceived, AddressOf handlePageReceived
+		  AddHandler self.aNetSocket.PageReceived, AddressOf handlePageReceived //Handle information comming in
+		  AddHandler self.aNetSocket.error, AddressOf handleError //Handle incoming errors 
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Sub handleError(sender as xojo.Net.HTTPSocket, err as RuntimeException)
+		  //Event handler for the aNetSocket. Stores the error code and message for access
+		  
+		  self.lastErrorCode = err.ErrorNumber
+		  self.errormessage = err.Reason
+		  Error(err) //Trigger object event 
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub handlePageReceived(caller as Xojo.Net.HTTPSocket, URL As Text, HTTPStatus As Integer, content As Xojo.Core.MemoryBlock)
-		  dim test as integer
+		  using Xojo.Core
+		  using Xojo.Data
+		  
+		  dim json as text = Xojo.core.TextEncoding.UTF8.ConvertDataToText(content)
 		  
 		  //PARSE RESPONSE 
-		  'dim retValue as AuthorizeNetAPI.ANetResponse
-		  'dim err as new JSONItem()
-		  'Select case self.aNetSocket.ErrorCode
-		  'case 0
-		  'try 
-		  'dim test as dictionary = Xojo.data.ParseJSON(response)
-		  'retValue = new AuthorizeNetAPI.ANetResponse(response)
-		  '
-		  'Catch e as JSONException
-		  'err.Value("errorCode") = "404"
-		  'err.value("errorText") = "Error parsing response from gateway"
-		  'retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		  '
-		  'end try 
-		  '
-		  'case -1
-		  'err.Value("errorCode") = "-1"
-		  'err.Value("errorText") = "Connection timeout with gateway"
-		  'retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		  '
-		  'else
-		  'err.Value("errorCode") = str(Self.aNetSocket.ErrorCode)
-		  'err.Value("errorText") = "Error connecting to gateway"
-		  'retValue = new AuthorizeNetAPI.ANetResponse(err.ToString())
-		  '
-		  'end select
-		  '
-		  'return retValue
+		  dim retValue as AuthorizeNetAPI.ANetResponse_
+		  dim err as new JSONItem()
+		  Select case self.lastErrorCode
+		  case 0
+		    try 
+		      dim data as Dictionary = Xojo.data.ParseJSON(json) 
+		      //PARSE transactionResponse 
+		      if data.HasKey("transactionResponse") then
+		        dim txResponse as Dictionary = data.Value("transactionResponse")
+		        retValue = new AuthorizeNetAPI.Response_Transaction(txResponse)
+		        
+		      else
+		        //XXX: WHAT TO DO HERE? DIFFERENT TYPE OF RESPONSE?
+		        
+		      end if
+		      
+		    Catch e as JSONException
+		      err.Value("errorCode") = "404"
+		      err.value("errorText") = "Error parsing response from gateway"
+		      retValue = new AuthorizeNetAPI.Response_Transaction(err)
+		      
+		    end try 
+		    
+		  case -1
+		    err.Value("errorCode") = str(self.lastErrorCode)
+		    err.Value("errorText") = "Connection timeout with gateway"
+		    retValue = new AuthorizeNetAPI.Response_Transaction(err)
+		    
+		  else
+		    err.Value("errorCode") = str(self.lastErrorCode)
+		    err.Value("errorText") = "Error connecting to gateway"
+		    retValue = new AuthorizeNetAPI.Response_Transaction(err)
+		    
+		  end select
+		  
+		  MessageReceived(retValue)
 		End Sub
 	#tag EndMethod
 
@@ -103,12 +125,24 @@ Protected Class ANetController
 
 
 	#tag Hook, Flags = &h0
+		Event Error(err as RuntimeException)
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
 		Event MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
 	#tag EndHook
 
 
 	#tag Property, Flags = &h21
 		Private aNetSocket As xojo.Net.HTTPSocket
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private errorMessage As Text
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private lastErrorCode As integer
 	#tag EndProperty
 
 

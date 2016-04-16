@@ -967,8 +967,13 @@ End
 #tag Events ANetController1
 	#tag Event
 		Sub MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
-		  'dim response as AuthorizeNetAPI.ANetResponse
-		  'self.TextArea1.text = response.toString()
+		  if response IsA AuthorizeNetAPI.Response_Transaction then
+		    self.TextArea1.Text = response.toString
+		    
+		  else
+		    //HANDLE OTHER TYPES OF RESPONSED HERE 
+		    
+		  end if
 		End Sub
 	#tag EndEvent
 #tag EndEvents
