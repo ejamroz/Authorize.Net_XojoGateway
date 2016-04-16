@@ -1,5 +1,22 @@
 #tag Module
 Protected Module AuthorizeNetAPI
+	#tag Method, Flags = &h0, CompatibilityFlags = (not TargetHasGUI and not TargetWeb and not TargetIOS) or  (TargetWeb) or  (TargetHasGUI)
+		Function StringToText(s As String) As Text
+		  // Before a String can be converted to Text, it must have a valid encoding
+		  // to avoid an exception. If the encoding is not valid, we will hex-encode the string instead.
+		  
+		  If s.Encoding Is Nil Or Not s.Encoding.IsValidData(s) Then
+		    s = EncodeHex(s, True)
+		    s = s.DefineEncoding(Encodings.UTF8) // Just to make sure
+		    
+		  End If
+		  
+		  Return s.ToText
+		  
+		End Function
+	#tag EndMethod
+
+
 	#tag Constant, Name = TX_LIVE, Type = Text, Dynamic = False, Default = \"https://api.authorize.net/xml/v1/request.api", Scope = Public
 	#tag EndConstant
 

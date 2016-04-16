@@ -940,10 +940,10 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   68
    End
-   Begin AuthorizeNetAPI.ANetController ANetController1
+   Begin ANetController ANetController1
       Index           =   -2147483648
       LockedInPosition=   False
-      Scope           =   1
+      Scope           =   2
       TabPanelIndex   =   0
    End
 End
@@ -955,10 +955,10 @@ End
 #tag Events PushButton1
 	#tag Event
 		Sub Action()
-		  dim auth as new AuthorizeNetAPI.MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
-		  dim cc as new AuthorizeNetAPI.CreditCard("4111111111111111", "0120")
-		  dim billing as new AuthorizeNetAPI.BillingProfile("tom", "jones", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
-		  dim req as new AuthorizeNetAPI.Request_AuthorizeAndCapture(42.40, cc, billing)
+		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
+		  dim cc as new CreditCard("4111111111111111", "0120")
+		  dim billing as new BillingProfile("tom", "jones", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
+		  dim req as new Request_AuthorizeAndCapture(42.40, cc, billing)
 		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.TX_SANDBOX)
 		  
 		End Sub
@@ -967,7 +967,7 @@ End
 #tag Events ANetController1
 	#tag Event
 		Sub MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
-		  if response IsA AuthorizeNetAPI.Response_Transaction then
+		  if response IsA Response_Transaction then
 		    self.TextArea1.Text = response.toString
 		    
 		  else
