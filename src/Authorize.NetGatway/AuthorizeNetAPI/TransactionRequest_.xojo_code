@@ -8,6 +8,20 @@ Implements Tokenizable
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function generateProfile() As JSONItem
+		  //Creates the necessary json for saving a profile during a tx
+		  
+		  dim json as new JSONItem()
+		  
+		  json.Value("createProfile") = "true"
+		  
+		  return json
+		  
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
 		  
@@ -27,6 +41,9 @@ Implements Tokenizable
 
 
 	#tag Constant, Name = AUTH_AND_CAPTURE, Type = Text, Dynamic = False, Default = \"authCaptureTransaction", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = CREATE_PROFILE_FROM_TX, Type = Text, Dynamic = False, Default = \"createCustomerProfileFromTransactionRequest", Scope = Protected
 	#tag EndConstant
 
 

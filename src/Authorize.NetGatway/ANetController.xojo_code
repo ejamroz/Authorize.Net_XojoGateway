@@ -72,15 +72,21 @@ Protected Class ANetController
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
 		  //@param gateway: The URL for which payment gateway to use 
+		  //@throws UnsupportedFormatException: if an unknown tx type is passed 
 		  
 		  using Xojo.Core
 		  using xojo.Data
 		  
+		  //DISPATCH REQUEST TYPE 
 		  if theRequest isa Request_AuthorizeAndCapture then
 		    self.process_AuthCapture(auth, Request_AuthorizeAndCapture(theRequest), gateway)
 		    
+		  elseif theRequest isa Request_CreateCustomerProfileFromTransaction then 
+		    self.process_CreateCustomerFromTx(auth, Request_CreateCustomerProfileFromTransaction(theRequest), gateway)
+		    
+		    //TODO: ADD OTHER REQUESTS HERE 
 		  else
-		    dim err as new InvalidArgumentException
+		    dim err as new UnsupportedFormatException
 		    err.ErrorNumber = 1
 		    err.Message = "Unknown transaction Request submitted"
 		    
@@ -109,17 +115,57 @@ Protected Class ANetController
 		  //FORM REQUEST
 		  request.Value(JSON_HEAD) = requestBody
 		  
+		  //POST
+		  self.send(request, gateway)
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub process_CreateCustomerFromTx(auth as MerchantAuthentication, theRequest as Request_CreateCustomerProfileFromTransaction, gateway as Text)
+		  //Processes a transaction of type Create Customer Profile from Transaction 
+		  //@param auth: The merchant authentication profile 
+		  //@param theRequest: The TransactionRequest object to be processed through the gateway
+		  //@param gateway: The URL for which payment gateway to use 
+		  
+		  using Xojo.Core
+		  using xojo.Data
+		  
+		  const JSON_HEAD = "createCustomerProfileFromTransactionRequest"
+		  dim requestBody as new JSONItem()
+		  dim request as new JSONItem()
+		  
+		  //FORM BODY OF REQUEST
+		  requestBody.Value(self.MERCHANT_TOKEN) = auth.getJson()
+		  requestBody.Value("transId") = theRequest.getID()
+		  
+		  //FORM REQUEST
+		  request.Value(JSON_HEAD) = requestBody
+		  
+		  //POST
+		  self.send(request, gateway)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub send(request as JSONItem, gateway as text)
+		  //POSTS the request to the given gateway
+		  //@param data: JSON data to post
+		  //@param gateway: The URL of the API to post to 
+		  
+		  using Xojo.Data
+		  Using Xojo.Core 
+		  
 		  //CONVERT TO DATA
-		  dim j1 as string = DefineEncoding(request.ToString(), Encodings.UTF8)
-		  dim json as text = j1.ToText()
+		  dim json as text = AuthorizeNetAPI.JSONtoText(request)
 		  dim data as MemoryBlock = TextEncoding.UTF8.ConvertTextToData(json)
 		  
 		  //PROCESS GATEWAY 
 		  self.aNetSocket.SetRequestContent(data, "application/x-www-form-urlencoded")
 		  self.aNetSocket.send("POST", gateway)
-		  
-		  
-		  
 		End Sub
 	#tag EndMethod
 
@@ -146,10 +192,10 @@ Protected Class ANetController
 	#tag EndProperty
 
 
-	#tag Constant, Name = MERCHANT_TOKEN, Type = String, Dynamic = False, Default = \"merchantAuthentication", Scope = Public
+	#tag Constant, Name = MERCHANT_TOKEN, Type = String, Dynamic = False, Default = \"merchantAuthentication", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = REQUEST_TOKEN, Type = String, Dynamic = False, Default = \"transactionRequest", Scope = Public
+	#tag Constant, Name = REQUEST_TOKEN, Type = String, Dynamic = False, Default = \"transactionRequest", Scope = Private
 	#tag EndConstant
 
 

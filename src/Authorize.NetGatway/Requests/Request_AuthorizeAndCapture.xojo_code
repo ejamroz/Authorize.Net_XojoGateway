@@ -2,21 +2,37 @@
 Protected Class Request_AuthorizeAndCapture
 Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as AuthorizeNetAPI.PaymentType_, optional billing as BillingProfile)
+		Sub constructor(amount as double, payType as AuthorizeNetAPI.PaymentType_, optional billing as BillingProfile, optional toSave as boolean, optional invoiceNum as string)
 		  //Creates a transactionRequest object which is needed when trying to 
 		  //    authenticate,capture,refund, or void a transaction
 		  //@param type: The type of transation request that this is
 		  //@param amount: The amount to act on e.g. to charge. This is a total and must include tax, shipping, etc
 		  //@param payType: The type of payment used in this transation
 		  //@param billing: [OPTIONAL] Billing profile for the payment 
+		  //@param toSave: [OPTIONAL] if true, will create a customerProfile inside ANet's CIM system 
 		  
 		  self.type = super.AUTH_AND_CAPTURE
 		  self.amount = str(amount)
 		  self.paymentType = payType
 		  self.billing = billing
+		  self.toSave = toSave
+		  self.invoiceNumber = invoiceNum
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function generateInvoiceToken() As JSONItem
+		  //@return: Formatted json for handling invoice numbers
+		  
+		  Using xojo.Core
+		  
+		  dim jsonObj as new JSONItem()
+		  jsonObj.value("invoiceNumber") = self.invoiceNumber
+		  
+		  return jsonObj
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -29,6 +45,16 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 		  jsonBody.Value("transactionType") = self.type
 		  jsonBody.Value("amount") = self.amount
 		  jsonBody.Value(self.PAY_TOKEN) = self.paymentType.getJson()
+		  if self.toSave then 
+		    jsonBody.value("profile") = super.generateProfile()
+		    
+		  end if
+		  
+		  if self.invoiceNumber <> "" then //we were given an ivoice number to track this by
+		    jsonBody.Value("order") = self.generateInvoiceToken()
+		    
+		  end if
+		  
 		  if self.billing <> Nil then 
 		    jsonBody.Value(self.BILL_TOKEN) = self.billing.getJson()
 		    
@@ -50,7 +76,15 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private invoiceNumber As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private paymentType As AuthorizeNetAPI.PaymentType_
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private toSave As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
