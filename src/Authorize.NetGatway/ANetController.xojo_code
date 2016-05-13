@@ -13,10 +13,21 @@ Protected Class ANetController
 		Private Sub handleError(sender as xojo.Net.HTTPSocket, err as RuntimeException)
 		  //Event handler for the aNetSocket. Stores the error code and message for access
 		  
-		  self.lastErrorCode = err.ErrorNumber
-		  self.errormessage = err.Reason
-		  Error(err) //Trigger object event 
+		  if err.ErrorNumber <> 200 then //200 indicates a successful command 
+		    Error(err) //Trigger object event 
+		    
+		  end if
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function handleErrorResponse(data as xojo.Core.Dictionary) As Response_Error
+		  //Converts a transaction reponse to usable data
+		  //@param Data: Dictionary representing parsable data from a transaction response
+		  
+		  return new Response_Error(data)
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -27,54 +38,44 @@ Protected Class ANetController
 		  using Xojo.Data
 		  using AuthorizeNetAPI
 		  
-		  dim retValue as AuthorizeNetAPI.ANetResponse_
 		  dim err as new Dictionary()
 		  dim responseData as Dictionary
 		  dim responseType as Text
 		  dim response as Pair
 		  
-		  Select case self.lastErrorCode
-		  case 0 //nothing went wrong 
-		    //MAKE SURE DATA COME IN CORRECTLY 
-		    try 
-		      dim json as text = TextEncoding.UTF8.ConvertDataToText(content)
-		      response = determineResponseType(json)
-		      responseType = response.left
-		      responseData = response.right
-		      
-		    Catch e as BadDataException
-		      err.Value("errorCode") = str(e.ErrorNumber)
-		      err.Value("errorText") = e.Reason
-		      MessageReceived(new Response_Transaction(err)) //TODO: SHOULD RETURN RESPONSE OF TYPE kTypeError 
-		      
-		    end try
+		  //MAKE SURE DATA COME IN CORRECTLY 
+		  try 
+		    dim json as text = TextEncoding.UTF8.ConvertDataToText(content)
+		    response = determineResponseType(json)
+		    responseType = response.left
+		    responseData = response.right
 		    
-		    //HANDLE RESPONSE TYPES 
-		    Select case responseType
-		    case kTypeTransaction
-		      retValue = handleTXResponse(responseData)
-		      
-		    case kTypeProfile
-		      //TODO
-		      
-		    case kTypeError
-		      //TODO
-		      
-		    End Select
+		  Catch e as BadDataException
+		    Error(e) //Raise event 
+		    return //stop the MessageReceived event from firing 
 		    
-		  case -1 //timeout 
-		    err.Value("errorCode") = str(self.lastErrorCode)
-		    err.Value("errorText") = "Connection timeout with gateway"
-		    retValue = new Response_Transaction(err) //TODO: SHOULD RETURN RESPONSE OF TYPE kTypeError 
-		    
-		  else //unknown err, pass it to user 
-		    err.Value("errorCode") = str(self.lastErrorCode)
-		    err.Value("errorText") = "Error connecting to gateway"
-		    retValue = new Response_Transaction(err) //TODO: SHOULD RETURN RESPONSE OF TYPE kTypeError 
-		    
-		  end select
+		  end try
 		  
-		  MessageReceived(retValue)
+		  //HANDLE RESPONSE TYPES 
+		  Select case responseType
+		  case kTypeTransaction
+		    dim retValue as Response_Transaction = handleTXResponse(responseData)
+		    TransactionResponseReceived(retValue)
+		    
+		  case kTypeProfile
+		    break
+		    //TODO
+		    
+		  case kTypeError
+		    dim retValue as Response_Error = handleErrorResponse(responseData)
+		    ErrorResponseReceived(retValue)
+		    
+		  else
+		    break
+		    //TODO: handle other response types 
+		    
+		  End Select
+		  
 		End Sub
 	#tag EndMethod
 
@@ -263,20 +264,20 @@ Protected Class ANetController
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
+		Event ErrorResponseReceived(response as Response_Error)
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event ProfileResponseReceived(response as Response_ProfileCreation)
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event TransactionResponseReceived(response as Response_Transaction)
 	#tag EndHook
 
 
 	#tag Property, Flags = &h21
 		Private aNetSocket As xojo.Net.HTTPSocket
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private errorMessage As Text
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private lastErrorCode As integer
 	#tag EndProperty
 
 

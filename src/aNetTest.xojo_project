@@ -29,6 +29,7 @@ Class=Request_CreateCustomerProfileFromTransaction;Authorize.NetGatway/Requests/
 Class=Response_ProfileCreation;Authorize.NetGatway/Responses/Response_ProfileCreation.xojo_code;&h7DBE07FF;&h767527FF;false
 Class=Request_Refund;Authorize.NetGatway/Requests/Request_Refund.xojo_code;&h61CB07FF;&h5B6FD7FF;false
 Class=Request_Void;Authorize.NetGatway/Requests/Request_Void.xojo_code;&h568FEFFF;&h5B6FD7FF;false
+Class=Response_Error;Authorize.NetGatway/Responses/Response_Error.xojo_code;&h4B7E7FF;&h767527FF;false
 DefaultWindow=aNetModuleTest
 AppMenuBar=MainMenuBar
 MajorVersion=1

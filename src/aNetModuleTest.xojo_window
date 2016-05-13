@@ -946,12 +946,6 @@ Begin Window aNetModuleTest
       Scope           =   2
       TabPanelIndex   =   0
    End
-   Begin ANetController ANetController2
-      Index           =   -2147483648
-      LockedInPosition=   False
-      Scope           =   0
-      TabPanelIndex   =   0
-   End
    Begin PushButton PushButton2
       AutoDeactivate  =   True
       Bold            =   False
@@ -1029,7 +1023,7 @@ End
 	#tag Event
 		Sub Action()
 		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
-		  dim cc as new CreditCard("4111111111111111", "0120")
+		  dim cc as new CreditCard("4111111111111111", "") //"0120")
 		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
 		  dim req as new Request_AuthorizeAndCapture(42.40, cc, billing, false, "1005")
 		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.kTxSandbox)
@@ -1039,16 +1033,26 @@ End
 #tag EndEvents
 #tag Events ANetController1
 	#tag Event
-		Sub MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
-		  if response IsA Response_Transaction then
-		    self.TextArea1.Text = response.toString
-		    self.aNetTxID = Response_Transaction(response).transactionID
+		Sub Error(err as RuntimeException)
+		  MsgBox "An error occured while trying to communicate with ANet. Error number: " + str(err.ErrorNumber) + chr(10) + err.Reason
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub ErrorResponseReceived(response as Response_Error)
+		  self.TextArea1.Text = response.toString()
+		  if response.isSuccess() then 
+		    MsgBox "Success!"
 		    
 		  else
-		    //HANDLE OTHER TYPES OF RESPONSED HERE 
+		    MsgBox "Fail"
 		    
-		  end if
-		  
+		  end if 
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub TransactionResponseReceived(response as Response_Transaction)
+		  self.TextArea1.Text = response.toString
+		  self.aNetTxID = response.transactionID
 		  if response.isSuccess() then 
 		    MsgBox "Success!"
 		    
@@ -1081,6 +1085,11 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="aNetTxID"
+		Group="Behavior"
+		Type="text"
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackColor"
 		Visible=true

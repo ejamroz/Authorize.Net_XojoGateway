@@ -8,7 +8,7 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 		  //@param amount: The amount to act on e.g. to charge. This is a total and must include tax, shipping, etc
 		  //@param payType: The type of payment used in this transation
 		  //@param billing: [OPTIONAL] Billing profile for the payment 
-		  //@param toSave: [OPTIONAL] if true, will create a customerProfile inside ANet's CIM system 
+		  //@param toSave: if true, will create a customerProfile inside ANet's CIM system 
 		  
 		  self.type = super.kAuthAndCapture
 		  self.amount = str(amount)

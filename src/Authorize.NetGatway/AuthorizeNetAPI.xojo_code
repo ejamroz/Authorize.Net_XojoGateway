@@ -35,7 +35,7 @@ Protected Module AuthorizeNetAPI
 		  else
 		    dim e as new BadDataException()
 		    e.ErrorNumber = 404000
-		    e.Reason = "Unknow response type passed"
+		    e.Reason = "Unknow response type"
 		    raise e 
 		    
 		  end if
