@@ -3,7 +3,7 @@ Protected Class Request_CreateCustomerProfileFromTransaction
 Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag Method, Flags = &h0
 		Sub constructor(txID as string)
-		  self.type = super.CREATE_PROFILE_FROM_TX
+		  self.type = super.kCreateProfileFromTx
 		  self.txID = txID
 		End Sub
 	#tag EndMethod
@@ -66,11 +66,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 			Visible=true
 			Group="Position"
 			InitialValue="0"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="txID"
-			Group="Behavior"
 			Type="Integer"
 		#tag EndViewProperty
 	#tag EndViewBehavior

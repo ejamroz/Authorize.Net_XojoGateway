@@ -1,49 +1,8 @@
 #tag Class
 Protected Class ANetResponse_
 	#tag Method, Flags = &h1
-		Protected Sub constructor(json as variant)
-		  //Parses the given JSON object to create a response. Supported types: 
-		  //    -JSONItem
-		  //    -Xojo.Core.Dictionary
-		  //@param json: Object representing JSON string
-		  //@throws BadDataException for improperly formatted JSON
-		  //@throws UnsupportedFormatException for objects passed that are passed that can not be parsed 
-		  
-		  using xojo.core
-		  using xojo.data
-		  
-		  dim data as Dictionary
-		  try 
-		    data = self.validateInput(json)
-		    
-		  catch err as RunTimeException
-		    dim e as new UnsupportedFormatException()
-		    e.ErrorNumber = err.ErrorNumber
-		    e.Message = err.Message
-		    raise e 
-		    
-		  end try
-		  
-		  //LOAD ANY MESSSAGE DATA
-		  if data.HasKey("messages") then 
-		    dim temp() as Auto = data.Value("messages")
-		    dim err as Dictionary = temp(0) 
-		    self.StatusCode = err.Lookup("code", "")
-		    self.StatusMessage = err.Lookup("text", "")
-		    
-		  end if
-		  
-		  //LOAD ANY ERRORS
-		  if data.HasKey("errors") then
-		    dim temp() as Auto = data.Value("errors")
-		    dim err as Dictionary = temp(0) 
-		    self.lastErrorCode = err.Lookup("errorCode", "")
-		    self.errorMessage = err.Lookup("errorText", "")
-		    
-		  end if
-		  
-		  //STORE DATA 
-		  self.data = data 
+		Protected Sub constructor(dataJson as xojo.Core.Dictionary)
+		  data = dataJson
 		End Sub
 	#tag EndMethod
 
@@ -51,7 +10,7 @@ Protected Class ANetResponse_
 		Function isSuccess() As boolean
 		  //@return: True is the request was a success and false otherwise
 		  
-		  if self.StatusCode = AuthorizeNetAPI.SUCCESS_CODE then
+		  if StatusCode = kSuccessCode then
 		    return true
 		    
 		  end if 
@@ -61,22 +20,45 @@ Protected Class ANetResponse_
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub setResponseCodes(data as xojo.Core.Dictionary)
+		  //Extracts result code information from the passed object. The intent is to get 
+		  //    more specific knowlege about what happened based on what type of response
+		  //    was issued 
+		  //@param data: Dictionary representing the messages Token of an ANet response 
+		  //@return true if data was extracted false otherwise
+		  
+		  Using Xojo.Core
+		  
+		  if data.HasKey("message") then 
+		    dim temp() as Auto = data.Value("message")
+		    dim err as Dictionary = temp(0) 
+		    self.StatusCode = err.Lookup("code", "")
+		    self.StatusMessage = err.Lookup("text", "")
+		    
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function toString() As string
 		  using Xojo.Core
 		  
 		  dim retString as string = "[Status: " + self.StatusCode + chr(10) +_
 		  "Message: " + self.StatusMessage + chr(10)
 		  if self.data <> Nil then 
+		    #Pragma BreakOnExceptions false 
 		    for each item as DictionaryEntry in self.data
 		      try
 		        retString = retString + item.Key + ": " + item.Value + chr(10) 
 		        
-		      catch err as TypeMismatchException
+		      catch err as TypeMismatchException //TODO: dont be lazy here and actually recursively search all of the data 
 		        retString = retString + item.Key + ": [DATA]" + chr(10) 
 		        
 		      end try 
 		      
 		    next 
+		    #Pragma BreakOnExceptions true
 		    
 		  end if
 		  
@@ -92,8 +74,8 @@ Protected Class ANetResponse_
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Function validateInput(json as variant) As xojo.Core.Dictionary
+	#tag Method, Flags = &h1
+		Protected Function validateInput(json as variant) As xojo.Core.Dictionary
 		  //Checks to see if pass json is in a supportd type, if so, converts it to a dictionary. Currently supports:
 		  //    - JSONItem
 		  //    - Xojo.Core.Dictionary
@@ -166,11 +148,21 @@ Protected Class ANetResponse_
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="errorMessage"
+			Group="Behavior"
+			Type="Text"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="lastErrorCode"
+			Group="Behavior"
+			Type="text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -188,13 +180,13 @@ Protected Class ANetResponse_
 		#tag ViewProperty
 			Name="StatusCode"
 			Group="Behavior"
-			Type="string"
+			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StatusMessage"
 			Group="Behavior"
-			Type="string"
+			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty

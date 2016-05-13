@@ -2,16 +2,15 @@
 Protected Class Request_AuthorizeAndCapture
 Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as AuthorizeNetAPI.PaymentType_, optional billing as BillingProfile, optional toSave as boolean, optional invoiceNum as string)
+		Sub constructor(amount as double, payType as AuthorizeNetAPI.PaymentType_, optional billing as BillingProfile, toSave as boolean, optional invoiceNum as string)
 		  //Creates a transactionRequest object which is needed when trying to 
 		  //    authenticate,capture,refund, or void a transaction
-		  //@param type: The type of transation request that this is
 		  //@param amount: The amount to act on e.g. to charge. This is a total and must include tax, shipping, etc
 		  //@param payType: The type of payment used in this transation
 		  //@param billing: [OPTIONAL] Billing profile for the payment 
 		  //@param toSave: [OPTIONAL] if true, will create a customerProfile inside ANet's CIM system 
 		  
-		  self.type = super.AUTH_AND_CAPTURE
+		  self.type = super.kAuthAndCapture
 		  self.amount = str(amount)
 		  self.paymentType = payType
 		  self.billing = billing
@@ -44,7 +43,7 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 		  //FORM TOKEN DATA
 		  jsonBody.Value("transactionType") = self.type
 		  jsonBody.Value("amount") = self.amount
-		  jsonBody.Value(self.PAY_TOKEN) = self.paymentType.getJson()
+		  jsonBody.Value(super.kPayToken) = self.paymentType.getJson()
 		  if self.toSave then 
 		    jsonBody.value("profile") = super.generateProfile()
 		    
@@ -56,7 +55,7 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 		  end if
 		  
 		  if self.billing <> Nil then 
-		    jsonBody.Value(self.BILL_TOKEN) = self.billing.getJson()
+		    jsonBody.Value(super.kBillToken) = self.billing.getJson()
 		    
 		  end if
 		  
@@ -90,13 +89,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag Property, Flags = &h21
 		Private type As string
 	#tag EndProperty
-
-
-	#tag Constant, Name = BILL_TOKEN, Type = String, Dynamic = False, Default = \"billTo", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = PAY_TOKEN, Type = String, Dynamic = False, Default = \"payment", Scope = Private
-	#tag EndConstant
 
 
 	#tag ViewBehavior

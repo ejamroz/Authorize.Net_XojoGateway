@@ -21,41 +21,51 @@ Protected Class ANetController
 
 	#tag Method, Flags = &h21
 		Private Sub handlePageReceived(caller as Xojo.Net.HTTPSocket, URL As Text, HTTPStatus As Integer, content As Xojo.Core.MemoryBlock)
+		  //Event hander for data comming in
+		  
 		  using Xojo.Core
 		  using Xojo.Data
+		  using AuthorizeNetAPI
 		  
-		  dim json as text = Xojo.core.TextEncoding.UTF8.ConvertDataToText(content)
-		  
-		  //PARSE RESPONSE 
 		  dim retValue as AuthorizeNetAPI.ANetResponse_
-		  dim err as new JSONItem()
+		  dim err as new Dictionary()
+		  dim responseData as Dictionary
+		  dim responseType as Text
+		  dim response as Pair
+		  
 		  Select case self.lastErrorCode
-		  case 0
+		  case 0 //nothing went wrong 
+		    //MAKE SURE DATA COME IN CORRECTLY 
 		    try 
-		      dim data as Dictionary = Xojo.data.ParseJSON(json) 
-		      //PARSE transactionResponse 
-		      if data.HasKey("transactionResponse") then
-		        dim txResponse as Dictionary = data.Value("transactionResponse")
-		        retValue = new Response_Transaction(txResponse)
-		        
-		      else
-		        //XXX: WHAT TO DO HERE? DIFFERENT TYPE OF RESPONSE?
-		        
-		      end if
+		      dim json as text = Xojo.core.TextEncoding.UTF8.ConvertDataToText(content)
+		      response = determineResponseType(json)
+		      responseType = response.left
+		      responseData = response.right
 		      
-		    Catch e as JSONException
-		      err.Value("errorCode") = "404"
-		      err.value("errorText") = "Error parsing response from gateway"
-		      retValue = new Response_Transaction(err)
+		    Catch e as BadDataException
+		      err.Value("errorCode") = str(e.ErrorNumber)
+		      err.Value("errorText") = e.Reason
+		      MessageReceived(new Response_Transaction(err))
 		      
-		    end try 
+		    end try
 		    
-		  case -1
+		    //HANDLE RESPONSE TYPES 
+		    Select case responseType
+		    case kTypeTransaction
+		      retValue = handleTXResponse(responseData)
+		      
+		    case kTypeProfile
+		      
+		    case kTypeError
+		      
+		    End Select
+		    
+		  case -1 //timeout 
 		    err.Value("errorCode") = str(self.lastErrorCode)
 		    err.Value("errorText") = "Connection timeout with gateway"
 		    retValue = new Response_Transaction(err)
 		    
-		  else
+		  else //unknown err, pass it to user 
 		    err.Value("errorCode") = str(self.lastErrorCode)
 		    err.Value("errorText") = "Error connecting to gateway"
 		    retValue = new Response_Transaction(err)
@@ -64,6 +74,23 @@ Protected Class ANetController
 		  
 		  MessageReceived(retValue)
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function handleTXResponse(data as xojo.Core.Dictionary) As Response_Transaction
+		  //Converts a transaction reponse to usable data
+		  //@param Data: Dictionary representing parsable data from a transaction response
+		  
+		  using Xojo.Core
+		  
+		  dim retValue as Response_Transaction
+		  dim txResponse as Dictionary = data.Value("transactionResponse") //tx details
+		  
+		  retValue = new Response_Transaction(txResponse)
+		  retValue.setResponseCodes(data.Value("messages"))
+		  
+		  return retValue
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -77,20 +104,43 @@ Protected Class ANetController
 		  using Xojo.Core
 		  using xojo.Data
 		  
+		  dim jsonHead as string
+		  dim theRequestJSON as new JSONItem()
+		  dim sendRequestBody as new JSONItem()
+		  dim sendRequest as new JSONItem()
+		  
 		  //DISPATCH REQUEST TYPE 
-		  if theRequest isa Request_AuthorizeAndCapture then
-		    self.process_AuthCapture(auth, Request_AuthorizeAndCapture(theRequest), gateway)
+		  if theRequest isa Request_AuthorizeAndCapture then //charge a cc
+		    jsonHead = "createTransactionRequest"
+		    theRequestJSON = Request_AuthorizeAndCapture(theRequest).getJson()
 		    
-		  elseif theRequest isa Request_CreateCustomerProfileFromTransaction then 
-		    self.process_CreateCustomerFromTx(auth, Request_CreateCustomerProfileFromTransaction(theRequest), gateway)
+		  elseif theRequest isa Request_CreateCustomerProfileFromTransaction then //create a customer profile
+		    jsonHead = "createCustomerProfileFromTransactionRequest"
+		    theRequestJSON = Request_CreateCustomerProfileFromTransaction(theRequest).getJson()
+		    
+		  elseif theRequest isa Request_Refund then //refund a tx 
+		    jsonHead = "createTransactionRequest"
+		    theRequestJSON = Request_Refund(theRequest).getJson()
 		    
 		    //TODO: ADD OTHER REQUESTS HERE 
 		  else
 		    dim err as new UnsupportedFormatException
 		    err.ErrorNumber = 1
 		    err.Message = "Unknown transaction Request submitted"
+		    raise err 
 		    
 		  end if
+		  
+		  //FORM BODY OF REQUEST
+		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
+		  sendRequestBody.Value(kRequestToken) = theRequestJSON
+		  
+		  //FORM REQUEST
+		  sendRequest.Value(jsonHead) = sendRequestBody
+		  
+		  //POST
+		  self.send(sendRequest, gateway)
+		  
 		End Sub
 	#tag EndMethod
 
@@ -109,8 +159,8 @@ Protected Class ANetController
 		  dim request as new JSONItem()
 		  
 		  //FORM BODY OF REQUEST
-		  requestBody.Value(self.MERCHANT_TOKEN) = auth.getJson()
-		  requestBody.Value(self.REQUEST_TOKEN) = theRequest.getJson()
+		  requestBody.Value(self.kMerchantToken) = auth.getJson()
+		  requestBody.Value(self.kRequestToken) = theRequest.getJson()
 		  
 		  //FORM REQUEST
 		  request.Value(JSON_HEAD) = requestBody
@@ -138,7 +188,7 @@ Protected Class ANetController
 		  dim request as new JSONItem()
 		  
 		  //FORM BODY OF REQUEST
-		  requestBody.Value(self.MERCHANT_TOKEN) = auth.getJson()
+		  requestBody.Value(self.kMerchantToken) = auth.getJson()
 		  requestBody.Value("transId") = theRequest.getID()
 		  
 		  //FORM REQUEST
@@ -147,6 +197,32 @@ Protected Class ANetController
 		  //POST
 		  self.send(request, gateway)
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub process_Refund(auth as MerchantAuthentication, theRequest as Request_Refund, gateway as Text)
+		  //Process a transaction type refund
+		  //@param auth: The authorization object
+		  //@param theRequest: The specific refund request object
+		  //@param gateway: The payment gateway to process the request through
+		  
+		  using Xojo.Core
+		  using xojo.Data
+		  
+		  const JSON_HEAD = "createTransactionRequest"
+		  dim requestBody as new JSONItem()
+		  dim request as new JSONItem()
+		  
+		  //FORM BODY OF REQUEST
+		  requestBody.Value(self.kMerchantToken) = auth.getJson()
+		  requestBody.Value(self.kRequestToken) = theRequest.getJson()
+		  
+		  //FORM REQUEST
+		  request.Value(JSON_HEAD) = requestBody
+		  
+		  //POST
+		  self.send(request, gateway)
 		End Sub
 	#tag EndMethod
 
@@ -192,10 +268,10 @@ Protected Class ANetController
 	#tag EndProperty
 
 
-	#tag Constant, Name = MERCHANT_TOKEN, Type = String, Dynamic = False, Default = \"merchantAuthentication", Scope = Private
+	#tag Constant, Name = kMerchantToken, Type = String, Dynamic = False, Default = \"merchantAuthentication", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = REQUEST_TOKEN, Type = String, Dynamic = False, Default = \"transactionRequest", Scope = Private
+	#tag Constant, Name = kRequestToken, Type = String, Dynamic = False, Default = \"transactionRequest", Scope = Private
 	#tag EndConstant
 
 

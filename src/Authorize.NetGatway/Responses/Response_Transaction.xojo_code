@@ -2,20 +2,47 @@
 Protected Class Response_Transaction
 Inherits AuthorizeNetAPI.ANetResponse_
 	#tag Method, Flags = &h0
-		Sub constructor(json as variant)
-		  //Creates a response to a requent involving a transaction:
-		  //    - AuthorizeAndCapture
-		  //    See the superclass AuthorizeNetAPI.ANetResponse_ for details on construction
-		  //@param json: json object to be parsed 
+		Sub constructor(dataJson as xojo.Core.Dictionary)
+		  //@param dataJson: Object representing JSON string of response data
 		  
-		  super.constructor(json) 
+		  using xojo.core
+		  using xojo.data
 		  
+		  super.constructor(dataJson)
+		  statusCode = data.Lookup("responseCode", "404000")
+		  if StatusCode = "404000" then //Something has changed about the formatting of responses :(
+		    StatusMessage = "Unable to determine status based on results, check Anet portal using transaction ID"
+		    
+		  end if
+		  
+		  //LOAD ANY ERRORS
+		  if data.HasKey("errors") then
+		    dim temp() as Auto = data.Value("errors")
+		    dim err as Dictionary = temp(0) 
+		    self.lastErrorCode = err.Lookup("errorCode", "")
+		    self.errorMessage = err.Lookup("errorText", "")
+		    
+		  end if
 		  
 		  
 		  
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function isSuccess() As boolean
+		  //@override
+		  //@return: True is the request was a success and false otherwise
+		  
+		  if StatusCode = kSuccessCode or StatusCode = "1" then
+		    return true
+		    
+		  end if 
+		  
+		  return false 
+		End Function
 	#tag EndMethod
 
 
@@ -31,7 +58,7 @@ Inherits AuthorizeNetAPI.ANetResponse_
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return self.data.Lookup("transHash", "") 
+			  return self.data.Lookup("transHash", "")
 			End Get
 		#tag EndGetter
 		transactionHash As Text
@@ -40,7 +67,7 @@ Inherits AuthorizeNetAPI.ANetResponse_
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return self.data.Lookup("transId", "") 
+			  return self.data.Lookup("transId", "")
 			  
 			End Get
 		#tag EndGetter
@@ -50,46 +77,15 @@ Inherits AuthorizeNetAPI.ANetResponse_
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="accountNumber"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="accountType"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="authCode"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="avsResultCode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="cavvResultCode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="cvvResultCode"
-			Group="Behavior"
-			Type="string"
+			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="errorMessage"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -101,8 +97,7 @@ Inherits AuthorizeNetAPI.ANetResponse_
 		#tag ViewProperty
 			Name="lastErrorCode"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -118,9 +113,15 @@ Inherits AuthorizeNetAPI.ANetResponse_
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="responseCode"
+			Name="StatusCode"
 			Group="Behavior"
-			Type="string"
+			Type="Text"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="StatusMessage"
+			Group="Behavior"
+			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
@@ -137,16 +138,14 @@ Inherits AuthorizeNetAPI.ANetResponse_
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="transHash"
+			Name="transactionHash"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="transId"
+			Name="transactionID"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="Text"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

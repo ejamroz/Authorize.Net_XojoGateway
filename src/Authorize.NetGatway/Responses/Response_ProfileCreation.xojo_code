@@ -2,16 +2,10 @@
 Protected Class Response_ProfileCreation
 Inherits AuthorizeNetAPI.ANetResponse_
 	#tag Method, Flags = &h0
-		Sub constructor(json as variant)
+		Sub constructor(dataJson as xojo.Core.Dictionary)
 		  //@param json: Object representing JSON string. This method currently accepts JSONItems and Xojo.Core.Dictionaries
 		  
-		  super.constructor(json)
-		  
-		  
-		  
-		  
-		  
-		  
+		  super.constructor(dataJson)
 		  
 		  
 		End Sub
@@ -48,34 +42,9 @@ Inherits AuthorizeNetAPI.ANetResponse_
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="authCode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="avsResultCode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="cavvResultCode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="cvvResultCode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="errorMessage"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -87,8 +56,7 @@ Inherits AuthorizeNetAPI.ANetResponse_
 		#tag ViewProperty
 			Name="lastErrorCode"
 			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
+			Type="text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -104,21 +72,21 @@ Inherits AuthorizeNetAPI.ANetResponse_
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="PaymentProfileIDs()"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="ProfileID"
 			Group="Behavior"
-			Type="string"
+			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="responseCode"
+			Name="StatusCode"
 			Group="Behavior"
-			Type="string"
+			Type="Text"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="StatusMessage"
+			Group="Behavior"
+			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
@@ -133,18 +101,6 @@ Inherits AuthorizeNetAPI.ANetResponse_
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="transHash"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="transId"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

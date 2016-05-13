@@ -40,10 +40,19 @@ Implements Tokenizable
 	#tag EndProperty
 
 
-	#tag Constant, Name = AUTH_AND_CAPTURE, Type = Text, Dynamic = False, Default = \"authCaptureTransaction", Scope = Protected
+	#tag Constant, Name = kAuthAndCapture, Type = Text, Dynamic = False, Default = \"authCaptureTransaction", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = CREATE_PROFILE_FROM_TX, Type = Text, Dynamic = False, Default = \"createCustomerProfileFromTransactionRequest", Scope = Protected
+	#tag Constant, Name = kBillToken, Type = String, Dynamic = False, Default = \"billTo", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = kCreateProfileFromTx, Type = Text, Dynamic = False, Default = \"createCustomerProfileFromTransactionRequest", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = kPayToken, Type = String, Dynamic = False, Default = \"payment", Scope = Protected
+	#tag EndConstant
+
+	#tag Constant, Name = kRefund , Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Protected
 	#tag EndConstant
 
 

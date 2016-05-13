@@ -48,7 +48,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Name:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -83,7 +82,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Address:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -118,7 +116,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "City"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -153,7 +150,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "State:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -188,7 +184,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   4
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Country:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -223,7 +218,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   5
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Zip:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -258,7 +252,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "total:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -293,7 +286,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "CC:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -328,7 +320,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   8
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "EXP:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -732,7 +723,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   105
+      Left            =   72
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -819,7 +810,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   20
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Phone:"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -896,7 +886,6 @@ Begin Window aNetModuleTest
       Selectable      =   False
       TabIndex        =   22
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Last"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -952,18 +941,47 @@ Begin Window aNetModuleTest
       Width           =   68
    End
    Begin ANetController ANetController1
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   2
       TabPanelIndex   =   0
    End
    Begin ANetController ANetController2
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   0
       TabPanelIndex   =   0
+   End
+   Begin PushButton PushButton2
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   True
+      Caption         =   "Refund TX"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   168
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   24
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   293
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
    End
 End
 #tag EndWindow
@@ -978,7 +996,7 @@ End
 		  dim cc as new CreditCard("4111111111111111", "0120")
 		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
 		  dim req as new Request_AuthorizeAndCapture(42.40, cc, billing, false, "1005")
-		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.TX_SANDBOX)
+		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -995,11 +1013,23 @@ End
 		  end if
 		  
 		  if response.isSuccess() then 
+		    MsgBox "Success!"
 		    
 		  else
-		    MsgBox "Profile not created" 
+		    MsgBox "Fail"
 		    
 		  end if 
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton2
+	#tag Event
+		Sub Action()
+		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
+		  dim cc as new CreditCard("1111", "0120")
+		  dim req as new Request_Refund(10, cc, "2258468983")
+		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.kTxSandbox)
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

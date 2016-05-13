@@ -1,6 +1,48 @@
 #tag Module
 Protected Module AuthorizeNetAPI
 	#tag Method, Flags = &h0
+		Function determineResponseType(json as text) As Pair
+		  //Determines what type of reponse the passed json represents
+		  //@return responseType : Xojo.Core.Dictionary representing repsonse
+		  //@throws BadDataException if the json is not parsable
+		  
+		  using Xojo.Core
+		  using Xojo.Data
+		  
+		  dim data as Dictionary
+		  
+		  try 
+		    data = ParseJSON(json)
+		    
+		  catch err as JSONException
+		    dim e as new BadDataException()
+		    e.ErrorNumber = 2
+		    e.Message = "Improper JSON string passed: " + err.Reason
+		    raise e
+		    
+		  end try 
+		  
+		  //DETERMINE REPONSE TYPE 
+		  if data.HasKey("transactionResponse") then
+		    return kTypeTransaction : data
+		    
+		  elseif data.HasKey("customerProfileId") then 
+		    return kTypeProfile : data 
+		    
+		  elseif data.HasKey("messages") then
+		    return kTypeError : data
+		    
+		  else
+		    dim e as new BadDataException()
+		    e.ErrorNumber = 404000
+		    e.Reason = "Unknow response type passed"
+		    raise e 
+		    
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function JSONtoText(json as JSONItem) As Text
 		  //@param json: The JSONItem to convert to text
 		  //@return: Text representation of the JSONItem
@@ -26,13 +68,22 @@ Protected Module AuthorizeNetAPI
 	#tag EndMethod
 
 
-	#tag Constant, Name = SUCCESS_CODE, Type = Text, Dynamic = False, Default = \"I00001", Scope = Public
+	#tag Constant, Name = kSuccessCode, Type = Text, Dynamic = False, Default = \"I00001", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = TX_LIVE, Type = Text, Dynamic = False, Default = \"https://api.authorize.net/xml/v1/request.api", Scope = Public
+	#tag Constant, Name = kTxLive, Type = Text, Dynamic = False, Default = \"https://api.authorize.net/xml/v1/request.api", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = TX_SANDBOX, Type = Text, Dynamic = False, Default = \"https://apitest.authorize.net/xml/v1/request.api", Scope = Public
+	#tag Constant, Name = kTxSandbox, Type = Text, Dynamic = False, Default = \"https://apitest.authorize.net/xml/v1/request.api", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kTypeError, Type = Text, Dynamic = False, Default = \"error", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kTypeProfile, Type = Text, Dynamic = False, Default = \"profile", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kTypeTransaction, Type = Text, Dynamic = False, Default = \"transaction", Scope = Public
 	#tag EndConstant
 
 
