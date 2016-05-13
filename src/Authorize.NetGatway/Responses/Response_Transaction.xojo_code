@@ -58,6 +58,15 @@ Inherits AuthorizeNetAPI.ANetResponse_
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  return StringToText(right(data.Value("accountNumber"), 4))
+			End Get
+		#tag EndGetter
+		lastFour As text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return self.data.Lookup("transHash", "")
 			End Get
 		#tag EndGetter

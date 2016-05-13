@@ -96,11 +96,13 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processRequest(auth as MerchantAuthentication, theRequest as AuthorizeNetAPI.TransactionRequest_, gateway as Text)
+		Sub processRequest(auth as MerchantAuthentication, theRequest as AuthorizeNetAPI.TransactionRequest_, gateway as Text, optional refID as string)
 		  //Processes a transaction request
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
 		  //@param gateway: The URL for which payment gateway to use 
+		  //@param refID: [OPTIONAL] merchant assigned identifier for the request being acted on 
+		  //    ex: the serial of the transaction being voided in a void request 
 		  //@throws UnsupportedFormatException: if an unknown tx type is passed 
 		  
 		  using Xojo.Core
@@ -124,6 +126,10 @@ Protected Class ANetController
 		    jsonHead = "createTransactionRequest"
 		    theRequestJSON = Request_Refund(theRequest).getJson()
 		    
+		  elseif theRequest isa Request_Void then 
+		    jsonHead = "createTransactionRequest"
+		    theRequestJSON = Request_Void(theRequest).getJson()
+		    
 		    //TODO: ADD OTHER REQUESTS HERE 
 		  else
 		    dim err as new UnsupportedFormatException
@@ -135,6 +141,10 @@ Protected Class ANetController
 		  
 		  //FORM BODY OF REQUEST
 		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
+		  if refID <> "" then
+		    sendRequestBody.Value("refId") = refID
+		    
+		  end if
 		  sendRequestBody.Value(kRequestToken) = theRequestJSON
 		  
 		  //FORM REQUEST

@@ -55,6 +55,9 @@ Implements Tokenizable
 	#tag Constant, Name = kRefund , Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Protected
 	#tag EndConstant
 
+	#tag Constant, Name = kVoidTransaction, Type = Text, Dynamic = False, Default = \"voidTransaction", Scope = Protected
+	#tag EndConstant
+
 
 	#tag ViewBehavior
 		#tag ViewProperty

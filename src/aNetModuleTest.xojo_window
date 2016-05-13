@@ -965,7 +965,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   168
+      Left            =   252
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -983,10 +983,46 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   80
    End
+   Begin PushButton PushButton3
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   True
+      Caption         =   "Void TX"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   164
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   25
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   293
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndWindow
 
 #tag WindowCode
+	#tag Property, Flags = &h0
+		aNetTxID As text
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
 #tag Events PushButton1
@@ -1006,6 +1042,7 @@ End
 		Sub MessageReceived(response as AuthorizeNetAPI.ANetResponse_)
 		  if response IsA Response_Transaction then
 		    self.TextArea1.Text = response.toString
+		    self.aNetTxID = Response_Transaction(response).transactionID
 		    
 		  else
 		    //HANDLE OTHER TYPES OF RESPONSED HERE 
@@ -1028,6 +1065,16 @@ End
 		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
 		  dim cc as new CreditCard("1111", "0120")
 		  dim req as new Request_Refund(10, cc, "2258468983")
+		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.kTxSandbox)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton3
+	#tag Event
+		Sub Action()
+		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
+		  dim req as new Request_Void(self.aNetTxID)
 		  self.ANetController1.processRequest(auth, req, AuthorizeNetAPI.kTxSandbox)
 		  
 		End Sub
