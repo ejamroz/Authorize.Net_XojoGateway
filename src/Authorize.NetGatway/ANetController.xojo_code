@@ -37,7 +37,7 @@ Protected Class ANetController
 		  case 0 //nothing went wrong 
 		    //MAKE SURE DATA COME IN CORRECTLY 
 		    try 
-		      dim json as text = Xojo.core.TextEncoding.UTF8.ConvertDataToText(content)
+		      dim json as text = TextEncoding.UTF8.ConvertDataToText(content)
 		      response = determineResponseType(json)
 		      responseType = response.left
 		      responseData = response.right
@@ -45,7 +45,7 @@ Protected Class ANetController
 		    Catch e as BadDataException
 		      err.Value("errorCode") = str(e.ErrorNumber)
 		      err.Value("errorText") = e.Reason
-		      MessageReceived(new Response_Transaction(err))
+		      MessageReceived(new Response_Transaction(err)) //TODO: SHOULD RETURN RESPONSE OF TYPE kTypeError 
 		      
 		    end try
 		    
@@ -55,20 +55,22 @@ Protected Class ANetController
 		      retValue = handleTXResponse(responseData)
 		      
 		    case kTypeProfile
+		      //TODO
 		      
 		    case kTypeError
+		      //TODO
 		      
 		    End Select
 		    
 		  case -1 //timeout 
 		    err.Value("errorCode") = str(self.lastErrorCode)
 		    err.Value("errorText") = "Connection timeout with gateway"
-		    retValue = new Response_Transaction(err)
+		    retValue = new Response_Transaction(err) //TODO: SHOULD RETURN RESPONSE OF TYPE kTypeError 
 		    
 		  else //unknown err, pass it to user 
 		    err.Value("errorCode") = str(self.lastErrorCode)
 		    err.Value("errorText") = "Error connecting to gateway"
-		    retValue = new Response_Transaction(err)
+		    retValue = new Response_Transaction(err) //TODO: SHOULD RETURN RESPONSE OF TYPE kTypeError 
 		    
 		  end select
 		  

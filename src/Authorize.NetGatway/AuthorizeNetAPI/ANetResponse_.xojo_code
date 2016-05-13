@@ -8,7 +8,7 @@ Protected Class ANetResponse_
 
 	#tag Method, Flags = &h0
 		Function isSuccess() As boolean
-		  //@return: True is the request was a success and false otherwise
+		  //@return: True if the request was a success and false otherwise
 		  
 		  if StatusCode = kSuccessCode then
 		    return true
@@ -25,7 +25,6 @@ Protected Class ANetResponse_
 		  //    more specific knowlege about what happened based on what type of response
 		  //    was issued 
 		  //@param data: Dictionary representing the messages Token of an ANet response 
-		  //@return true if data was extracted false otherwise
 		  
 		  Using Xojo.Core
 		  
@@ -71,50 +70,6 @@ Protected Class ANetResponse_
 		  retString = retString + "]" 
 		  
 		  return retString 
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h1
-		Protected Function validateInput(json as variant) As xojo.Core.Dictionary
-		  //Checks to see if pass json is in a supportd type, if so, converts it to a dictionary. Currently supports:
-		  //    - JSONItem
-		  //    - Xojo.Core.Dictionary
-		  //@param json: The json object to parse
-		  //@return: A dictionary based on the pased json object
-		  //@throws BadDataException for improperly formatted JSON
-		  //@throws UnsupportedFormatException for objects passed that are passed that can not be parsed 
-		  
-		  using xojo.core
-		  using xojo.data
-		  
-		  dim data as Dictionary
-		  
-		  if json isa JSONItem then
-		    dim myjson as JSONItem = JSONItem(json) 
-		    try 
-		      dim jString as string = DefineEncoding(myjson.toString(), Encodings.UTF8)
-		      data = ParseJSON(jString.toText())
-		      
-		    catch err as JSONException
-		      dim e as new BadDataException()
-		      e.ErrorNumber = 2
-		      e.Message = "Improper JSON string passed to constructor: " + err.Reason
-		      raise e
-		      
-		    end try 
-		    
-		  elseif json isa Dictionary then
-		    data = json
-		    
-		  else
-		    dim e as new UnsupportedFormatException()
-		    e.ErrorNumber = 1
-		    e.Message = "Non-parsable object passed to constructor"
-		    raise e
-		    
-		  end if
-		  
-		  return data
 		End Function
 	#tag EndMethod
 
