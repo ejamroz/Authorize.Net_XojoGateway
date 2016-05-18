@@ -1,7 +1,9 @@
-#tag Interface
-Protected Interface Tokenizable
+#tag Class
+Protected Class PaymentProfile
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
+		  // Part of the Tokenizable interface.
+		  
 		  
 		End Function
 	#tag EndMethod
@@ -42,5 +44,5 @@ Protected Interface Tokenizable
 			Type="Integer"
 		#tag EndViewProperty
 	#tag EndViewBehavior
-End Interface
-#tag EndInterface
+End Class
+#tag EndClass

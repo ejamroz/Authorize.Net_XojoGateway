@@ -1,35 +1,36 @@
 #tag Class
-Protected Class Request_Void
-Inherits AuthorizeNetAPI.TransactionRequest_
+Protected Class CreateCustomerProfileFromTransactionReq
+Inherits ANetAPI.AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(refTransId as text)
-		  // Calling the overridden superclass constructor.
-		  //@param refTransID: The ANet identifier of the original settled transaction 
-		  
-		  self.type = super.kVoidTransaction
-		  self.refTransId = refTransId
-		  
+		Sub constructor(txID as string)
+		  self.type = super.kCreateProfileFromTx
+		  self.txID = txID
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function getID() As String
+		  //@return: The txID
+		  
+		  return self.txID
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  using Xojo.Core
+		  //@return: JSONItem corresponding to this request type
 		  
 		  dim jsonBody as new JSONItem()
 		  
-		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = self.type
-		  jsonBody.Value("refTransId") = self.refTransId
+		  jsonBody.Value("transID") = self.txID
 		  
 		  return jsonBody
-		  
 		End Function
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h21
-		Private refTransId As string
+		Private txID As string
 	#tag EndProperty
 
 
@@ -53,11 +54,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 			Visible=true
 			Group="ID"
 			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="refTransId"
-			Group="Behavior"
-			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

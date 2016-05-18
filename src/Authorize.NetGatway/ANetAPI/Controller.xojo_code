@@ -1,5 +1,5 @@
 #tag Class
-Protected Class ANetController
+Protected Class Controller
 	#tag Method, Flags = &h0
 		Sub constructor()
 		  self.aNetSocket = new Xojo.Net.HTTPSocket()
@@ -21,11 +21,11 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function handleErrorResponse(data as xojo.Core.Dictionary) As Response_Error
+		Private Function handleErrorResponse(data as xojo.Core.Dictionary) As ANetAPI.Responses.ErrorResponse
 		  //Converts a transaction reponse to usable data
 		  //@param Data: Dictionary representing parsable data from a transaction response
 		  
-		  return new Response_Error(data)
+		  return new ErrorResponse(data)
 		  
 		End Function
 	#tag EndMethod
@@ -33,10 +33,6 @@ Protected Class ANetController
 	#tag Method, Flags = &h21
 		Private Sub handlePageReceived(caller as Xojo.Net.HTTPSocket, URL As Text, HTTPStatus As Integer, content As Xojo.Core.MemoryBlock)
 		  //Event hander for data comming in
-		  
-		  using Xojo.Core
-		  using Xojo.Data
-		  using AuthorizeNetAPI
 		  
 		  dim err as new Dictionary()
 		  dim responseData as Dictionary
@@ -59,7 +55,7 @@ Protected Class ANetController
 		  //HANDLE RESPONSE TYPES 
 		  Select case responseType
 		  case kTypeTransaction
-		    dim retValue as Response_Transaction = handleTXResponse(responseData)
+		    dim retValue as TransactionResponse = handleTXResponse(responseData)
 		    TransactionResponseReceived(retValue)
 		    
 		  case kTypeProfile
@@ -67,7 +63,7 @@ Protected Class ANetController
 		    //TODO
 		    
 		  case kTypeError
-		    dim retValue as Response_Error = handleErrorResponse(responseData)
+		    dim retValue as ErrorResponse = handleErrorResponse(responseData)
 		    ErrorResponseReceived(retValue)
 		    
 		  else
@@ -80,16 +76,14 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function handleTXResponse(data as xojo.Core.Dictionary) As Response_Transaction
+		Private Function handleTXResponse(data as xojo.Core.Dictionary) As ANetAPI.Responses.TransactionResponse
 		  //Converts a transaction reponse to usable data
 		  //@param Data: Dictionary representing parsable data from a transaction response
 		  
-		  using Xojo.Core
-		  
-		  dim retValue as Response_Transaction
+		  dim retValue as TransactionResponse
 		  dim txResponse as Dictionary = data.Value("transactionResponse") //tx details
 		  
-		  retValue = new Response_Transaction(txResponse)
+		  retValue = new TransactionResponse(txResponse)
 		  retValue.setResponseCodes(data.Value("messages"))
 		  
 		  return retValue
@@ -97,17 +91,14 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processRequest(auth as MerchantAuthentication, theRequest as AuthorizeNetAPI.TransactionRequest_, gateway as Text, optional refID as string)
-		  //Processes a transaction request
+		Sub processRequest(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as ANetAPI.AbstractTransactionRequest, gateway as Text, optional refID as string)
+		  //Processes and sends a request to the ANet portal 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
 		  //@param gateway: The URL for which payment gateway to use 
 		  //@param refID: [OPTIONAL] merchant assigned identifier for the request being acted on 
 		  //    ex: the serial of the transaction being voided in a void request 
-		  //@throws UnsupportedFormatException: if an unknown tx type is passed 
-		  
-		  using Xojo.Core
-		  using xojo.Data
+		  //@throws UnsupportedFormatException: if an unknown request type is passed 
 		  
 		  dim jsonHead as string
 		  dim theRequestJSON as new JSONItem()
@@ -115,21 +106,21 @@ Protected Class ANetController
 		  dim sendRequest as new JSONItem()
 		  
 		  //DISPATCH REQUEST TYPE 
-		  if theRequest isa Request_AuthorizeAndCapture then //charge a cc
+		  if theRequest isa AuthorizeAndCaptureReq then //charge a cc
 		    jsonHead = "createTransactionRequest"
-		    theRequestJSON = Request_AuthorizeAndCapture(theRequest).getJson()
+		    theRequestJSON = AuthorizeAndCaptureReq(theRequest).getJson()
 		    
-		  elseif theRequest isa Request_CreateCustomerProfileFromTransaction then //create a customer profile
+		  elseif theRequest isa CreateCustomerProfileFromTransactionReq then //create a customer profile
 		    jsonHead = "createCustomerProfileFromTransactionRequest"
-		    theRequestJSON = Request_CreateCustomerProfileFromTransaction(theRequest).getJson()
+		    theRequestJSON = CreateCustomerProfileFromTransactionReq(theRequest).getJson()
 		    
-		  elseif theRequest isa Request_Refund then //refund a tx 
+		  elseif theRequest isa RefundReq then //refund a tx 
 		    jsonHead = "createTransactionRequest"
-		    theRequestJSON = Request_Refund(theRequest).getJson()
+		    theRequestJSON = RefundReq(theRequest).getJson()
 		    
-		  elseif theRequest isa Request_Void then 
+		  elseif theRequest isa VoidReq then 
 		    jsonHead = "createTransactionRequest"
-		    theRequestJSON = Request_Void(theRequest).getJson()
+		    theRequestJSON = VoidReq(theRequest).getJson()
 		    
 		    //TODO: ADD OTHER REQUESTS HERE 
 		  else
@@ -158,14 +149,11 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub process_AuthCapture(auth as MerchantAuthentication, theRequest as Request_AuthorizeAndCapture, gateway as Text)
+		Private Sub process_AuthCapture(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as AuthorizeAndCaptureReq, gateway as Text)
 		  //Processes a transaction of type Authenticate and Capure 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
 		  //@param gateway: The URL for which payment gateway to use 
-		  
-		  using Xojo.Core
-		  using xojo.Data
 		  
 		  const JSON_HEAD = "createTransactionRequest"
 		  dim requestBody as new JSONItem()
@@ -187,14 +175,11 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub process_CreateCustomerFromTx(auth as MerchantAuthentication, theRequest as Request_CreateCustomerProfileFromTransaction, gateway as Text)
+		Private Sub process_CreateCustomerFromTx(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as CreateCustomerProfileFromTransactionReq, gateway as Text)
 		  //Processes a transaction of type Create Customer Profile from Transaction 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
 		  //@param gateway: The URL for which payment gateway to use 
-		  
-		  using Xojo.Core
-		  using xojo.Data
 		  
 		  const JSON_HEAD = "createCustomerProfileFromTransactionRequest"
 		  dim requestBody as new JSONItem()
@@ -214,14 +199,11 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub process_Refund(auth as MerchantAuthentication, theRequest as Request_Refund, gateway as Text)
+		Private Sub process_Refund(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as RefundReq, gateway as Text)
 		  //Process a transaction type refund
 		  //@param auth: The authorization object
 		  //@param theRequest: The specific refund request object
 		  //@param gateway: The payment gateway to process the request through
-		  
-		  using Xojo.Core
-		  using xojo.Data
 		  
 		  const JSON_HEAD = "createTransactionRequest"
 		  dim requestBody as new JSONItem()
@@ -245,11 +227,8 @@ Protected Class ANetController
 		  //@param data: JSON data to post
 		  //@param gateway: The URL of the API to post to 
 		  
-		  using Xojo.Data
-		  Using Xojo.Core 
-		  
 		  //CONVERT TO DATA
-		  dim json as text = AuthorizeNetAPI.JSONtoText(request)
+		  dim json as text = ANetAPI.JSONtoText(request)
 		  dim data as MemoryBlock = TextEncoding.UTF8.ConvertTextToData(json)
 		  
 		  //PROCESS GATEWAY 
@@ -264,16 +243,27 @@ Protected Class ANetController
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event ErrorResponseReceived(response as Response_Error)
+		Event ErrorResponseReceived(response as ANetAPI.Responses.ErrorResponse)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event ProfileResponseReceived(response as Response_ProfileCreation)
+		Event ProfileResponseReceived(response as ANetAPI.Responses.ProfileResponse)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event TransactionResponseReceived(response as Response_Transaction)
+		Event TransactionResponseReceived(response as ANetAPI.Responses.TransactionResponse)
 	#tag EndHook
+
+
+	#tag Note, Name = Usage
+		Use this class to send requests through the ANet portal and recieve responses
+		
+		SENDING:
+		
+		RECIEVING:
+		    - Messages are recieved through events, thus they are asynchronous
+		
+	#tag EndNote
 
 
 	#tag Property, Flags = &h21
@@ -286,6 +276,19 @@ Protected Class ANetController
 
 	#tag Constant, Name = kRequestToken, Type = String, Dynamic = False, Default = \"transactionRequest", Scope = Private
 	#tag EndConstant
+
+
+	#tag Using, Name = Requests
+	#tag EndUsing
+
+	#tag Using, Name = Responses
+	#tag EndUsing
+
+	#tag Using, Name = Xojo.Core
+	#tag EndUsing
+
+	#tag Using, Name = Xojo.Data
+	#tag EndUsing
 
 
 	#tag ViewBehavior

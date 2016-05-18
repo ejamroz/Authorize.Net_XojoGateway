@@ -1,5 +1,5 @@
 #tag Class
-Protected Class ANetResponse_
+Protected Class AbstractResponse
 	#tag Method, Flags = &h1
 		Protected Sub constructor(dataJson as xojo.Core.Dictionary)
 		  data = dataJson
@@ -26,8 +26,6 @@ Protected Class ANetResponse_
 		  //    was issued 
 		  //@param data: Dictionary representing the messages Token of an ANet response 
 		  
-		  Using Xojo.Core
-		  
 		  if data.HasKey("message") then 
 		    dim temp() as Auto = data.Value("message")
 		    dim err as Dictionary = temp(0) 
@@ -41,8 +39,6 @@ Protected Class ANetResponse_
 
 	#tag Method, Flags = &h0
 		Function toString() As string
-		  using Xojo.Core
-		  
 		  dim retString as string = "[Status: " + self.StatusCode + chr(10) +_
 		  "Message: " + self.StatusMessage + chr(10)
 		  if self.data <> Nil then 

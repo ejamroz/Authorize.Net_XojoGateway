@@ -1,8 +1,8 @@
 #tag Class
-Protected Class Request_Refund
-Inherits AuthorizeNetAPI.TransactionRequest_
+Protected Class RefundReq
+Inherits ANetAPI.AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as AuthorizeNetAPI.PaymentType_, refTransId as text)
+		Sub constructor(amount as double, payType as ANetAPI.AbstractPaymentType, refTransId as text)
 		  // Calling the overridden superclass constructor.
 		  //@param amount: The amount to refund, this number must <= original transaction amount
 		  //@param payType: The payment to refund, if credit, it must be the same card that was used
@@ -18,8 +18,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  using Xojo.Core
-		  
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
@@ -39,7 +37,7 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private payType As AuthorizeNetAPI.PaymentType_
+		Private payType As ANetAPI.AbstractPaymentType
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -48,11 +46,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="amount"
-			Group="Behavior"
-			Type="Integer"
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true

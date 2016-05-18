@@ -1,6 +1,6 @@
 #tag Class
-Protected Class TransactionRequest_
-Implements Tokenizable
+Protected Class AbstractTransactionRequest
+Implements JSONWrapper
 	#tag Method, Flags = &h21
 		Private Sub constructor()
 		  
@@ -52,7 +52,7 @@ Implements Tokenizable
 	#tag Constant, Name = kPayToken, Type = String, Dynamic = False, Default = \"payment", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kRefund , Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Protected
+	#tag Constant, Name = kRefund, Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Protected
 	#tag EndConstant
 
 	#tag Constant, Name = kVoidTransaction, Type = Text, Dynamic = False, Default = \"voidTransaction", Scope = Protected

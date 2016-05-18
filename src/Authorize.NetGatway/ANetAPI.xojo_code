@@ -1,47 +1,5 @@
 #tag Module
-Protected Module AuthorizeNetAPI
-	#tag Method, Flags = &h0
-		Function determineResponseType(json as text) As Pair
-		  //Determines what type of reponse the passed json represents
-		  //@return responseType : Xojo.Core.Dictionary representing repsonse
-		  //@throws BadDataException if the json is not parsable
-		  
-		  using Xojo.Core
-		  using Xojo.Data
-		  
-		  dim data as Dictionary
-		  
-		  try 
-		    data = ParseJSON(json)
-		    
-		  catch err as JSONException
-		    dim e as new BadDataException()
-		    e.ErrorNumber = 2
-		    e.Message = "Improper JSON string passed: " + err.Reason
-		    raise e
-		    
-		  end try 
-		  
-		  //DETERMINE REPONSE TYPE 
-		  if data.HasKey("transactionResponse") then
-		    return kTypeTransaction : data
-		    
-		  elseif data.HasKey("customerProfileId") then 
-		    return kTypeProfile : data 
-		    
-		  elseif data.HasKey("messages") then
-		    return kTypeError : data
-		    
-		  else
-		    dim e as new BadDataException()
-		    e.ErrorNumber = 404000
-		    e.Reason = "Unknow response type"
-		    raise e 
-		    
-		  end if
-		End Function
-	#tag EndMethod
-
+Protected Module ANetAPI
 	#tag Method, Flags = &h0
 		Function JSONtoText(json as JSONItem) As Text
 		  //@param json: The JSONItem to convert to text
@@ -57,7 +15,6 @@ Protected Module AuthorizeNetAPI
 		  // to avoid an exception. If the encoding is not valid, we will hex-encode the string instead.
 		  
 		  If s.Encoding Is Nil Or Not s.Encoding.IsValidData(s) Then
-		    s = EncodeHex(s, True)
 		    s = s.DefineEncoding(Encodings.UTF8) // Just to make sure
 		    
 		  End If
@@ -85,6 +42,13 @@ Protected Module AuthorizeNetAPI
 
 	#tag Constant, Name = kTypeTransaction, Type = Text, Dynamic = False, Default = \"transaction", Scope = Public
 	#tag EndConstant
+
+
+	#tag Using, Name = Xojo.Core
+	#tag EndUsing
+
+	#tag Using, Name = Xojo.Data
+	#tag EndUsing
 
 
 	#tag ViewBehavior

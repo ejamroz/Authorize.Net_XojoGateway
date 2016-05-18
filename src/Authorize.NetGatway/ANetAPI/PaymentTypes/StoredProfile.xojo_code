@@ -1,37 +1,17 @@
 #tag Class
-Protected Class Request_CreateCustomerProfileFromTransaction
-Inherits AuthorizeNetAPI.TransactionRequest_
+Protected Class StoredProfile
+Inherits ANetAPI.AbstractPaymentType
 	#tag Method, Flags = &h0
-		Sub constructor(txID as string)
-		  self.type = super.kCreateProfileFromTx
-		  self.txID = txID
+		Sub constructor()
+		  //TODO
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getID() As String
-		  //@return: The txID
-		  
-		  return self.txID
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  //@return: JSONItem corresponding to this request type
 		  
-		  dim jsonBody as new JSONItem()
-		  
-		  jsonBody.Value("transID") = self.txID
-		  
-		  return jsonBody
 		End Function
 	#tag EndMethod
-
-
-	#tag Property, Flags = &h21
-		Private txID As string
-	#tag EndProperty
 
 
 	#tag ViewBehavior

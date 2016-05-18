@@ -1,26 +1,6 @@
 #tag Class
-Protected Class PaymentType_
-Implements Tokenizable
-	#tag Method, Flags = &h21
-		Private Sub constructor()
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getJson() As JSONItem
-		  
-		  
-		End Function
-	#tag EndMethod
-
-
-	#tag Note, Name = Description
-		This is an abstract super class for all payment types. It can not be instantiated
-		
-	#tag EndNote
-
-
+Protected Class GetCustomerPaymentProfileReq
+Inherits ANetAPI.AbstractTransactionRequest
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Index"

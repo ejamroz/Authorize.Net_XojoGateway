@@ -1,12 +1,9 @@
 #tag Class
-Protected Class Response_Transaction
-Inherits AuthorizeNetAPI.ANetResponse_
+Protected Class TransactionResponse
+Inherits ANetAPI.AbstractResponse
 	#tag Method, Flags = &h0
 		Sub constructor(dataJson as xojo.Core.Dictionary)
 		  //@param dataJson: Object representing JSON string of response data
-		  
-		  using xojo.core
-		  using xojo.data
 		  
 		  super.constructor(dataJson)
 		  statusCode = data.Lookup("responseCode", "404000")
@@ -84,6 +81,13 @@ Inherits AuthorizeNetAPI.ANetResponse_
 	#tag EndComputedProperty
 
 
+	#tag Using, Name = Xojo.Core
+	#tag EndUsing
+
+	#tag Using, Name = Xojo.Data
+	#tag EndUsing
+
+
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="authCode"
@@ -105,6 +109,11 @@ Inherits AuthorizeNetAPI.ANetResponse_
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="lastErrorCode"
+			Group="Behavior"
+			Type="text"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="lastFour"
 			Group="Behavior"
 			Type="text"
 		#tag EndViewProperty

@@ -1,7 +1,6 @@
 #tag Class
 Protected Class CreditCard
-Inherits AuthorizeNetAPI.PaymentType_
-Implements Tokenizable
+Inherits ANetAPI.AbstractPaymentType
 	#tag Method, Flags = &h0
 		Sub constructor(cc as string, expirationDate as string, optional cvv as string)
 		  //@param cc: The credit card number
@@ -16,8 +15,6 @@ Implements Tokenizable
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  using Xojo.Core
-		  
 		  dim jsonBody as new JSONItem()
 		  dim jsonToken as new JSONItem()
 		  

@@ -1,8 +1,8 @@
 #tag Class
-Protected Class Request_AuthorizeAndCapture
-Inherits AuthorizeNetAPI.TransactionRequest_
+Protected Class AuthorizeAndCaptureReq
+Inherits ANetAPI.AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as AuthorizeNetAPI.PaymentType_, optional billing as BillingProfile, toSave as boolean, optional invoiceNum as string)
+		Sub constructor(amount as double, payType as ANetAPI.AbstractPaymentType, optional billing as ANetAPI.Utility.BillingProfile, toSave as boolean, optional invoiceNum as string)
 		  //Creates a transactionRequest object which is needed when trying to 
 		  //    authenticate,capture,refund, or void a transaction
 		  //@param amount: The amount to act on e.g. to charge. This is a total and must include tax, shipping, etc
@@ -25,8 +25,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 		Private Function generateInvoiceToken() As JSONItem
 		  //@return: Formatted json for handling invoice numbers
 		  
-		  Using xojo.Core
-		  
 		  dim jsonObj as new JSONItem()
 		  jsonObj.value("invoiceNumber") = self.invoiceNumber
 		  
@@ -36,8 +34,6 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  using Xojo.Core
-		  
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
@@ -71,7 +67,7 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private billing As BillingProfile
+		Private billing As ANetAPI.Utility.BillingProfile
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -79,7 +75,7 @@ Inherits AuthorizeNetAPI.TransactionRequest_
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentType As AuthorizeNetAPI.PaymentType_
+		Private paymentType As ANetAPI.AbstractPaymentType
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
