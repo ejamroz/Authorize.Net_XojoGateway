@@ -51,6 +51,9 @@ Protected Class AbstractRequest
 	#tag Constant, Name = kBillToken, Type = String, Dynamic = False, Default = \"billTo", Scope = Protected
 	#tag EndConstant
 
+	#tag Constant, Name = kPayToken, Type = String, Dynamic = False, Default = \"payment", Scope = Protected
+	#tag EndConstant
+
 	#tag Constant, Name = kProfileToken, Type = String, Dynamic = False, Default = \"profile", Scope = Protected
 	#tag EndConstant
 

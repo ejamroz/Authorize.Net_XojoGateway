@@ -20,6 +20,21 @@ Protected Class AbstractPaymentType
 	#tag EndNote
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mTokenName
+			  
+			End Get
+		#tag EndGetter
+		JSONTokenName As string
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h1
+		Protected mTokenName As string
+	#tag EndProperty
+
+
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Index"

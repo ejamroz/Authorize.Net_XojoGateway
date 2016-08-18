@@ -28,10 +28,6 @@ Inherits ANetAPI.AbstractRequest
 	#tag EndNote
 
 
-	#tag Constant, Name = kPayToken, Type = Text, Dynamic = False, Default = \"payment", Scope = Protected
-	#tag EndConstant
-
-
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Index"

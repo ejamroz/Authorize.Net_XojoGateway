@@ -9,6 +9,7 @@ Inherits ANetAPI.AbstractTransactionRequest
 		  //@param payType: The type of payment used in this transation
 		  //@param billing: [OPTIONAL] Billing profile for the payment 
 		  //@param toSave: if true, will create a customerProfile inside ANet's CIM system 
+		  //@param invoiceNumber: Merchant supplied transaction number 
 		  
 		  super.constructor()
 		  self.mType = kTypeAuthAndCapture
@@ -40,7 +41,7 @@ Inherits ANetAPI.AbstractTransactionRequest
 		  //FORM TOKEN DATA
 		  jsonBody.Value("transactionType") = mType
 		  jsonBody.Value("amount") = self.amount
-		  jsonBody.Value(super.kPayToken) = self.paymentType.getJson()
+		  jsonBody.Value(paymentType.JSONTokenName) = self.paymentType.getJson()
 		  if self.toSave then 
 		    jsonBody.value("profile") = super.generateProfile()
 		    

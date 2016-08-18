@@ -7,6 +7,7 @@ Inherits ANetAPI.AbstractPaymentType
 		  //@param expirationDate: The expiration date for the card in form MMYY
 		  //@param cvv: [OPTIONAL] 3-digit code on back of card. Needed if wanting to use authorize.net's Card Code Verification (CCV) security feature
 		  
+		  mTokenName = kPayWithCCToken
 		  self.cc = cc
 		  self.expirationDate = expirationDate
 		  self.cvv = cvv
@@ -52,6 +53,9 @@ Inherits ANetAPI.AbstractPaymentType
 		Private type As string = "creditCard"
 	#tag EndProperty
 
+
+	#tag Constant, Name = kPayWithCCToken, Type = String, Dynamic = False, Default = \"payment", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = PAY_TYPE, Type = Text, Dynamic = False, Default = \"creditCard", Scope = Private
 	#tag EndConstant

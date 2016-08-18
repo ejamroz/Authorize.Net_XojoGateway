@@ -42,6 +42,15 @@ Inherits ANetAPI.AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  return data.Lookup("customerPaymentProfileId", "")
+			End Get
+		#tag EndGetter
+		paymentProfileId As Text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return self.data.Lookup("customerProfileId", "")
 			End Get
 		#tag EndGetter
