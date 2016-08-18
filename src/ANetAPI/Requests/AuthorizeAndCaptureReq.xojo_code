@@ -10,7 +10,8 @@ Inherits ANetAPI.AbstractTransactionRequest
 		  //@param billing: [OPTIONAL] Billing profile for the payment 
 		  //@param toSave: if true, will create a customerProfile inside ANet's CIM system 
 		  
-		  self.type = super.kAuthAndCapture
+		  super.constructor()
+		  self.mType = kTypeAuthAndCapture
 		  self.amount = str(amount)
 		  self.paymentType = payType
 		  self.billing = billing
@@ -37,7 +38,7 @@ Inherits ANetAPI.AbstractTransactionRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = self.type
+		  jsonBody.Value("transactionType") = mType
 		  jsonBody.Value("amount") = self.amount
 		  jsonBody.Value(super.kPayToken) = self.paymentType.getJson()
 		  if self.toSave then 
@@ -107,6 +108,12 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="sentinalToken"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

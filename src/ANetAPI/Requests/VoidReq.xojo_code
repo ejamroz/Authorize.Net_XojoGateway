@@ -1,23 +1,26 @@
 #tag Class
-Protected Class MerchantAuthentication
+Protected Class VoidReq
+Inherits ANetAPI.AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(name as string, transactionkey as string)
-		  self.name = name
-		  Self.transactionId = transactionKey
+		Sub constructor(refTransId as text)
+		  // Calling the overridden superclass constructor.
+		  //@param refTransID: The ANet identifier of the original settled transaction 
+		  
+		  super.constructor()
+		  self.mType = kTypeVoidTransaction
+		  self.refTransId = refTransId
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  //@return: The name of this token : the information stored by it
-		  
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("name") = self.name
-		  jsonBody.Value("transactionKey") = self.transactionID
+		  jsonBody.Value("transactionType") = self.mType
+		  jsonBody.Value("refTransId") = self.refTransId
 		  
-		  //FORM TOKEN
 		  return jsonBody
 		  
 		End Function
@@ -25,14 +28,7 @@ Protected Class MerchantAuthentication
 
 
 	#tag Property, Flags = &h21
-		#tag Note
-			Key value pairs for merchant key and transaction key
-		#tag EndNote
-		Private name As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private transactionID As String
+		Private refTransId As string
 	#tag EndProperty
 
 
@@ -56,6 +52,12 @@ Protected Class MerchantAuthentication
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="sentinalToken"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

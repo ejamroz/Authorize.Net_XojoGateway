@@ -1,12 +1,6 @@
-#tag Interface
-Protected Interface JSONWrapper
-	#tag Method, Flags = &h0
-		Function getJson() As JSONItem
-		  
-		End Function
-	#tag EndMethod
-
-
+#tag Class
+Protected Class GetCustomerPaymentProfileReq
+Inherits ANetAPI.AbstractProfileRequest
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Index"
@@ -42,5 +36,5 @@ Protected Interface JSONWrapper
 			Type="Integer"
 		#tag EndViewProperty
 	#tag EndViewBehavior
-End Interface
-#tag EndInterface
+End Class
+#tag EndClass

@@ -1,36 +1,44 @@
 #tag Class
-Protected Class ErrorResponse
-Inherits ANetAPI.AbstractResponse
-	#tag Method, Flags = &h0
-		Sub constructor(data as xojo.Core.Dictionary)
-		  //@param data: The response data 
-		  
-		  super.constructor(data)
-		  super.setResponseCodes(data.Value("messages")) //we can do this because we know the structure of what we are getting as it is an error
-		  
-		  
-		  
+Protected Class AbstractTransactionRequest
+Inherits ANetAPI.AbstractRequest
+	#tag Method, Flags = &h1
+		Protected Sub constructor()
+		  mToken = kRequestToken
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function generateProfile() As JSONItem
+		  //Creates the necessary json for saving a profile during a tx
+		  
+		  dim json as new JSONItem()
+		  
+		  json.Value("createProfile") = "true"
+		  
+		  return json
+		  
+		  
+		End Function
+	#tag EndMethod
+
+
+	#tag Note, Name = Description
+		This is an abstract super class for all transaction types. It can not be instantiated
+		
+	#tag EndNote
+
+
+	#tag Constant, Name = kPayToken, Type = Text, Dynamic = False, Default = \"payment", Scope = Protected
+	#tag EndConstant
+
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="errorMessage"
-			Group="Behavior"
-			Type="Text"
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="lastErrorCode"
-			Group="Behavior"
-			Type="text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -46,15 +54,9 @@ Inherits ANetAPI.AbstractResponse
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="StatusCode"
+			Name="sentinalToken"
 			Group="Behavior"
-			Type="Text"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="StatusMessage"
-			Group="Behavior"
-			Type="Text"
+			Type="string"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty

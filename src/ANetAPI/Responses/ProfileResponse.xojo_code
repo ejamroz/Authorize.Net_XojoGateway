@@ -2,10 +2,11 @@
 Protected Class ProfileResponse
 Inherits ANetAPI.AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary)
+		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as text)
 		  //@param json: Object representing JSON string. This method currently accepts JSONItems and Xojo.Core.Dictionaries
 		  
 		  super.constructor(dataJson)
+		  mRequestType = requestType
 		  
 		  
 		End Sub
@@ -28,6 +29,15 @@ Inherits ANetAPI.AbstractResponse
 		End Function
 	#tag EndMethod
 
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return StringToText(right(data.Lookup("cardNumber", ""), 4))
+			End Get
+		#tag EndGetter
+		lastFour As Text
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -56,6 +66,11 @@ Inherits ANetAPI.AbstractResponse
 			Name="lastErrorCode"
 			Group="Behavior"
 			Type="text"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="lastFour"
+			Group="Behavior"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"

@@ -1,6 +1,25 @@
 #tag Class
-Protected Class GetCustomerPaymentProfileReq
-Inherits ANetAPI.AbstractTransactionRequest
+Protected Class AbstractPaymentType
+	#tag Method, Flags = &h21
+		Private Sub constructor()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getJson() As JSONItem
+		  
+		  
+		End Function
+	#tag EndMethod
+
+
+	#tag Note, Name = Description
+		This is an abstract super class for all payment types. It can not be instantiated
+		
+	#tag EndNote
+
+
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="Index"

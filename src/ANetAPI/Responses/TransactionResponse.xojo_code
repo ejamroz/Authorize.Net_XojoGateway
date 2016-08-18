@@ -2,44 +2,14 @@
 Protected Class TransactionResponse
 Inherits ANetAPI.AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary)
+		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as text)
 		  //@param dataJson: Object representing JSON string of response data
 		  
 		  super.constructor(dataJson)
-		  statusCode = data.Lookup("responseCode", "404000")
-		  if StatusCode = "404000" then //Something has changed about the formatting of responses :(
-		    StatusMessage = "Unable to determine status based on results, check Anet portal using transaction ID"
-		    
-		  end if
-		  
-		  //LOAD ANY ERRORS
-		  if data.HasKey("errors") then
-		    dim temp() as Auto = data.Value("errors")
-		    dim err as Dictionary = temp(0) 
-		    self.lastErrorCode = err.Lookup("errorCode", "")
-		    self.errorMessage = err.Lookup("errorText", "")
-		    
-		  end if
-		  
-		  
-		  
+		  mRequestType = requestType
 		  
 		  
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function isSuccess() As boolean
-		  //@override
-		  //@return: True is the request was a success and false otherwise
-		  
-		  if StatusCode = kSuccessCode or StatusCode = "1" then
-		    return true
-		    
-		  end if 
-		  
-		  return false 
-		End Function
 	#tag EndMethod
 
 

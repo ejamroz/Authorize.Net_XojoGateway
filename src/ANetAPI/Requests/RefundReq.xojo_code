@@ -9,7 +9,8 @@ Inherits ANetAPI.AbstractTransactionRequest
 		  //    in the original settled transaction. Only the last 4 digits are required for the card 
 		  //@param refTransID: The ANet identifier of the original settled transaction 
 		  
-		  self.type = super.kRefund 
+		  super.constructor()
+		  self.mType = kTypeRefund 
 		  self.amount = amount
 		  self.payType = payType
 		  self.refTransId = refTransId
@@ -21,7 +22,7 @@ Inherits ANetAPI.AbstractTransactionRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = self.type
+		  jsonBody.Value("transactionType") = self.mType
 		  jsonBody.Value("amount") = self.amount
 		  jsonBody.Value(super.kPayToken) = self.payType.getJson()
 		  jsonBody.Value("refTransId") = self.refTransId
@@ -65,6 +66,12 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="sentinalToken"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

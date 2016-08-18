@@ -1,9 +1,10 @@
 #tag Class
 Protected Class CreateCustomerProfileFromTransactionReq
-Inherits ANetAPI.AbstractTransactionRequest
+Inherits ANetAPI.AbstractProfileRequest
 	#tag Method, Flags = &h0
 		Sub constructor(txID as string)
-		  self.type = super.kCreateProfileFromTx
+		  super.constructor()
+		  self.mType = kTypeCreateProfileFromTx
 		  self.txID = txID
 		End Sub
 	#tag EndMethod
@@ -56,6 +57,12 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="sentinalToken"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
@@ -67,6 +74,11 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="validationMode"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

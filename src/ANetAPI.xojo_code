@@ -25,22 +25,37 @@ Protected Module ANetAPI
 	#tag EndMethod
 
 
-	#tag Constant, Name = kSuccessCode, Type = Text, Dynamic = False, Default = \"I00001", Scope = Public
-	#tag EndConstant
-
 	#tag Constant, Name = kTxLive, Type = Text, Dynamic = False, Default = \"https://api.authorize.net/xml/v1/request.api", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kTxSandbox, Type = Text, Dynamic = False, Default = \"https://apitest.authorize.net/xml/v1/request.api", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeError, Type = Text, Dynamic = False, Default = \"error", Scope = Public
+	#tag Constant, Name = kTypeAuthAndCapture, Type = Text, Dynamic = False, Default = \"authCaptureTransaction", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeProfile, Type = Text, Dynamic = False, Default = \"profile", Scope = Public
+	#tag Constant, Name = kTypeCreateCustomerProfile, Type = Text, Dynamic = False, Default = \"CreateCustomerProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeTransaction, Type = Text, Dynamic = False, Default = \"transaction", Scope = Public
+	#tag Constant, Name = kTypeCreatePaymentProfile, Type = Text, Dynamic = False, Default = \"CreatePaymentProfile", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kTypeCreateProfileFromTx, Type = Text, Dynamic = False, Default = \"createCustomerProfileFromTransaction", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kTypeRefund, Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kTypeVoidTransaction, Type = Text, Dynamic = False, Default = \"voidTransaction", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kValidationLive, Type = Text, Dynamic = False, Default = \"live", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kValidationNone, Type = Text, Dynamic = False, Default = \"none", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kValidationTest, Type = Text, Dynamic = False, Default = \"test", Scope = Public
 	#tag EndConstant
 
 

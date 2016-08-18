@@ -31,15 +31,50 @@ Protected Class BillingProfile
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.value("firstName") = self.firstName
-		  jsonBody.value("lastName") = self.lastName
-		  jsonBody.value("company") = self.companyName
-		  jsonBody.value("address") = self.address
-		  jsonBody.value("city") = self.city
-		  jsonBody.value("state") = self.state
-		  jsonBody.value("zip") = self.zipCode
-		  jsonBody.value("country") = self.country
-		  jsonBody.value("phoneNumber") = self.phoneNumber
+		  if firstName <> "" then 
+		    jsonBody.value("firstName") = self.firstName
+		    
+		  end if
+		  
+		  if lastName <> "" then 
+		    jsonBody.value("lastName") = self.lastName
+		    
+		  end if
+		  
+		  if companyName <> "" then 
+		    jsonBody.value("company") = self.companyName
+		    
+		  end if
+		  
+		  if address <> "" then 
+		    jsonBody.value("address") = self.address
+		    
+		  end if
+		  
+		  if city <> "" then 
+		    jsonBody.value("city") = self.city
+		    
+		  end if
+		  
+		  if state <> "" then 
+		    jsonBody.value("state") = self.state
+		    
+		  end if
+		  
+		  if zipCode <> "" then 
+		    jsonBody.value("zip") = self.zipCode
+		    
+		  end if
+		  
+		  if country <> "" then 
+		    jsonBody.value("country") = self.country
+		    
+		  end if
+		  
+		  if phoneNumber <> "" then 
+		    jsonBody.value("phoneNumber") = self.phoneNumber
+		    
+		  end if
 		  
 		  //FORM TOKEN
 		  return jsonBody
@@ -86,7 +121,7 @@ Protected Class BillingProfile
 	#tag EndProperty
 
 
-	#tag Constant, Name = TOKEN_NAME, Type = String, Dynamic = False, Default = \"billTo", Scope = Public
+	#tag Constant, Name = kTokenName, Type = String, Dynamic = False, Default = \"billTo", Scope = Public
 	#tag EndConstant
 
 

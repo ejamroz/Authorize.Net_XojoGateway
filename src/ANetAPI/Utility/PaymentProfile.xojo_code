@@ -1,12 +1,36 @@
 #tag Class
 Protected Class PaymentProfile
 	#tag Method, Flags = &h0
+		Sub constructor(payment as ANetAPI.AbstractPaymentType, billing as ANetAPI.Utility.BillingProfile)
+		  //@param payment: Object representing payment information
+		  //@param billing: Object representing the billing information 
+		  
+		  paymentInfo = payment
+		  billingInfo = billing
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
 		  // Part of the Tokenizable interface.
 		  
+		  dim jsonBody as new JSONItem()
 		  
+		  jsonBody.Value("billTo") = billingInfo.getJson()
+		  jsonBody.Value("payment") = paymentInfo.getJson()
+		  
+		  return jsonBody
 		End Function
 	#tag EndMethod
+
+
+	#tag Property, Flags = &h21
+		Private billingInfo As ANetAPI.Utility.BillingProfile
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private paymentInfo As ANetAPI.AbstractPaymentType
+	#tag EndProperty
 
 
 	#tag ViewBehavior

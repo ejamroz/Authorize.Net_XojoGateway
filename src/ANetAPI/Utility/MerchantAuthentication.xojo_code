@@ -1,24 +1,21 @@
 #tag Class
-Protected Class VoidReq
-Inherits ANetAPI.AbstractTransactionRequest
+Protected Class MerchantAuthentication
 	#tag Method, Flags = &h0
-		Sub constructor(refTransId as text)
-		  // Calling the overridden superclass constructor.
-		  //@param refTransID: The ANet identifier of the original settled transaction 
-		  
-		  self.type = super.kVoidTransaction
-		  self.refTransId = refTransId
-		  
+		Sub constructor(name as string, transactionkey as string)
+		  self.name = name
+		  Self.transactionId = transactionKey
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
+		  //@return: The name of this token : the information stored by it
+		  
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = self.type
-		  jsonBody.Value("refTransId") = self.refTransId
+		  jsonBody.Value("name") = self.name
+		  jsonBody.Value("transactionKey") = self.transactionID
 		  
 		  return jsonBody
 		  
@@ -27,7 +24,14 @@ Inherits ANetAPI.AbstractTransactionRequest
 
 
 	#tag Property, Flags = &h21
-		Private refTransId As string
+		#tag Note
+			Key value pairs for merchant key and transaction key
+		#tag EndNote
+		Private name As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private transactionID As String
 	#tag EndProperty
 
 
