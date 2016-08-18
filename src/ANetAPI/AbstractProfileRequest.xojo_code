@@ -8,6 +8,20 @@ Inherits ANetAPI.AbstractRequest
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCustomerId
+			  
+			End Get
+		#tag EndGetter
+		customerId As String
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h1
+		Protected mCustomerId As String
+	#tag EndProperty
+
 	#tag Property, Flags = &h1
 		Protected mValidation As string
 	#tag EndProperty

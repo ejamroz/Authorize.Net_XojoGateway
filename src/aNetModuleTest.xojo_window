@@ -25,7 +25,7 @@ Begin Window aNetModuleTest
    Resizeable      =   True
    Title           =   "Test Window"
    Visible         =   True
-   Width           =   812
+   Width           =   706
    Begin Label Label2
       AutoDeactivate  =   True
       Bold            =   False
@@ -91,7 +91,7 @@ Begin Window aNetModuleTest
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "3g43A42jEa3J5Dw9"
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -178,7 +178,7 @@ Begin Window aNetModuleTest
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   491
+      Width           =   385
    End
    Begin Label Label10
       AutoDeactivate  =   True
@@ -231,7 +231,7 @@ Begin Window aNetModuleTest
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   98
+      Left            =   123
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -245,7 +245,7 @@ Begin Window aNetModuleTest
       TabIndex        =   21
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "5g7W2Waks"
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -254,7 +254,7 @@ Begin Window aNetModuleTest
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   176
+      Width           =   151
    End
    Begin PushButton PushButton2
       AutoDeactivate  =   True
@@ -748,6 +748,48 @@ End
 		aNetTxID As Text
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCustomerPaymentProfile
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCustomerPaymentProfile = value
+			  if value <> "" then
+			    self.PushButton5.Enabled = true
+			    
+			  else
+			    self.PushButton5.Enabled = false
+			    
+			  end if
+			End Set
+		#tag EndSetter
+		customerPaymentProfileID As Text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCustomerProfile
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCustomerProfile = value
+			  if value <> "" then
+			    self.PushButton6.Enabled = true
+			    
+			  else
+			    self.PushButton6.Enabled = false
+			    
+			  end if
+			End Set
+		#tag EndSetter
+		customerProfileID As Text
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		Private mCustomerPaymentProfile As Text
 	#tag EndProperty
@@ -772,8 +814,7 @@ End
 		  
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
-		  //dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim cc as new CreditCard("4111111111111111", "0120")
 		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
 		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
@@ -791,7 +832,7 @@ End
 		  
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim cc as new CreditCard("1111", "0120")
 		  dim req as new RefundReq(10, cc, self.aNetTxID)
 		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
@@ -807,7 +848,7 @@ End
 		  
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new VoidReq(self.aNetTxID)
 		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
 		  
@@ -819,16 +860,13 @@ End
 		Sub Action()
 		  using ANetAPI.Utility
 		  using ANetAPI.Requests
-		  using ANetAPI.PaymentTypes
 		  
 		  self.TextArea1.Text = ""
 		  
-		  //dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new CreditCard("4111111111111111", "0120")
-		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
-		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim customer as new CustomerProfile("123456796", "Nina Simone|4356622023", "nict@t.t")
+		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
+		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -855,12 +893,15 @@ End
 		Sub Action()
 		  Using ANetAPI.Utility
 		  using ANetAPI.Requests
+		  Using ANetAPI.PaymentTypes
 		  
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication("5g7W2Waks", "3g43A42jEa3J5Dw9")
-		  dim req as new VoidReq(self.aNetTxID)
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim billing as new BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
+		  dim cc as new CreditCard("4111111111111111", "1220")
+		  dim req as new CreateCustomerPaymentProfileReq(customerProfileID, cc, billing, kValidationTest) 
+		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -894,7 +935,10 @@ End
 		    end if
 		    
 		    //STORE TX ID
-		    aNetTxID = ANetAPI.Responses.TransactionResponse(response).transactionID
+		    if response.requestType = kTypeAuthAndCapture then 
+		      aNetTxID = ANetAPI.Responses.TransactionResponse(response).transactionID
+		      
+		    end if
 		    
 		  else
 		    //DO ACCOUNTING
@@ -903,6 +947,12 @@ End
 		      
 		    else
 		      self.TextField13.Text = str(val(self.TextField13.Text) + 1) 
+		      
+		    end if
+		    
+		    //STORE INFO
+		    if response.requestType = kTypeCreateCustomerProfile then 
+		      customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
 		      
 		    end if
 		    

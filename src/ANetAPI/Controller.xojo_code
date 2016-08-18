@@ -91,6 +91,10 @@ Protected Class Controller
 		    jsonHead = kCreateCustomerProfileHeader
 		    theRequestJSON = CreateCustomerProfileReq(theRequest).getJson()
 		    
+		  ElseIf theRequest isa CreateCustomerPaymentProfileReq then 
+		    jsonHead = kCreateCustomerPaymentProfileHeader
+		    theRequestJSON = CreateCustomerPaymentProfileReq(theRequest).getJson()
+		    
 		    //TODO: ADD OTHER REQUESTS HERE 
 		  else
 		    #Pragma BreakOnExceptions false
@@ -105,6 +109,11 @@ Protected Class Controller
 		  
 		  //FORM BODY OF REQUEST
 		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
+		  if theRequest.requestType = kTypeCreatePaymentProfile then 
+		    sendRequestBody.Value("customerProfileId") = theRequest.customerId
+		    
+		  end if
+		  
 		  sendRequestBody.Value(theRequest.sentinalToken) = theRequestJSON
 		  if theRequest.validationMode <> "" then 
 		    sendRequestBody.Value("validationMode") = theRequest.validationMode
@@ -224,6 +233,7 @@ Protected Class Controller
 		#tag Getter
 			Get
 			  return lastRequestMade
+			  
 			End Get
 		#tag EndGetter
 		lastRequest As Text
@@ -233,6 +243,9 @@ Protected Class Controller
 		Private lastRequestMade As Text
 	#tag EndProperty
 
+
+	#tag Constant, Name = kCreateCustomerPaymentProfileHeader, Type = String, Dynamic = False, Default = \"createCustomerPaymentProfileRequest", Scope = Private
+	#tag EndConstant
 
 	#tag Constant, Name = kCreateCustomerProfileHeader, Type = String, Dynamic = False, Default = \"createCustomerProfileRequest", Scope = Private
 	#tag EndConstant

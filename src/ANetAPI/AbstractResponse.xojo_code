@@ -136,13 +136,13 @@ Protected Class AbstractResponse
 		Protected mRequestType As Text
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h1
+	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
 			  return mRequestType
 			End Get
 		#tag EndGetter
-		Protected requestType As Text
+		requestType As Text
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
