@@ -8,7 +8,7 @@ Protected Class AbstractRequest
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  return nil
+		  return new JSONItem() //return an empty item 
 		  
 		End Function
 	#tag EndMethod

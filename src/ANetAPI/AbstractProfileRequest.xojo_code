@@ -23,8 +23,21 @@ Inherits ANetAPI.AbstractRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
+		Protected mPaymentID As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
 		Protected mValidation As string
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mPaymentID
+			End Get
+		#tag EndGetter
+		paymentProfileID As string
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter

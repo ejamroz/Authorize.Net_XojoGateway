@@ -43,6 +43,9 @@ Protected Module ANetAPI
 	#tag Constant, Name = kTypeCreateProfileFromTx, Type = Text, Dynamic = False, Default = \"createCustomerProfileFromTransaction", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kTypeGetCustomerPaymentPRofile, Type = Text, Dynamic = False, Default = \"getCustomerPaymentProfile", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kTypeRefund, Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Public
 	#tag EndConstant
 

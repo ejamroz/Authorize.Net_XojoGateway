@@ -9,7 +9,7 @@ Begin Window aNetModuleTest
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   278
+   Height          =   326
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -91,7 +91,7 @@ Begin Window aNetModuleTest
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "3g43A42jEa3J5Dw9"
+      Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -145,7 +145,7 @@ Begin Window aNetModuleTest
       DataSource      =   ""
       Enabled         =   True
       Format          =   ""
-      Height          =   238
+      Height          =   286
       HelpTag         =   ""
       HideSelection   =   True
       Index           =   -2147483648
@@ -245,7 +245,7 @@ Begin Window aNetModuleTest
       TabIndex        =   21
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "5g7W2Waks"
+      Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -375,7 +375,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   238
+      Top             =   270
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -406,7 +406,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   206
+      Top             =   238
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -721,6 +721,37 @@ Begin Window aNetModuleTest
       Scope           =   1
       TabPanelIndex   =   0
    End
+   Begin PushButton PushButton7
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Get Payment Info"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   37
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   206
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
 End
 #tag EndWindow
 
@@ -935,16 +966,36 @@ End
 		    end if
 		    
 		    //STORE INFO
-		    if response.requestType = kTypeCreateCustomerProfile then 
+		    select case response.requestType
+		    case kTypeCreateCustomerProfile 
 		      customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
 		      
-		    elseif response.requestType = kTypeCreatePaymentProfile then
+		    case kTypeCreatePaymentProfile 
 		      customerPaymentProfileID = ANetAPI.Responses.ProfileResponse(response).paymentProfileId
 		      
-		    end if
+		    case kTypeGetCustomerPaymentPRofile
+		      customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
+		      customerPaymentProfileID = ANetAPI.Responses.ProfileResponse(response).paymentProfileId
+		      
+		    end select
 		    
 		  end if
 		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton7
+	#tag Event
+		Sub Action()
+		  using ANetAPI.Utility
+		  using ANetAPI.Requests
+		  
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  //dim req as new GetCustomerPaymentProfileReq(PROFILE ID HERE, PAYMENT PROFILE ID HERE) 
+		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent

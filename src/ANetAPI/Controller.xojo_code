@@ -61,7 +61,7 @@ Protected Class Controller
 		  case kTypeAuthAndCapture, kTypeRefund, kTypeVoidTransaction
 		    ResponseReceived(new TransactionResponse(data, lastRequestMade))
 		    
-		  case kTypeCreateCustomerProfile, kTypeCreatePaymentProfile, kTypeCreateProfileFromTx
+		  case kTypeCreateCustomerProfile, kTypeCreatePaymentProfile, kTypeCreateProfileFromTx, kTypeGetCustomerPaymentPRofile
 		    ResponseReceived(new ProfileResponse(data, lastRequestMade))
 		    
 		  End Select
@@ -82,7 +82,7 @@ Protected Class Controller
 		  dim sendRequestBody as new JSONItem()
 		  dim sendRequest as new JSONItem()
 		  
-		  //DISPATCH REQUEST TYPE 
+		  //SET HEADERS
 		  if theRequest isa CreateCustomerProfileFromTransactionReq then //create a customer profile from tx
 		    jsonHead = kCreateCustProfileFromTxHeader
 		    theRequestJSON = CreateCustomerProfileFromTransactionReq(theRequest).getJson()
@@ -95,7 +95,11 @@ Protected Class Controller
 		    jsonHead = kCreateCustomerPaymentProfileHeader
 		    theRequestJSON = CreateCustomerPaymentProfileReq(theRequest).getJson()
 		    
-		    //TODO: ADD OTHER REQUESTS HERE 
+		  elseif theRequest isa GetCustomerPaymentProfileReq then
+		    jsonHead = kGetCustomerPaymentProfileHeader
+		    //there is no request JSON for this type of request 
+		    
+		    //XXX: ADD OTHER REQUESTS HERE 
 		  else
 		    #Pragma BreakOnExceptions false
 		    dim err as new UnsupportedFormatException()
@@ -109,12 +113,30 @@ Protected Class Controller
 		  
 		  //FORM BODY OF REQUEST
 		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
-		  if theRequest.requestType = kTypeCreatePaymentProfile then 
+		  'if theRequest.requestType = kTypeCreatePaymentProfile then 
+		  'sendRequestBody.Value("customerProfileId") = theRequest.customerId
+		  '
+		  'elseif theRequest.requestType = kTypeGetCustomerPaymentPRofile
+		  'sendRequestBody.Value("customerProfileId") = theRequest.customerId
+		  'sendRequestBody.Value("customerPaymentProfileId") = theRequest.paymentProfileID
+		  '
+		  'end if
+		  
+		  If theRequest.customerId <> "" then
 		    sendRequestBody.Value("customerProfileId") = theRequest.customerId
+		    
+		  End If
+		  
+		  if theRequest.paymentProfileID <> "" then 
+		    sendRequestBody.Value("customerPaymentProfileId") = theRequest.paymentProfileID
 		    
 		  end if
 		  
-		  sendRequestBody.Value(theRequest.sentinalToken) = theRequestJSON
+		  If theRequest.sentinalToken <> "" then
+		    sendRequestBody.Value(theRequest.sentinalToken) = theRequestJSON
+		    
+		  End If
+		  
 		  if theRequest.validationMode <> "" then 
 		    sendRequestBody.Value("validationMode") = theRequest.validationMode
 		    
@@ -251,6 +273,9 @@ Protected Class Controller
 	#tag EndConstant
 
 	#tag Constant, Name = kCreateCustProfileFromTxHeader, Type = String, Dynamic = False, Default = \"createCustomerProfileFromTransactionRequest", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kGetCustomerPaymentProfileHeader, Type = String, Dynamic = False, Default = \"getCustomerPaymentProfileRequest", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kMerchantToken, Type = String, Dynamic = False, Default = \"merchantAuthentication", Scope = Private
