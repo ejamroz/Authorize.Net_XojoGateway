@@ -1,5 +1,5 @@
 # Authorize.Net_XojoGateway
-A module for  integrating Xojo applications with Authorize.net's CIM and payment gateways using their JSON API. More information about their APIs [here](http://developer.authorize.net/api/reference/).
+A module for  integrating Xojo applications with Authorize.net's CIM and payment gateways using their JSON API. More information about their APIs [here](http://developer.authorize.net/api/reference/). This was designed for a project with certain limitations, so I have not integrated their full API (Apple Pay, PayPal, etc). Hopefully when I get some time I will get around to doing that, or if you want to help out feel free to fork and add!
 
 ## Current Abilities
 * Charge a credit card
@@ -9,7 +9,11 @@ A module for  integrating Xojo applications with Authorize.net's CIM and payment
 * Void a same day transaction
 * Add payment profiles to a CIM record
 * Charge a stored CIM profile
+* Retrieve a payment profile for a CIM record
 
 ## Coming soon
-* Retrieve a payment profile from Anet's CIM database
-
+* Have accounts store more than one CC
+* Delete payment profiles
+* Update payment profiles
+* Update customer profiles
+* Delete customer profiles
