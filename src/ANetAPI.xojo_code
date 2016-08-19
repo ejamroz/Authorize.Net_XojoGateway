@@ -52,16 +52,19 @@ Protected Module ANetAPI
 	#tag Constant, Name = kTypeRefund, Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kTypeUpdateCustomerPaymentProfile, Type = Text, Dynamic = False, Default = \"UpdateCustomerPaymentProfile", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kTypeVoidTransaction, Type = Text, Dynamic = False, Default = \"voidTransaction", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kValidationLive, Type = Text, Dynamic = False, Default = \"live", Scope = Public
+	#tag Constant, Name = kValidationLive, Type = Text, Dynamic = False, Default = \"liveMode", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kValidationNone, Type = Text, Dynamic = False, Default = \"none", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kValidationTest, Type = Text, Dynamic = False, Default = \"test", Scope = Public
+	#tag Constant, Name = kValidationTest, Type = Text, Dynamic = False, Default = \"testMode", Scope = Public
 	#tag EndConstant
 
 

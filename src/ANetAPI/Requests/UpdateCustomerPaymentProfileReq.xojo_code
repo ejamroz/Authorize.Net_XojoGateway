@@ -1,20 +1,22 @@
 #tag Class
-Protected Class CreateCustomerPaymentProfileReq
+Protected Class UpdateCustomerPaymentProfileReq
 Inherits ANetAPI.AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as Text)
-		  //@param custSerial: The Anet customer profile id
+		Sub constructor(custSerial as string, paymentSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as Text)
+		  //@param custSerial: ANet customer ID
+		  //@param paymentSerial: ANet payment profile ID
 		  //@param billingInfo: The billing information for the payment method provided
 		  //@param paymentInfo: Information regarding payment, currently only CC's are accepted
 		  //@param validationMode: The level of validation required for the payment provided
 		  
 		  super.constructor()
-		  mType = kTypeCreatePaymentProfile
+		  mType = kTypeUpdateCustomerPaymentProfile
 		  mJSONBodyToken= kPaymentProfileToken
 		  mCustomerId = custSerial
 		  self.billingInfo = billingInfo
 		  self.paymentInfo = paymentInfo
 		  mValidation = validationMode
+		  mCustomerPaymentProfile = paymentSerial
 		End Sub
 	#tag EndMethod
 
@@ -25,6 +27,7 @@ Inherits ANetAPI.AbstractProfileRequest
 		  //FORM TOKEN DATA
 		  jsonBody.Value("billTo") = billingInfo.getJson
 		  jsonBody.Value("payment") = paymentInfo.getJson
+		  jsonBody.Value("customerPaymentProfileId") = mCustomerPaymentProfile
 		  
 		  //FORM TOKEN
 		  return jsonBody
@@ -35,6 +38,14 @@ Inherits ANetAPI.AbstractProfileRequest
 
 	#tag Property, Flags = &h21
 		Private billingInfo As ANetAPI.Utility.BillingProfile
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		#tag Note
+			This is a private inaccessable version of mPaymentID
+			
+		#tag EndNote
+		Private mCustomerPaymentProfile As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

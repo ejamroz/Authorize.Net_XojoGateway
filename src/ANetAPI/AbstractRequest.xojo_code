@@ -15,7 +15,7 @@ Protected Class AbstractRequest
 
 
 	#tag Property, Flags = &h1
-		Protected mToken As string
+		Protected mJSONBodyToken As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
@@ -35,7 +35,7 @@ Protected Class AbstractRequest
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return mToken
+			  return mJSONBodyToken
 			  
 			End Get
 		#tag EndGetter
@@ -81,6 +81,12 @@ Protected Class AbstractRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"

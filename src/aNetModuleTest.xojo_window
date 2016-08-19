@@ -884,9 +884,11 @@ End
 			  mCustomerPaymentProfile = value
 			  if value <> "" then
 			    self.PushButton5.Enabled = true
+			    self.PushButton9.Enabled = true
 			    
 			  else
 			    self.PushButton5.Enabled = false
+			    self.PushButton9.Enabled = false 
 			    
 			  end if
 			End Set
@@ -983,7 +985,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim customer as new CustomerProfile("123456798", "Test Simone|4356622023", "nict@t.t")
+		  dim customer as new CustomerProfile("123456800", "Test Test|4356622023", "nict@t.t")
 		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
@@ -1046,10 +1048,7 @@ End
 		    end if
 		    
 		    //STORE TX ID
-		    if response.requestType = kTypeAuthAndCapture then 
-		      aNetTxID = ANetAPI.Responses.TransactionResponse(response).transactionID
-		      
-		    end if
+		    aNetTxID = ANetAPI.Responses.TransactionResponse(response).transactionID
 		    
 		  else
 		    //DO ACCOUNTING
@@ -1062,18 +1061,8 @@ End
 		    end if
 		    
 		    //STORE INFO
-		    select case response.requestType
-		    case kTypeCreateCustomerProfile 
-		      customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
-		      
-		    case kTypeCreatePaymentProfile 
-		      customerPaymentProfileID = ANetAPI.Responses.ProfileResponse(response).paymentProfileId
-		      
-		    case kTypeGetCustomerPaymentPRofile
-		      customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
-		      customerPaymentProfileID = ANetAPI.Responses.ProfileResponse(response).paymentProfileId
-		      
-		    end select
+		    customerPaymentProfileID = ANetAPI.Responses.ProfileResponse(response).paymentProfileId
+		    customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
 		    
 		  end if
 		  
@@ -1102,7 +1091,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new ANetAPI.Requests.DeleteCustomerProfile(customerProfileID) 
+		  dim req as new ANetAPI.Requests.DeleteCustomerProfileReq(customerProfileID) 
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
@@ -1114,7 +1103,9 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new ANetAPI.Requests.DeleteCustomerProfile(customerProfileID) 
+		  dim billing as new ANetAPI.Utility.BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
+		  dim cc as new ANetAPI.PaymentTypes.CreditCard("5111111111111111", "1220")
+		  dim req as new ANetAPI.Requests.UpdateCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID, cc, billing, kValidationNone) 
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
@@ -1126,7 +1117,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new ANetAPI.Requests.DeleteCustomerProfile(customerProfileID) 
+		  dim req as new ANetAPI.Requests.DeleteCustomerProfileReq(customerProfileID) 
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub

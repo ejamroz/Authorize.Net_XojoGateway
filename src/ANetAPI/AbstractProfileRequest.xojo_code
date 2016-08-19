@@ -3,7 +3,7 @@ Protected Class AbstractProfileRequest
 Inherits ANetAPI.AbstractRequest
 	#tag Method, Flags = &h1
 		Protected Sub constructor()
-		  mToken = kProfileToken
+		  mJSONBodyToken= kProfileToken
 		End Sub
 	#tag EndMethod
 
@@ -57,6 +57,12 @@ Inherits ANetAPI.AbstractRequest
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="customerId"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
@@ -75,6 +81,18 @@ Inherits ANetAPI.AbstractRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="paymentProfileID"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"

@@ -8,7 +8,7 @@ Inherits ANetAPI.AbstractProfileRequest
 		  
 		  Super.Constructor()
 		  mType = kTypeGetCustomerPaymentPRofile
-		  mToken = "" 
+		  mJSONBodyToken= "" 
 		  mCustomerId = customerID
 		  mPaymentID = paymentID
 		End Sub
@@ -16,6 +16,12 @@ Inherits ANetAPI.AbstractProfileRequest
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="customerId"
+			Group="Behavior"
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -35,6 +41,18 @@ Inherits ANetAPI.AbstractProfileRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="paymentProfileID"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"

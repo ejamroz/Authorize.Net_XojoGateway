@@ -1,49 +1,17 @@
 #tag Class
-Protected Class CreateCustomerPaymentProfileReq
+Protected Class DeleteCustomerProfileReq
 Inherits ANetAPI.AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as Text)
-		  //@param custSerial: The Anet customer profile id
-		  //@param billingInfo: The billing information for the payment method provided
-		  //@param paymentInfo: Information regarding payment, currently only CC's are accepted
-		  //@param validationMode: The level of validation required for the payment provided
+		Sub constructor(customerID as string)
+		  //@param customerID: ANet customer serial
 		  
-		  super.constructor()
-		  mType = kTypeCreatePaymentProfile
-		  mJSONBodyToken= kPaymentProfileToken
-		  mCustomerId = custSerial
-		  self.billingInfo = billingInfo
-		  self.paymentInfo = paymentInfo
-		  mValidation = validationMode
+		  Super.Constructor()
+		  mType = kTypeDeleteCustomerProfile
+		  mJSONBodyToken= ""
+		  mCustomerId = customerID
+		  
 		End Sub
 	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getJson() As JSONItem
-		  dim jsonBody as new JSONItem()
-		  
-		  //FORM TOKEN DATA
-		  jsonBody.Value("billTo") = billingInfo.getJson
-		  jsonBody.Value("payment") = paymentInfo.getJson
-		  
-		  //FORM TOKEN
-		  return jsonBody
-		  
-		End Function
-	#tag EndMethod
-
-
-	#tag Property, Flags = &h21
-		Private billingInfo As ANetAPI.Utility.BillingProfile
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private paymentInfo As ANetAPI.AbstractPaymentType
-	#tag EndProperty
-
-
-	#tag Constant, Name = kPaymentProfileToken, Type = Text, Dynamic = False, Default = \"paymentProfile", Scope = Private
-	#tag EndConstant
 
 
 	#tag ViewBehavior

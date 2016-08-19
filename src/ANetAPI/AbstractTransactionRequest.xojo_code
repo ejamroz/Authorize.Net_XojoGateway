@@ -3,7 +3,7 @@ Protected Class AbstractTransactionRequest
 Inherits ANetAPI.AbstractRequest
 	#tag Method, Flags = &h1
 		Protected Sub constructor()
-		  mToken = kRequestToken
+		  mJSONBodyToken= kRequestToken
 		End Sub
 	#tag EndMethod
 
@@ -48,6 +48,12 @@ Inherits ANetAPI.AbstractRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"
