@@ -9,7 +9,7 @@ Begin Window aNetModuleTest
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   326
+   Height          =   372
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -25,7 +25,7 @@ Begin Window aNetModuleTest
    Resizeable      =   True
    Title           =   "Test Window"
    Visible         =   True
-   Width           =   706
+   Width           =   653
    Begin Label Label2
       AutoDeactivate  =   True
       Bold            =   False
@@ -145,7 +145,7 @@ Begin Window aNetModuleTest
       DataSource      =   ""
       Enabled         =   True
       Format          =   ""
-      Height          =   286
+      Height          =   332
       HelpTag         =   ""
       HideSelection   =   True
       Index           =   -2147483648
@@ -178,7 +178,7 @@ Begin Window aNetModuleTest
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   385
+      Width           =   332
    End
    Begin Label Label10
       AutoDeactivate  =   True
@@ -362,7 +362,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   28
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -717,6 +717,7 @@ Begin Window aNetModuleTest
    End
    Begin ANetAPI.Controller Controller1
       Index           =   -2147483648
+      lastRequest     =   ""
       LockedInPosition=   False
       Scope           =   1
       TabPanelIndex   =   0
@@ -752,6 +753,99 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   117
    End
+   Begin PushButton PushButton8
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   True
+      Caption         =   "Delete Profile"
+      Default         =   False
+      Enabled         =   False
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   38
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   334
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
+   Begin PushButton PushButton9
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   True
+      Caption         =   "Update Pay Info"
+      Default         =   False
+      Enabled         =   False
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   39
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   270
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
+   Begin PushButton PushButton10
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   True
+      Caption         =   "Delete Pay Info"
+      Default         =   False
+      Enabled         =   False
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   157
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   40
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   302
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
 End
 #tag EndWindow
 
@@ -765,7 +859,7 @@ End
 		#tag Setter
 			Set
 			  mTxId = value
-			  if value <> "" then 
+			  if value <> "" then
 			    self.PushButton2.Enabled = true
 			    self.PushButton3.Enabled = true
 			    
@@ -811,9 +905,11 @@ End
 			  mCustomerProfile = value
 			  if value <> "" then
 			    self.PushButton6.Enabled = true
+			    self.PushButton8.Enabled = true 
 			    
 			  else
 			    self.PushButton6.Enabled = false
+			    self.PushButton8.Enabled = false 
 			    
 			  end if
 			End Set
@@ -887,7 +983,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim customer as new CustomerProfile("123456797", "Nina Simone|4356622023", "nict@t.t")
+		  dim customer as new CustomerProfile("123456798", "Test Simone|4356622023", "nict@t.t")
 		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
@@ -945,7 +1041,7 @@ End
 		      self.TextField1.Text = str(val(self.TextField1.Text) + 1) 
 		      
 		    else
-		       self.TextField11.Text = str(val(self.TextField11.Text) + 1)
+		      self.TextField11.Text = str(val(self.TextField11.Text) + 1)
 		      
 		    end if
 		    
@@ -1000,7 +1096,48 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events PushButton8
+	#tag Event
+		Sub Action()
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim req as new ANetAPI.Requests.DeleteCustomerProfile(customerProfileID) 
+		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton9
+	#tag Event
+		Sub Action()
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim req as new ANetAPI.Requests.DeleteCustomerProfile(customerProfileID) 
+		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton10
+	#tag Event
+		Sub Action()
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim req as new ANetAPI.Requests.DeleteCustomerProfile(customerProfileID) 
+		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="aNetTxID"
+		Group="Behavior"
+		Type="Text"
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackColor"
 		Visible=true
@@ -1028,6 +1165,16 @@ End
 		Group="OS X (Carbon)"
 		InitialValue="False"
 		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="customerPaymentProfileID"
+		Group="Behavior"
+		Type="Text"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="customerProfileID"
+		Group="Behavior"
+		Type="Text"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Frame"
@@ -1093,11 +1240,6 @@ End
 		Group="ID"
 		Type="String"
 		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="kj"
-		Group="Behavior"
-		Type="text"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LiveResize"
