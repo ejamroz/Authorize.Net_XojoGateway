@@ -91,7 +91,7 @@ Begin Window aNetModuleTest
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "3g43A42jEa3J5Dw9"
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -245,7 +245,7 @@ Begin Window aNetModuleTest
       TabIndex        =   21
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "5g7W2Waks"
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -994,7 +994,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  //dim req as new GetCustomerPaymentProfileReq(PROFILE ID HERE, PAYMENT PROFILE ID HERE) 
+		  dim req as new GetCustomerPaymentProfileReq("1500413481", "1500278422") 
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
