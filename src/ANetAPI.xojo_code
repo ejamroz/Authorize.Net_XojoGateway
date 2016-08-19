@@ -46,6 +46,9 @@ Protected Module ANetAPI
 	#tag Constant, Name = kTypeDeleteCustomerProfile, Type = Text, Dynamic = False, Default = \"deleteCustomerProfile", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kTypeDeletePaymentProfile, Type = Text, Dynamic = False, Default = \"deletePaymentProfile", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kTypeGetCustomerPaymentPRofile, Type = Text, Dynamic = False, Default = \"getCustomerPaymentProfile", Scope = Public
 	#tag EndConstant
 

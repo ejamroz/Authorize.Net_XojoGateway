@@ -63,7 +63,7 @@ Protected Class Controller
 		    
 		  case kTypeCreateCustomerProfile, kTypeCreatePaymentProfile, kTypeCreateProfileFromTx, _
 		    kTypeGetCustomerPaymentPRofile, kTypeDeleteCustomerProfile, _
-		    kTypeUpdateCustomerPaymentProfile
+		    kTypeUpdateCustomerPaymentProfile, kTypeDeletePaymentProfile
 		    ResponseReceived(new ProfileResponse(data, lastRequestMade))
 		    
 		  End Select
@@ -107,6 +107,10 @@ Protected Class Controller
 		    
 		  elseif theRequest isa DeleteCustomerProfileReq then
 		    jsonHead = kDeleteCustomerRequestHeader
+		    //there is no request JSON for this type of request
+		    
+		  elseif theRequest isa DeleteCustomerPaymentProfileReq then
+		    jsonHead = kDeletePaymentProfileRequestHeader
 		    //there is no request JSON for this type of request
 		    
 		    //XXX: ADD OTHER REQUESTS HERE 
@@ -277,6 +281,9 @@ Protected Class Controller
 	#tag EndConstant
 
 	#tag Constant, Name = kDeleteCustomerRequestHeader, Type = String, Dynamic = False, Default = \"deleteCustomerProfileRequest", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kDeletePaymentProfileRequestHeader, Type = String, Dynamic = False, Default = \"deleteCustomerPaymentProfileRequest", Scope = Private
 	#tag EndConstant
 
 	#tag Constant, Name = kGetCustomerPaymentProfileHeader, Type = String, Dynamic = False, Default = \"getCustomerPaymentProfileRequest", Scope = Private

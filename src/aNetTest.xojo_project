@@ -33,6 +33,7 @@ Class=AbstractProfileRequest;ANetAPI/AbstractProfileRequest.xojo_code;&h451BEFFF
 Class=CreateCustomerPaymentProfileReq;ANetAPI/Requests/CreateCustomerPaymentProfileReq.xojo_code;&h4F3367FF;&h7C04EFFF;false
 Class=DeleteCustomerProfileReq;ANetAPI/Requests/DeleteCustomerProfileReq.xojo_code;&h2E5567FF;&h7C04EFFF;false
 Class=UpdateCustomerPaymentProfileReq;ANetAPI/Requests/UpdateCustomerPaymentProfileReq.xojo_code;&h6CA517FF;&h7C04EFFF;false
+Class=DeleteCustomerPaymentProfileReq;ANetAPI/Requests/DeleteCustomerPaymentProfileReq.xojo_code;&h6CEB2FFF;&h7C04EFFF;false
 DefaultWindow=aNetModuleTest
 AppMenuBar=MainMenuBar
 MajorVersion=1

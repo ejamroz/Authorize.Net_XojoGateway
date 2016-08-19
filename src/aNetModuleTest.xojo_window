@@ -885,10 +885,12 @@ End
 			  if value <> "" then
 			    self.PushButton5.Enabled = true
 			    self.PushButton9.Enabled = true
+			    self.PushButton10.Enabled = true
 			    
 			  else
 			    self.PushButton5.Enabled = false
 			    self.PushButton9.Enabled = false 
+			    self.PushButton10.Enabled = false
 			    
 			  end if
 			End Set
@@ -1117,7 +1119,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new ANetAPI.Requests.DeleteCustomerProfileReq(customerProfileID) 
+		  dim req as new ANetAPI.Requests.DeleteCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID) 
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
