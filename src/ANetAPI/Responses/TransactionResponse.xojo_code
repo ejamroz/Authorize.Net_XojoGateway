@@ -25,10 +25,48 @@ Inherits ANetAPI.AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  return data.Lookup("accountType", "") 
+			  
+			End Get
+		#tag EndGetter
+		cardType As text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return StringToText(right(data.Value("accountNumber"), 4))
 			End Get
 		#tag EndGetter
 		lastFour As text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return data.Lookup("refId", "")
+			End Get
+		#tag EndGetter
+		merchantTransactionId As text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  resturn data.Lookup("responseCode", "")
+			  
+			End Get
+		#tag EndGetter
+		responseCode As Text
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return data.Lookup("text", "") 
+			End Get
+		#tag EndGetter
+		responseMessage As text
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -80,7 +118,7 @@ Inherits ANetAPI.AbstractResponse
 		#tag ViewProperty
 			Name="lastErrorCode"
 			Group="Behavior"
-			Type="text"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="lastFour"
@@ -101,10 +139,9 @@ Inherits ANetAPI.AbstractResponse
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="StatusCode"
+			Name="requestType"
 			Group="Behavior"
 			Type="Text"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StatusMessage"
