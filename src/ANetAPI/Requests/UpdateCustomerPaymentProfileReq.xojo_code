@@ -2,7 +2,7 @@
 Protected Class UpdateCustomerPaymentProfileReq
 Inherits ANetAPI.AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as Text)
+		Sub constructor(custSerial as string, paymentSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as string)
 		  //@param custSerial: ANet customer ID
 		  //@param paymentSerial: ANet payment profile ID
 		  //@param billingInfo: The billing information for the payment method provided
@@ -43,7 +43,6 @@ Inherits ANetAPI.AbstractProfileRequest
 	#tag Property, Flags = &h21
 		#tag Note
 			This is a private inaccessable version of mPaymentID
-			
 		#tag EndNote
 		Private mCustomerPaymentProfile As string
 	#tag EndProperty
@@ -53,7 +52,7 @@ Inherits ANetAPI.AbstractProfileRequest
 	#tag EndProperty
 
 
-	#tag Constant, Name = kPaymentProfileToken, Type = Text, Dynamic = False, Default = \"paymentProfile", Scope = Private
+	#tag Constant, Name = kPaymentProfileToken, Type = String, Dynamic = False, Default = \"paymentProfile", Scope = Private
 	#tag EndConstant
 
 

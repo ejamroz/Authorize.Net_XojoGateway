@@ -282,7 +282,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   238
+      Top             =   270
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -313,7 +313,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   206
+      Top             =   238
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -375,7 +375,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   270
+      Top             =   302
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -846,6 +846,37 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   117
    End
+   Begin PushButton PushButton11
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "A and C w/ track2"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   28
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   41
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   206
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
 End
 #tag EndWindow
 
@@ -870,7 +901,7 @@ End
 			  end if
 			End Set
 		#tag EndSetter
-		aNetTxID As Text
+		aNetTxID As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -889,13 +920,13 @@ End
 			    
 			  else
 			    self.PushButton5.Enabled = false
-			    self.PushButton9.Enabled = false 
+			    self.PushButton9.Enabled = false
 			    self.PushButton10.Enabled = false
 			    
 			  end if
 			End Set
 		#tag EndSetter
-		customerPaymentProfileID As Text
+		customerPaymentProfileID As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -909,28 +940,28 @@ End
 			  mCustomerProfile = value
 			  if value <> "" then
 			    self.PushButton6.Enabled = true
-			    self.PushButton8.Enabled = true 
+			    self.PushButton8.Enabled = true
 			    
 			  else
 			    self.PushButton6.Enabled = false
-			    self.PushButton8.Enabled = false 
+			    self.PushButton8.Enabled = false
 			    
 			  end if
 			End Set
 		#tag EndSetter
-		customerProfileID As Text
+		customerProfileID As string
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
-		Private mCustomerPaymentProfile As Text
+		Private mCustomerPaymentProfile As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mCustomerProfile As Text
+		Private mCustomerProfile As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mTxId As Text
+		Private mTxId As string
 	#tag EndProperty
 
 
@@ -1121,6 +1152,20 @@ End
 		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new ANetAPI.Requests.DeleteCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID) 
 		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PushButton11
+	#tag Event
+		Sub Action()
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim cc as new ANetAPI.PaymentTypes.CreditCard("5301250070000191=08051010912345678901")
+		  dim billing as new ANetAPI.Utility.BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
+		  dim req as new ANetAPI.Requests.AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
+		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent

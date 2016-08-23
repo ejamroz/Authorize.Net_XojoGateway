@@ -2,7 +2,7 @@
 Protected Class CreateCustomerPaymentProfileReq
 Inherits ANetAPI.AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as Text)
+		Sub constructor(custSerial as string, paymentInfo as ANetAPI.AbstractPaymentType, billingInfo as ANetAPI.Utility.BillingProfile, validationMode as string)
 		  //@param custSerial: The Anet customer profile id
 		  //@param billingInfo: The billing information for the payment method provided
 		  //@param paymentInfo: Information regarding payment, currently only CC's are accepted
@@ -42,7 +42,7 @@ Inherits ANetAPI.AbstractProfileRequest
 	#tag EndProperty
 
 
-	#tag Constant, Name = kPaymentProfileToken, Type = Text, Dynamic = False, Default = \"paymentProfile", Scope = Private
+	#tag Constant, Name = kPaymentProfileToken, Type = String, Dynamic = False, Default = \"paymentProfile", Scope = Private
 	#tag EndConstant
 
 

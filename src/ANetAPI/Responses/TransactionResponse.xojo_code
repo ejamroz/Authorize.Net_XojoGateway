@@ -2,7 +2,7 @@
 Protected Class TransactionResponse
 Inherits ANetAPI.AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as text)
+		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as string)
 		  //@param dataJson: Object representing JSON string of response data
 		  
 		  super.constructor(dataJson)
@@ -19,7 +19,7 @@ Inherits ANetAPI.AbstractResponse
 			  return self.data.Lookup("authCode", "")
 			End Get
 		#tag EndGetter
-		authCode As Text
+		authCode As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -29,7 +29,7 @@ Inherits ANetAPI.AbstractResponse
 			  
 			End Get
 		#tag EndGetter
-		cardType As text
+		cardType As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -38,7 +38,7 @@ Inherits ANetAPI.AbstractResponse
 			  return StringToText(right(data.Value("accountNumber"), 4))
 			End Get
 		#tag EndGetter
-		lastFour As text
+		lastFour As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -47,17 +47,17 @@ Inherits ANetAPI.AbstractResponse
 			  Return data.Lookup("refId", "")
 			End Get
 		#tag EndGetter
-		merchantTransactionId As text
+		merchantTransactionId As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  resturn data.Lookup("responseCode", "")
+			  return data.Lookup("responseCode", "")
 			  
 			End Get
 		#tag EndGetter
-		responseCode As Text
+		responseCode As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -66,7 +66,7 @@ Inherits ANetAPI.AbstractResponse
 			  return data.Lookup("text", "") 
 			End Get
 		#tag EndGetter
-		responseMessage As text
+		responseMessage As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -75,7 +75,7 @@ Inherits ANetAPI.AbstractResponse
 			  return self.data.Lookup("transHash", "")
 			End Get
 		#tag EndGetter
-		transactionHash As Text
+		transactionHash As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -85,7 +85,7 @@ Inherits ANetAPI.AbstractResponse
 			  
 			End Get
 		#tag EndGetter
-		transactionID As Text
+		transactionID As string
 	#tag EndComputedProperty
 
 

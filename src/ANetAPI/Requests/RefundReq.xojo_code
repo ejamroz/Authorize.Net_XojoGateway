@@ -2,7 +2,7 @@
 Protected Class RefundReq
 Inherits ANetAPI.AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as ANetAPI.AbstractPaymentType, refTransId as text)
+		Sub constructor(amount as double, payType as ANetAPI.AbstractPaymentType, refTransId as string)
 		  // Calling the overridden superclass constructor.
 		  //@param amount: The amount to refund, this number must <= original transaction amount
 		  //@param payType: The payment to refund, if credit, it must be the same card that was used
@@ -66,6 +66,12 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"
