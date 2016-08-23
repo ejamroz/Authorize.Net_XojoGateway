@@ -72,7 +72,7 @@ Protected Class Controller
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processProfileRequest(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as ANetAPI.AbstractProfileRequest, gateway as Text)
+		Sub processProfileRequest(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as ANetAPI.AbstractProfileRequest, gateway as string)
 		  //Processes and sends a request to the ANet portal 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The ProfileRequest object to be processed through the gateway
@@ -158,7 +158,7 @@ Protected Class Controller
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processTxRequest(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as ANetAPI.AbstractTransactionRequest, gateway as Text, optional refID as string)
+		Sub processTxRequest(auth as ANetAPI.Utility.MerchantAuthentication, theRequest as ANetAPI.AbstractTransactionRequest, gateway as string, optional refID as string)
 		  //Processes and sends a request to the ANet portal 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
@@ -216,7 +216,7 @@ Protected Class Controller
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub send(request as JSONItem, gateway as text)
+		Private Sub send(request as JSONItem, gateway as string)
 		  //POSTS the request to the given gateway
 		  //@param data: JSON data to post
 		  //@param gateway: The URL of the API to post to 
@@ -227,7 +227,7 @@ Protected Class Controller
 		  
 		  //PROCESS GATEWAY 
 		  self.aNetSocket.SetRequestContent(data, "application/x-www-form-urlencoded")
-		  self.aNetSocket.send("POST", gateway)
+		  self.aNetSocket.send("POST", StringToText(gateway))
 		End Sub
 	#tag EndMethod
 
@@ -263,11 +263,11 @@ Protected Class Controller
 			  
 			End Get
 		#tag EndGetter
-		lastRequest As Text
+		lastRequest As string
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
-		Private lastRequestMade As Text
+		Private lastRequestMade As string
 	#tag EndProperty
 
 

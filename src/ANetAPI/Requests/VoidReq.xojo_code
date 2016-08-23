@@ -2,7 +2,7 @@
 Protected Class VoidReq
 Inherits ANetAPI.AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(refTransId as text)
+		Sub constructor(refTransId as string)
 		  // Calling the overridden superclass constructor.
 		  //@param refTransID: The ANet identifier of the original settled transaction 
 		  
@@ -52,6 +52,12 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"

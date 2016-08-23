@@ -57,6 +57,15 @@ Inherits ANetAPI.AbstractTransactionRequest
 		    
 		  end if
 		  
+		  if self.paymentType isa ANetAPI.PaymentTypes.CreditCard and _
+		    ANetAPI.PaymentTypes.CreditCard(self.paymentType).isUsingTrack2 then
+		    dim jsonMerchant as new JSONItem()
+		    jsonMerchant.Value("marketType") = "2" //In person store front
+		    jsonMerchant.Value("deviceType") = "5" //Personal computer terminal 
+		    jsonBody.Value("retail") = jsonMerchant
+		    
+		  end if
+		  
 		  //FORM TOKEN
 		  return jsonBody
 		  
@@ -109,6 +118,12 @@ Inherits ANetAPI.AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="requestType"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"

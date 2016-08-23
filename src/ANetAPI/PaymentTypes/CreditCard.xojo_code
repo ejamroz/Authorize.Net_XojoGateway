@@ -2,6 +2,16 @@
 Protected Class CreditCard
 Inherits ANetAPI.AbstractPaymentType
 	#tag Method, Flags = &h0
+		Sub constructor(track2 as string)
+		  //@param track2: Track 2 data off of the card, which needs to have 
+		  //    sentinal characters(; or ?) already removed
+		  
+		  mTokenName = kPayWithCCToken
+		  mTrack2 = track2
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub constructor(cc as string, expirationDate as string, optional cvv as string)
 		  //@param cc: The credit card number
 		  //@param expirationDate: The expiration date for the card in form MMYY
@@ -20,13 +30,21 @@ Inherits ANetAPI.AbstractPaymentType
 		  dim jsonToken as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("cardNumber") = self.cc
-		  jsonBody.Value("expirationDate") = self.expirationDate
-		  if self.cvv <> "" then 
-		    jsonBody.Value("cardCode") = self.cvv
+		  if mTrack2 <> "" then //build token to only use track2 data
+		    jsonBody.Value("track2") = mTrack2
+		    jsonToken.Value(kPayUsingTrackData) = jsonBody
+		    
+		  else //use cc,exp, and CVV values 
+		    jsonBody.Value("cardNumber") = self.cc
+		    jsonBody.Value("expirationDate") = self.expirationDate
+		    if self.cvv <> "" then 
+		      jsonBody.Value("cardCode") = self.cvv
+		      
+		    end if
+		    
+		    jsonToken.Value(self.kPayType) = jsonBody
 		    
 		  end if
-		  jsonToken.Value(self.PAY_TYPE) = jsonBody
 		  
 		  //FORM TOKEN
 		  return jsonToken
@@ -49,15 +67,36 @@ Inherits ANetAPI.AbstractPaymentType
 		Private expirationDate As string
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if mTrack2 <> "" then 
+			    return true
+			    
+			  end if
+			  
+			  return false 
+			End Get
+		#tag EndGetter
+		isUsingTrack2 As boolean
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21
+		Private mTrack2 As string
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private type As string = "creditCard"
 	#tag EndProperty
 
 
-	#tag Constant, Name = kPayWithCCToken, Type = String, Dynamic = False, Default = \"payment", Scope = Private
+	#tag Constant, Name = kPayType, Type = String, Dynamic = False, Default = \"creditCard", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = PAY_TYPE, Type = Text, Dynamic = False, Default = \"creditCard", Scope = Private
+	#tag Constant, Name = kPayUsingTrackData, Type = String, Dynamic = False, Default = \"trackData", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kPayWithCCToken, Type = String, Dynamic = False, Default = \"payment", Scope = Private
 	#tag EndConstant
 
 
@@ -68,6 +107,12 @@ Inherits ANetAPI.AbstractPaymentType
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="JSONTokenName"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"

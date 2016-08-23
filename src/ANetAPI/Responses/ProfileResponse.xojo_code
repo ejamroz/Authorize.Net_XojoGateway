@@ -2,7 +2,7 @@
 Protected Class ProfileResponse
 Inherits ANetAPI.AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as text)
+		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as string)
 		  //@param json: Object representing JSON string. This method currently accepts JSONItems and Xojo.Core.Dictionaries
 		  
 		  super.constructor(dataJson)
@@ -36,7 +36,7 @@ Inherits ANetAPI.AbstractResponse
 			  return StringToText(right(data.Lookup("cardNumber", ""), 4))
 			End Get
 		#tag EndGetter
-		lastFour As Text
+		lastFour As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -45,7 +45,7 @@ Inherits ANetAPI.AbstractResponse
 			  return data.Lookup("customerPaymentProfileId", "")
 			End Get
 		#tag EndGetter
-		paymentProfileId As Text
+		paymentProfileId As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -54,7 +54,7 @@ Inherits ANetAPI.AbstractResponse
 			  return self.data.Lookup("customerProfileId", "")
 			End Get
 		#tag EndGetter
-		ProfileID As Text
+		ProfileID As string
 	#tag EndComputedProperty
 
 
@@ -74,7 +74,7 @@ Inherits ANetAPI.AbstractResponse
 		#tag ViewProperty
 			Name="lastErrorCode"
 			Group="Behavior"
-			Type="text"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="lastFour"
@@ -95,16 +95,20 @@ Inherits ANetAPI.AbstractResponse
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="paymentProfileId"
+			Group="Behavior"
+			Type="Text"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="ProfileID"
 			Group="Behavior"
 			Type="Text"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="StatusCode"
+			Name="requestType"
 			Group="Behavior"
 			Type="Text"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StatusMessage"

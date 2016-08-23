@@ -2,7 +2,7 @@
 Protected Class TransactionResponse
 Inherits ANetAPI.AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as text)
+		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as string)
 		  //@param dataJson: Object representing JSON string of response data
 		  
 		  super.constructor(dataJson)
@@ -19,7 +19,17 @@ Inherits ANetAPI.AbstractResponse
 			  return self.data.Lookup("authCode", "")
 			End Get
 		#tag EndGetter
-		authCode As Text
+		authCode As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return data.Lookup("accountType", "") 
+			  
+			End Get
+		#tag EndGetter
+		cardType As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -28,7 +38,35 @@ Inherits ANetAPI.AbstractResponse
 			  return StringToText(right(data.Value("accountNumber"), 4))
 			End Get
 		#tag EndGetter
-		lastFour As text
+		lastFour As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return data.Lookup("refId", "")
+			End Get
+		#tag EndGetter
+		merchantTransactionId As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return data.Lookup("responseCode", "")
+			  
+			End Get
+		#tag EndGetter
+		responseCode As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return data.Lookup("text", "") 
+			End Get
+		#tag EndGetter
+		responseMessage As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -37,7 +75,7 @@ Inherits ANetAPI.AbstractResponse
 			  return self.data.Lookup("transHash", "")
 			End Get
 		#tag EndGetter
-		transactionHash As Text
+		transactionHash As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -47,7 +85,7 @@ Inherits ANetAPI.AbstractResponse
 			  
 			End Get
 		#tag EndGetter
-		transactionID As Text
+		transactionID As string
 	#tag EndComputedProperty
 
 
@@ -80,7 +118,7 @@ Inherits ANetAPI.AbstractResponse
 		#tag ViewProperty
 			Name="lastErrorCode"
 			Group="Behavior"
-			Type="text"
+			Type="Text"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="lastFour"
@@ -101,10 +139,9 @@ Inherits ANetAPI.AbstractResponse
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="StatusCode"
+			Name="requestType"
 			Group="Behavior"
 			Type="Text"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StatusMessage"

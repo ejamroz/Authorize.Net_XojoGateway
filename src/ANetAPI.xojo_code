@@ -25,49 +25,49 @@ Protected Module ANetAPI
 	#tag EndMethod
 
 
-	#tag Constant, Name = kTxLive, Type = Text, Dynamic = False, Default = \"https://api.authorize.net/xml/v1/request.api", Scope = Public
+	#tag Constant, Name = kTxLive, Type = String, Dynamic = False, Default = \"https://api.authorize.net/xml/v1/request.api", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTxSandbox, Type = Text, Dynamic = False, Default = \"https://apitest.authorize.net/xml/v1/request.api", Scope = Public
+	#tag Constant, Name = kTxSandbox, Type = String, Dynamic = False, Default = \"https://apitest.authorize.net/xml/v1/request.api", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeAuthAndCapture, Type = Text, Dynamic = False, Default = \"authCaptureTransaction", Scope = Public
+	#tag Constant, Name = kTypeAuthAndCapture, Type = String, Dynamic = False, Default = \"authCaptureTransaction", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeCreateCustomerProfile, Type = Text, Dynamic = False, Default = \"CreateCustomerProfile", Scope = Public
+	#tag Constant, Name = kTypeCreateCustomerProfile, Type = String, Dynamic = False, Default = \"CreateCustomerProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeCreatePaymentProfile, Type = Text, Dynamic = False, Default = \"CreatePaymentProfile", Scope = Public
+	#tag Constant, Name = kTypeCreatePaymentProfile, Type = String, Dynamic = False, Default = \"CreatePaymentProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeCreateProfileFromTx, Type = Text, Dynamic = False, Default = \"createCustomerProfileFromTransaction", Scope = Public
+	#tag Constant, Name = kTypeCreateProfileFromTx, Type = String, Dynamic = False, Default = \"createCustomerProfileFromTransaction", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeDeleteCustomerProfile, Type = Text, Dynamic = False, Default = \"deleteCustomerProfile", Scope = Public
+	#tag Constant, Name = kTypeDeleteCustomerProfile, Type = String, Dynamic = False, Default = \"deleteCustomerProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeDeletePaymentProfile, Type = Text, Dynamic = False, Default = \"deletePaymentProfile", Scope = Public
+	#tag Constant, Name = kTypeDeletePaymentProfile, Type = String, Dynamic = False, Default = \"deletePaymentProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeGetCustomerPaymentPRofile, Type = Text, Dynamic = False, Default = \"getCustomerPaymentProfile", Scope = Public
+	#tag Constant, Name = kTypeGetCustomerPaymentPRofile, Type = String, Dynamic = False, Default = \"getCustomerPaymentProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeRefund, Type = Text, Dynamic = False, Default = \"refundTransaction", Scope = Public
+	#tag Constant, Name = kTypeRefund, Type = String, Dynamic = False, Default = \"refundTransaction", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeUpdateCustomerPaymentProfile, Type = Text, Dynamic = False, Default = \"UpdateCustomerPaymentProfile", Scope = Public
+	#tag Constant, Name = kTypeUpdateCustomerPaymentProfile, Type = String, Dynamic = False, Default = \"UpdateCustomerPaymentProfile", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kTypeVoidTransaction, Type = Text, Dynamic = False, Default = \"voidTransaction", Scope = Public
+	#tag Constant, Name = kTypeVoidTransaction, Type = String, Dynamic = False, Default = \"voidTransaction", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kValidationLive, Type = Text, Dynamic = False, Default = \"liveMode", Scope = Public
+	#tag Constant, Name = kValidationLive, Type = String, Dynamic = False, Default = \"liveMode", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kValidationNone, Type = Text, Dynamic = False, Default = \"none", Scope = Public
+	#tag Constant, Name = kValidationNone, Type = String, Dynamic = False, Default = \"none", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kValidationTest, Type = Text, Dynamic = False, Default = \"testMode", Scope = Public
+	#tag Constant, Name = kValidationTest, Type = String, Dynamic = False, Default = \"testMode", Scope = Public
 	#tag EndConstant
 
 
