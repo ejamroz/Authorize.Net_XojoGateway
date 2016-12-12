@@ -1,27 +1,16 @@
 #tag Class
 Protected Class BillingProfile
 	#tag Method, Flags = &h0
-		Sub constructor(first as string, last as string, address as string, city as string, state as string, zip as string, country as string, phone as string, optional company as string)
-		  //Creates a customer billing profile
-		  //@param first: Customer first name
-		  //@param last: customer last name
-		  //@param address: customer address
-		  //@param city: address city
-		  //@param state: address state
-		  //@param zip: address zip code
-		  //@param country: address country
-		  //@param phone: customer phone number 
-		  //@param company: [OPTIONAL] customer company name
-		  
-		  self.firstname = first
-		  self.lastName = last
-		  self.address = address
-		  self.city = city
-		  self.state = state
-		  self.zipCode = zip
-		  self.country = country
-		  self.phoneNumber = phone
-		  self.companyName = company
+		Sub constructor(builder as BillingProfileBuilder)
+		  self.firstname = builder.firstName
+		  self.lastName = builder.lastName
+		  self.address = builder.address
+		  self.city = builder.city
+		  self.state = builder.state
+		  self.zipCode = builder.zipCode
+		  self.country = builder.country
+		  self.phoneNumber = builder.phoneNumber
+		  self.companyName = builder.companyName
 		  
 		End Sub
 	#tag EndMethod

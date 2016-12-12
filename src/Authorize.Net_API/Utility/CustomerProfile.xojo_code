@@ -2,17 +2,10 @@
 Protected Class CustomerProfile
 	#tag Method, Flags = &h0
 		Sub constructor(merchSerial as string, custInfo as string, email as string)
-		  //@param merchSerial: The merchand assigned ID of this customer
-		  //@param custInfo: FirstName LastName|PhoneNumber 
-		  //@param email: The customer contact email, where their reciept will be sent
-		  //@param payInfo: [OPTIONAL] Payment profile for this customer 
-		  //@param billTo: [OPTIONAL] Billing information, this must be provided if payInfo is supplied 
-		  
-		  merchantSerial = merchSerial
+		  self.merchantSerial = merchSerial
 		  description = custInfo
 		  self.email = email
-		  'paymentInfo = payInfo
-		  'self.billTo = billTo
+		  
 		  
 		  
 		End Sub
@@ -34,10 +27,6 @@ Protected Class CustomerProfile
 		    
 		  end if
 		  
-		  'if paymentInfo <> Nil then 
-		  'jsonBody.Value(paymentInfo.kTokenNameNonCapAndAuth) = paymentInfo.getJson()
-		  '
-		  'end if
 		  
 		  //FORM TOKEN
 		  return jsonBody

@@ -973,7 +973,16 @@ End
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim cc as new CreditCard("4111111111111111", "0120")
-		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
+		  dim theName as new Name("Lucky", "Primm")
+		  dim billingBuilder as new BillingProfileBuilder(theName)
+		  dim billing as BillingProfile = billingBuilder._
+		  setAddress("435 cloude ave")._
+		  setCity("springdale")._
+		  setState("utah")._
+		  setZipCode("84767")._
+		  setCountry("USA")._
+		  setPhoneNumber("4537561991")._
+		  createBillingProfile()
 		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
 		  
 		  self.controller1.processTxRequest(auth, req, kTxSandbox)
@@ -1038,7 +1047,14 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim billing as new BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
+		  dim theName as new Name("Nina", "Simone")
+		  dim billingBuilder as new BillingProfileBuilder(theName)
+		  dim billing as BillingProfile = billingBuilder._
+		  setAddress("123 Ave")._
+		  setCity("Denver")._
+		  setState("Colorado")._
+		  setZipCode("80207")._
+		  createBillingProfile() 
 		  dim cc as new CreditCard("4111111111111111", "1220")
 		  dim req as new CreateCustomerPaymentProfileReq(customerProfileID, cc, billing, kValidationTest) 
 		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
@@ -1127,7 +1143,14 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim billing as new BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
+		  dim theName as new Name("Nina", "Simone")
+		  dim billingBuilder as new BillingProfileBuilder(theName)
+		  dim billing as BillingProfile = billingBuilder._
+		  setAddress("123 Ave")._
+		  setCity("Denver")._
+		  setState("Colorado")._
+		  setZipCode("80207")._
+		  createBillingProfile() 
 		  dim cc as new CreditCard("5111111111111111", "1220")
 		  dim req as new UpdateCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID, cc, billing, kValidationNone) 
 		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
@@ -1154,7 +1177,16 @@ End
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim cc as new CreditCard("5301250070000191=08051010912345678901")
-		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
+		  dim theName as new Name("Lucky", "Primm")
+		  dim billingBuilder as new BillingProfileBuilder(theName)
+		  dim billing as BillingProfile = billingBuilder._
+		  setAddress("435 cloude ave")._
+		  setCity("springdale")._
+		  setState("utah")._
+		  setZipCode("84767")._
+		  setCountry("USA")._
+		  setPhoneNumber("4537561991")._
+		  createBillingProfile()
 		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
 		  self.controller1.processTxRequest(auth, req, kTxSandbox)
 		  
