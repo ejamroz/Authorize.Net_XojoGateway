@@ -91,7 +91,7 @@ Begin Window aNetModuleTest
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "3g43A42jEa3J5Dw9"
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -245,7 +245,7 @@ Begin Window aNetModuleTest
       TabIndex        =   21
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "5g7W2Waks"
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -715,11 +715,10 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   46
    End
-   Begin ANetAPI.Controller Controller1
+   Begin Controller Controller1
       Index           =   -2147483648
-      lastRequest     =   ""
       LockedInPosition=   False
-      Scope           =   1
+      Scope           =   0
       TabPanelIndex   =   0
    End
    Begin PushButton PushButton7
@@ -972,11 +971,12 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new ANetAPI.PaymentTypes.CreditCard("4111111111111111", "0120")
-		  dim billing as new ANetAPI.Utility.BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
-		  dim req as new ANetAPI.Requests.AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim cc as new CreditCard("4111111111111111", "0120")
+		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
+		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
+		  
+		  self.controller1.processTxRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -986,10 +986,10 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new ANetAPI.PaymentTypes.CreditCard("1111", "0120")
-		  dim req as new ANetAPI.Requests.RefundReq(10, cc, self.aNetTxID)
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim cc as new CreditCard("1111", "0120")
+		  dim req as new RefundReq(10, cc, self.aNetTxID)
+		  self.controller1.processTxRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -997,14 +997,11 @@ End
 #tag Events PushButton3
 	#tag Event
 		Sub Action()
-		  Using ANetAPI.Utility
-		  using ANetAPI.Requests
-		  
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new VoidReq(self.aNetTxID)
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
+		  self.controller1.processTxRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1012,15 +1009,12 @@ End
 #tag Events PushButton4
 	#tag Event
 		Sub Action()
-		  using ANetAPI.Utility
-		  using ANetAPI.Requests
-		  
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim customer as new CustomerProfile("123456800", "Test Test|4356622023", "nict@t.t")
 		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
-		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1030,10 +1024,10 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim prof as new ANetAPI.PaymentTypes.PaymentProfile(customerProfileID, customerPaymentProfileID)
-		  dim req as new ANetAPI.Requests.AuthorizeAndCaptureReq(30.00, prof, false)
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox, "12345")
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim prof as new StoredPaymentProfile(customerProfileID, customerPaymentProfileID)
+		  dim req as new AuthorizeAndCaptureReq(30.00, prof, false)
+		  self.controller1.processTxRequest(auth, req, kTxSandbox, "12345")
 		  
 		End Sub
 	#tag EndEvent
@@ -1043,11 +1037,11 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim billing as new ANetAPI.Utility.BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
-		  dim cc as new ANetAPI.PaymentTypes.CreditCard("4111111111111111", "1220")
-		  dim req as new ANetAPI.Requests.CreateCustomerPaymentProfileReq(customerProfileID, cc, billing, kValidationTest) 
-		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim billing as new BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
+		  dim cc as new CreditCard("4111111111111111", "1220")
+		  dim req as new CreateCustomerPaymentProfileReq(customerProfileID, cc, billing, kValidationTest) 
+		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1068,9 +1062,9 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub ResponseReceived(response as ANetAPI.AbstractResponse)
+		Sub ResponseReceived(response as AbstractResponse)
 		  self.TextArea1.Text = response.toString
-		  if response isa ANetAPI.Responses.TransactionResponse then 
+		  if response isa TransactionResponse then 
 		    //DO ACCOUNTING
 		    if response.isSuccess() then 
 		      self.TextField1.Text = str(val(self.TextField1.Text) + 1) 
@@ -1081,7 +1075,7 @@ End
 		    end if
 		    
 		    //STORE TX ID
-		    aNetTxID = ANetAPI.Responses.TransactionResponse(response).transactionID
+		    aNetTxID = TransactionResponse(response).transactionID
 		    
 		  else
 		    //DO ACCOUNTING
@@ -1094,8 +1088,8 @@ End
 		    end if
 		    
 		    //STORE INFO
-		    customerPaymentProfileID = ANetAPI.Responses.ProfileResponse(response).paymentProfileId
-		    customerProfileID = ANetAPI.Responses.ProfileResponse(response).ProfileID
+		    customerPaymentProfileID = ProfileResponse(response).paymentProfileId
+		    customerProfileID = ProfileResponse(response).ProfileID
 		    
 		  end if
 		  
@@ -1106,14 +1100,11 @@ End
 #tag Events PushButton7
 	#tag Event
 		Sub Action()
-		  using ANetAPI.Utility
-		  using ANetAPI.Requests
-		  
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new GetCustomerPaymentProfileReq("1500413481", "1500278422") 
-		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1123,9 +1114,9 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new ANetAPI.Requests.DeleteCustomerProfileReq(customerProfileID) 
-		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim req as new DeleteCustomerProfileReq(customerProfileID) 
+		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1135,11 +1126,11 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim billing as new ANetAPI.Utility.BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
-		  dim cc as new ANetAPI.PaymentTypes.CreditCard("5111111111111111", "1220")
-		  dim req as new ANetAPI.Requests.UpdateCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID, cc, billing, kValidationNone) 
-		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim billing as new BillingProfile("Nina", "Simone", "123 Ave", "Denver", "Colorado", "80207", "", "") 
+		  dim cc as new CreditCard("5111111111111111", "1220")
+		  dim req as new UpdateCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID, cc, billing, kValidationNone) 
+		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1149,9 +1140,9 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new ANetAPI.Requests.DeleteCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID) 
-		  self.controller1.processProfileRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim req as new DeleteCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID) 
+		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1161,11 +1152,11 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new ANetAPI.Utility.MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new ANetAPI.PaymentTypes.CreditCard("5301250070000191=08051010912345678901")
-		  dim billing as new ANetAPI.Utility.BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
-		  dim req as new ANetAPI.Requests.AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
-		  self.controller1.processTxRequest(auth, req, ANetAPI.kTxSandbox)
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim cc as new CreditCard("5301250070000191=08051010912345678901")
+		  dim billing as new BillingProfile("lucky", "primm", "435 cloude ave", "springdale", "utah", "84767", "USA", "4537561991")
+		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
+		  self.controller1.processTxRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1174,7 +1165,8 @@ End
 	#tag ViewProperty
 		Name="aNetTxID"
 		Group="Behavior"
-		Type="Text"
+		Type="string"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackColor"
@@ -1207,12 +1199,14 @@ End
 	#tag ViewProperty
 		Name="customerPaymentProfileID"
 		Group="Behavior"
-		Type="Text"
+		Type="string"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="customerProfileID"
 		Group="Behavior"
-		Type="Text"
+		Type="string"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Frame"
