@@ -715,7 +715,7 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   46
    End
-   Begin Controller Controller1
+   Begin ANetController Controller1
       Index           =   -2147483648
       LockedInPosition=   False
       Scope           =   0
