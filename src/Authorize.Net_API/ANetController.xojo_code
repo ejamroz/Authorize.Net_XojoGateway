@@ -38,7 +38,7 @@ Protected Class ANetController
 		  dim responseType as Text
 		  dim response as Pair
 		  
-		  //MAKE SURE DATA COME IN CORRECTLY 
+		  //MAKE SURE DATA CAME IN CORRECTLY 
 		  #Pragma BreakOnExceptions false 
 		  try 
 		    dim json as text = TextEncoding.UTF8.ConvertDataToText(content)
@@ -72,78 +72,37 @@ Protected Class ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processProfileRequest(auth as MerchantAuthentication, theRequest as AbstractProfileRequest, gateway as string)
+		Sub processProfileRequest(auth as MerchantAuthentication, theRequest as ANetProfileRequest, gateway as string)
 		  //Processes and sends a request to the ANet portal 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The ProfileRequest object to be processed through the gateway
 		  //@param gateway: The URL for which payment gateway to use 
 		  //@throws UnsupportedFormatException: if an unknown request type is passed 
 		  
-		  dim jsonHead as string
-		  dim theRequestJSON as new JSONItem()
+		  dim jsonHead as string = theRequest.getRequestHeader()
+		  dim theRequestJSON as JSONItem = theRequest.getJSON()
 		  dim sendRequestBody as new JSONItem()
 		  dim sendRequest as new JSONItem()
 		  
-		  //SET HEADERS
-		  if theRequest isa CreateCustomerProfileFromTransactionReq then //create a customer profile from tx
-		    jsonHead = kCreateCustProfileFromTxHeader
-		    theRequestJSON = CreateCustomerProfileFromTransactionReq(theRequest).getJson()
-		    
-		  elseif theRequest isa CreateCustomerProfileReq then //Creating a customer profile
-		    jsonHead = kCreateCustomerProfileHeader
-		    theRequestJSON = CreateCustomerProfileReq(theRequest).getJson()
-		    
-		  ElseIf theRequest isa UpdateCustomerPaymentProfileReq then 
-		    jsonHead = kUpdateCustomerPaymentProfileRequestHeader
-		    theRequestJSON = UpdateCustomerPaymentProfileReq(theRequest).getJson()
-		    
-		  ElseIf theRequest isa CreateCustomerPaymentProfileReq then 
-		    jsonHead = kCreateCustomerPaymentProfileHeader
-		    theRequestJSON = CreateCustomerPaymentProfileReq(theRequest).getJson()
-		    
-		  elseif theRequest isa GetCustomerPaymentProfileReq then
-		    jsonHead = kGetCustomerPaymentProfileHeader
-		    //there is no request JSON for this type of request 
-		    
-		  elseif theRequest isa DeleteCustomerProfileReq then
-		    jsonHead = kDeleteCustomerRequestHeader
-		    //there is no request JSON for this type of request
-		    
-		  elseif theRequest isa DeleteCustomerPaymentProfileReq then
-		    jsonHead = kDeletePaymentProfileRequestHeader
-		    //there is no request JSON for this type of request
-		    
-		    //XXX: ADD OTHER REQUESTS HERE 
-		  else
-		    #Pragma BreakOnExceptions false
-		    dim err as new UnsupportedFormatException()
-		    err.ErrorNumber = 1
-		    err.Message = "Unknown transaction Request submitted"
-		    
-		    raise err 
-		    #Pragma BreakOnExceptions true 
-		    
-		  end if
-		  
 		  //FORM BODY OF REQUEST
 		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
-		  If theRequest.customerId <> "" then
-		    sendRequestBody.Value("customerProfileId") = theRequest.customerId
+		  If theRequest.getCustomerID() <> "" then
+		    sendRequestBody.Value("customerProfileId") = theRequest.getCustomerID()
 		    
 		  End If
 		  
-		  If theRequest.sentinalToken <> "" then
-		    sendRequestBody.Value(theRequest.sentinalToken) = theRequestJSON
+		  If theRequest.getSentinalToken() <> "" then
+		    sendRequestBody.Value(theRequest.getSentinalToken()) = theRequestJSON
 		    
 		  End If
 		  
-		  if theRequest.paymentProfileID <> "" then 
-		    sendRequestBody.Value("customerPaymentProfileId") = theRequest.paymentProfileID
+		  if theRequest.getCustomerID() <> "" then 
+		    sendRequestBody.Value("customerPaymentProfileId") = theRequest.getCustomerID()
 		    
 		  end if
 		  
-		  if theRequest.validationMode <> "" then 
-		    sendRequestBody.Value("validationMode") = theRequest.validationMode
+		  if theRequest.getValidationMode() <> "" then 
+		    sendRequestBody.Value("validationMode") = theRequest.getValidationMode()
 		    
 		  end if
 		  
@@ -151,14 +110,21 @@ Protected Class ANetController
 		  sendRequest.Value(jsonHead) = sendRequestBody
 		  
 		  //POST
-		  lastRequestMade = StringToText(theRequest.requestType)
+		  lastRequestMade = StringToText(theRequest.getRequestType())
 		  self.send(sendRequest, gateway)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processTxRequest(auth as MerchantAuthentication, theRequest as AbstractTransactionRequest, gateway as string, optional refID as string)
+		Sub processRequest_1(theRequest as Request)
+		  lastRequestMade = StringToText(theRequest.requestType)
+		  send(theRequest.message, theRequest.gateway)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub processTxRequest(auth as MerchantAuthentication, theRequest as ANetTransactionRequest, gateway as string, optional refID as string)
 		  //Processes and sends a request to the ANet portal 
 		  //@param auth: The merchant authentication profile 
 		  //@param theRequest: The TransactionRequest object to be processed through the gateway
@@ -172,30 +138,8 @@ Protected Class ANetController
 		  dim sendRequestBody as new JSONItem()
 		  dim sendRequest as new JSONItem()
 		  
-		  //DISPATCH REQUEST TYPE 
-		  if theRequest isa AuthorizeAndCaptureReq then //charge a cc
-		    jsonHead = kTxRequestHeader
-		    theRequestJSON = AuthorizeAndCaptureReq(theRequest).getJson()
-		    
-		  elseif theRequest isa RefundReq then //refund a tx 
-		    jsonHead = kTxRequestHeader
-		    theRequestJSON = RefundReq(theRequest).getJson()
-		    
-		  elseif theRequest isa VoidReq then //Void a tx
-		    jsonHead = kTxRequestHeader
-		    theRequestJSON = VoidReq(theRequest).getJson()
-		    
-		    //TODO: ADD OTHER REQUESTS HERE 
-		  else
-		    #Pragma BreakOnExceptions false
-		    dim err as new UnsupportedFormatException()
-		    err.ErrorNumber = 1
-		    err.Message = "Unknown transaction Request submitted"
-		    
-		    raise err 
-		    #Pragma BreakOnExceptions true 
-		    
-		  end if
+		  jsonHead = theRequest.getRequestHeader()
+		  theRequestJSON = theRequest.getJSON()
 		  
 		  //FORM BODY OF REQUEST
 		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
@@ -203,13 +147,13 @@ Protected Class ANetController
 		    sendRequestBody.Value("refId") = refID
 		    
 		  end if
-		  sendRequestBody.Value(theRequest.sentinalToken) = theRequestJSON
+		  sendRequestBody.Value(theRequest.getSentinalToken()) = theRequestJSON
 		  
 		  //FORM REQUEST
-		  sendRequest.Value(jsonHead) = sendRequestBody
+		  sendRequest.Value(theRequest.getRequestHeader()) = sendRequestBody
 		  
 		  //POST
-		  lastRequestMade = StringToText(theRequest.requestType)
+		  lastRequestMade = StringToText(theRequest.getRequestType)
 		  self.send(sendRequest, gateway)
 		  
 		End Sub
@@ -271,34 +215,7 @@ Protected Class ANetController
 	#tag EndProperty
 
 
-	#tag Constant, Name = kCreateCustomerPaymentProfileHeader, Type = String, Dynamic = False, Default = \"createCustomerPaymentProfileRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kCreateCustomerProfileHeader, Type = String, Dynamic = False, Default = \"createCustomerProfileRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kCreateCustProfileFromTxHeader, Type = String, Dynamic = False, Default = \"createCustomerProfileFromTransactionRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kDeleteCustomerRequestHeader, Type = String, Dynamic = False, Default = \"deleteCustomerProfileRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kDeletePaymentProfileRequestHeader, Type = String, Dynamic = False, Default = \"deleteCustomerPaymentProfileRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kGetCustomerPaymentProfileHeader, Type = String, Dynamic = False, Default = \"getCustomerPaymentProfileRequest", Scope = Private
-	#tag EndConstant
-
 	#tag Constant, Name = kMerchantToken, Type = String, Dynamic = False, Default = \"merchantAuthentication", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kTxRequestHeader, Type = String, Dynamic = False, Default = \"createTransactionRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kUpdateCustomerPaymentProfileRequestHeader, Type = String, Dynamic = False, Default = \"updateCustomerPaymentProfileRequest", Scope = Private
-	#tag EndConstant
-
-	#tag Constant, Name = kUpdateCustomerProfileHeader, Type = String, Dynamic = False, Default = \"updateCustomerPaymentProfileRequest", Scope = Private
 	#tag EndConstant
 
 

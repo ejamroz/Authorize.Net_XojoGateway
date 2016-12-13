@@ -19,6 +19,10 @@ Protected Class AbstractRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
+		Protected mRequestHeader As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
 		Protected mType As string
 	#tag EndProperty
 
@@ -39,11 +43,6 @@ Protected Class AbstractRequest
 			  
 			End Get
 		#tag EndGetter
-		#tag Setter
-			Set
-			  //This property can not be set from the outside
-			End Set
-		#tag EndSetter
 		sentinalToken As string
 	#tag EndComputedProperty
 

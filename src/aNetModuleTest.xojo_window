@@ -993,12 +993,12 @@ End
 #tag Events PushButton2
 	#tag Event
 		Sub Action()
-		  self.TextArea1.Text = ""
-		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new CreditCard("1111", "0120")
-		  dim req as new RefundReq(10, cc, self.aNetTxID)
-		  self.controller1.processTxRequest(auth, req, kTxSandbox)
+		  'self.TextArea1.Text = ""
+		  '
+		  'dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  'dim cc as new CreditCard("1111", "0120")
+		  'dim req as new RefundReq(10, cc, self.aNetTxID)
+		  'self.controller1.processTxRequest(auth, req, kTxSandbox)
 		  
 		End Sub
 	#tag EndEvent
@@ -1021,7 +1021,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim customer as new CustomerProfile("123456800", "Test Test|4356622023", "nict@t.t")
+		  dim customer as new CustomerProfile("123456802", "Test Test|4356622023", "nict@t.t")
 		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
 		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
@@ -1031,12 +1031,12 @@ End
 #tag Events PushButton5
 	#tag Event
 		Sub Action()
-		  self.TextArea1.Text = ""
-		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim prof as new StoredPaymentProfile(customerProfileID, customerPaymentProfileID)
-		  dim req as new AuthorizeAndCaptureReq(30.00, prof, false)
-		  self.controller1.processTxRequest(auth, req, kTxSandbox, "12345")
+		  'self.TextArea1.Text = ""
+		  '
+		  'dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  'dim prof as new StoredPaymentProfile(customerProfileID, customerPaymentProfileID)
+		  'dim req as new AuthorizeAndCaptureReq(30.00, prof, false)
+		  'self.controller1.processTxRequest(auth, req, kTxSandbox, "12345")
 		  
 		End Sub
 	#tag EndEvent
@@ -1119,7 +1119,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new GetCustomerPaymentProfileReq("1500413481", "1500278422") 
+		  dim req as new GetCustomerPaymentProfileReq("1500413482", "1500278422") 
 		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
 		  
 		End Sub
