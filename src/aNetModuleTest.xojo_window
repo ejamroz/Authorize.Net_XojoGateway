@@ -715,12 +715,6 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   46
    End
-   Begin ANetController Controller1
-      Index           =   -2147483648
-      LockedInPosition=   False
-      Scope           =   0
-      TabPanelIndex   =   0
-   End
    Begin PushButton PushButton7
       AutoDeactivate  =   True
       Bold            =   False
@@ -876,6 +870,18 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   117
    End
+   Begin ANetTransactionManager ANetTransactionManager1
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Scope           =   0
+      TabPanelIndex   =   0
+   End
+   Begin ANetProfileManager ANetProfileManager1
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Scope           =   0
+      TabPanelIndex   =   0
+   End
 End
 #tag EndWindow
 
@@ -985,7 +991,7 @@ End
 		  createBillingProfile()
 		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
 		  
-		  self.controller1.processTxRequest(auth, req, kTxSandbox)
+		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -993,12 +999,12 @@ End
 #tag Events PushButton2
 	#tag Event
 		Sub Action()
-		  'self.TextArea1.Text = ""
-		  '
-		  'dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  'dim cc as new CreditCard("1111", "0120")
-		  'dim req as new RefundReq(10, cc, self.aNetTxID)
-		  'self.controller1.processTxRequest(auth, req, kTxSandbox)
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim cc as new CreditCard("1111", "0120")
+		  dim req as new RefundReq(10, cc, self.aNetTxID)
+		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1010,7 +1016,7 @@ End
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new VoidReq(self.aNetTxID)
-		  self.controller1.processTxRequest(auth, req, kTxSandbox)
+		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1023,7 +1029,7 @@ End
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim customer as new CustomerProfile("123456802", "Test Test|4356622023", "nict@t.t")
 		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
-		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
+		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1031,12 +1037,12 @@ End
 #tag Events PushButton5
 	#tag Event
 		Sub Action()
-		  'self.TextArea1.Text = ""
-		  '
-		  'dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  'dim prof as new StoredPaymentProfile(customerProfileID, customerPaymentProfileID)
-		  'dim req as new AuthorizeAndCaptureReq(30.00, prof, false)
-		  'self.controller1.processTxRequest(auth, req, kTxSandbox, "12345")
+		  self.TextArea1.Text = ""
+		  
+		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
+		  dim prof as new StoredPaymentProfile(customerProfileID, customerPaymentProfileID)
+		  dim req as new AuthorizeAndCaptureReq(30.00, prof, false)
+		  self.ANetTransactionManager1.processRequest(auth, req, "12345")
 		  
 		End Sub
 	#tag EndEvent
@@ -1057,57 +1063,7 @@ End
 		  createBillingProfile() 
 		  dim cc as new CreditCard("4111111111111111", "1220")
 		  dim req as new CreateCustomerPaymentProfileReq(customerProfileID, cc, billing, kValidationTest) 
-		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Controller1
-	#tag Event
-		Sub Error(err as RuntimeException)
-		  self.TextArea1.text = "An error occured while trying to communicate with ANet. Error number: " + str(err.ErrorNumber) + chr(10) + err.Reason
-		  
-		  Select case me.lastRequest
-		  case kTypeAuthAndCapture,kTypeRefund,kTypeVoidTransaction
-		    self.TextField11.Text = str(val(self.TextField11.Text) + 1) 
-		    
-		  case kTypeCreateProfileFromTx,kTypeCreatePaymentProfile,kTypeCreateCustomerProfile
-		    self.TextField11.Text = str(val(self.TextField13.Text) + 1) 
-		    
-		  End Select
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub ResponseReceived(response as AbstractResponse)
-		  self.TextArea1.Text = response.toString
-		  if response isa TransactionResponse then 
-		    //DO ACCOUNTING
-		    if response.isSuccess() then 
-		      self.TextField1.Text = str(val(self.TextField1.Text) + 1) 
-		      
-		    else
-		      self.TextField11.Text = str(val(self.TextField11.Text) + 1)
-		      
-		    end if
-		    
-		    //STORE TX ID
-		    aNetTxID = TransactionResponse(response).transactionID
-		    
-		  else
-		    //DO ACCOUNTING
-		    if response.isSuccess() then 
-		      self.TextField12.Text = str(val(self.TextField12.Text) + 1) 
-		      
-		    else
-		      self.TextField13.Text = str(val(self.TextField13.Text) + 1) 
-		      
-		    end if
-		    
-		    //STORE INFO
-		    customerPaymentProfileID = ProfileResponse(response).paymentProfileId
-		    customerProfileID = ProfileResponse(response).ProfileID
-		    
-		  end if
+		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		  
 		End Sub
@@ -1120,7 +1076,7 @@ End
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new GetCustomerPaymentProfileReq("1500413482", "1500278422") 
-		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
+		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1132,7 +1088,7 @@ End
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new DeleteCustomerProfileReq(customerProfileID) 
-		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
+		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1153,7 +1109,7 @@ End
 		  createBillingProfile() 
 		  dim cc as new CreditCard("5111111111111111", "1220")
 		  dim req as new UpdateCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID, cc, billing, kValidationNone) 
-		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
+		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1165,7 +1121,7 @@ End
 		  
 		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
 		  dim req as new DeleteCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID) 
-		  self.controller1.processProfileRequest(auth, req, kTxSandbox)
+		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1188,7 +1144,59 @@ End
 		  setPhoneNumber("4537561991")._
 		  createBillingProfile()
 		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
-		  self.controller1.processTxRequest(auth, req, kTxSandbox)
+		  self.ANetTransactionManager1.processRequest(auth, req)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ANetTransactionManager1
+	#tag Event
+		Sub Error(err as xojo.Net.NetException)
+		  self.TextArea1.text = "An error occured while trying to communicate with ANet. Error number: " + str(err.ErrorNumber) + chr(10) + err.Reason
+		  self.TextField11.Text = str(val(self.TextField11.Text) + 1) 
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub ResponseRecieved(response as TransactionResponse)
+		  self.TextArea1.Text = response.toString
+		  if response.isSuccess() then 
+		    self.TextField1.Text = str(val(self.TextField1.Text) + 1) 
+		    
+		  else
+		    self.TextField11.Text = str(val(self.TextField11.Text) + 1)
+		    
+		  end if
+		  
+		  //STORE TX ID
+		  aNetTxID = TransactionResponse(response).transactionID
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ANetProfileManager1
+	#tag Event
+		Sub Error(err as xojo.Net.NetException)
+		  self.TextArea1.text = "An error occured while trying to communicate with ANet. Error number: " + str(err.ErrorNumber) + chr(10) + err.Reason
+		  self.TextField11.Text = str(val(self.TextField13.Text) + 1) 
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub ResponseRecieved(response as ProfileResponse)
+		  self.TextArea1.Text = response.toString
+		  if response.isSuccess() then 
+		    self.TextField12.Text = str(val(self.TextField12.Text) + 1) 
+		    
+		  else
+		    self.TextField13.Text = str(val(self.TextField13.Text) + 1) 
+		    
+		  end if
+		  
+		  customerPaymentProfileID = ProfileResponse(response).paymentProfileId
+		  customerProfileID = ProfileResponse(response).ProfileID
+		  
+		  
 		  
 		End Sub
 	#tag EndEvent

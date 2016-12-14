@@ -2,11 +2,8 @@
 Protected Class TransactionResponse
 Inherits AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as string)
-		  //@param dataJson: Object representing JSON string of response data
-		  
+		Sub constructor(dataJson as xojo.Core.Dictionary)
 		  super.constructor(dataJson)
-		  mRequestType = requestType
 		  
 		  
 		End Sub

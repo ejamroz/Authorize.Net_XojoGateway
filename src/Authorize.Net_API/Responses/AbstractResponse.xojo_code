@@ -104,12 +104,6 @@ Protected Class AbstractResponse
 	#tag EndMethod
 
 
-	#tag Note, Name = Description
-		This is an abstract super class for all response types. It can not be instantiated
-		
-	#tag EndNote
-
-
 	#tag Property, Flags = &h1
 		Protected data As xojo.Core.Dictionary
 	#tag EndProperty
@@ -130,19 +124,6 @@ Protected Class AbstractResponse
 			End Get
 		#tag EndGetter
 		lastErrorCode As string
-	#tag EndComputedProperty
-
-	#tag Property, Flags = &h1
-		Protected mRequestType As string
-	#tag EndProperty
-
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  return mRequestType
-			End Get
-		#tag EndGetter
-		requestType As string
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0

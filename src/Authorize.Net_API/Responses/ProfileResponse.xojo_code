@@ -2,21 +2,14 @@
 Protected Class ProfileResponse
 Inherits AbstractResponse
 	#tag Method, Flags = &h0
-		Sub constructor(dataJson as xojo.Core.Dictionary, requestType as string)
-		  //@param json: Object representing JSON string. This method currently accepts JSONItems and Xojo.Core.Dictionaries
-		  
+		Sub constructor(dataJson as xojo.Core.Dictionary)
 		  super.constructor(dataJson)
-		  mRequestType = requestType
-		  
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getPaymentIDs() As Text()
-		  //@return: An array containing the ID's associated with all payment profiles associated with
-		  //    the customer profile that this corresponds to 
-		  
 		  dim ids() as Text
 		  dim values() as auto = self.data.Value("customerPaymentProfileIdList")
 		  
