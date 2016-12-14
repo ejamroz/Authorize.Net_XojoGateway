@@ -2,13 +2,10 @@
 Protected Class StoredPaymentProfile
 Inherits AbstractPaymentType
 	#tag Method, Flags = &h0
-		Sub constructor(customerID as string, paymentProfileID as string)
-		  //@param customerID: The ANet customer serial
-		  //@param paymentProfileID: The ANet payment profile ID
-		  
+		Sub constructor(builder as StoredPaymentProfileBuilder)
 		  mTokenName = kPayWithProfileToken
-		  customerProfile = customerID
-		  self.paymentProfileID = paymentProfileID
+		  customerProfile = builder.customerSerial
+		  paymentProfileID = builder.paymentProfileSerial
 		End Sub
 	#tag EndMethod
 

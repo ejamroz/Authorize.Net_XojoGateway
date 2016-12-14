@@ -2622,6 +2622,17 @@ End
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function getStoredPaymentProfile() As StoredPaymentProfile
+		  dim builder as new StoredPaymentProfileBuilder()
+		  return builder._
+		  setCustomerSerial(CustomerIDField.text)._
+		  setPaymentProfileSerial(ProfileIDField.text)._
+		  buildStoredPaymentProfile()
+		  
+		End Function
+	#tag EndMethod
+
 
 #tag EndWindowCode
 
@@ -2687,7 +2698,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
-		  dim prof as new StoredPaymentProfile(CustomerIDField.text, ProfileIDField.text)
+		  dim prof as StoredPaymentProfile = getStoredPaymentProfile()
 		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), prof, false)
 		  
 		  self.ANetTransactionManager1.processRequest(auth, req, InvoiceNumberField.text)
