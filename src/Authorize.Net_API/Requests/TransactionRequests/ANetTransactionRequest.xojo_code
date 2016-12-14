@@ -13,12 +13,6 @@ Protected Interface ANetTransactionRequest
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getRequestType() As string
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function getSentinalToken() As String
 		  
 		End Function

@@ -25,10 +25,8 @@ Implements ANetProfileRequest
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getProfileID() As String
-		  // Part of the ANetProfileRequest interface.
-		  
-		  return mPaymentID
+		Function getpaymentProfileID() As String
+		  return paymentProfileSerial
 		End Function
 	#tag EndMethod
 
@@ -37,12 +35,6 @@ Implements ANetProfileRequest
 		  // Part of the ANetProfileRequest interface.
 		  
 		  return mRequestHeader
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getRequestType() As String
-		  return mType
 		End Function
 	#tag EndMethod
 
@@ -68,11 +60,11 @@ Implements ANetProfileRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected mPaymentID As string
+		Protected mValidation As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected mValidation As string
+		Protected paymentProfileSerial As string
 	#tag EndProperty
 
 

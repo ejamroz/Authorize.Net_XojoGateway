@@ -13,19 +13,13 @@ Protected Interface ANetProfileRequest
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getProfileID() As String
+		Function getPaymentProfileID() As String
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getRequestHeader() As String
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getRequestType() As String
 		  
 		End Function
 	#tag EndMethod

@@ -11,7 +11,7 @@ Inherits AbstractProfileRequest
 		  mRequestHeader = kDeletePaymentProfileRequestHeader
 		  mJSONBodyToken= ""
 		  mCustomerId = customerID
-		  mPaymentID = paymentID
+		  paymentProfileSerial = paymentID
 		  
 		End Sub
 	#tag EndMethod

@@ -3,15 +3,12 @@ Protected Class GetCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
 		Sub constructor(customerID as string, paymentID as string)
-		  //@param customerID: ANet customer profile ID
-		  //@param paymentID: ANet customer payment profile ID 
-		  
 		  Super.Constructor()
 		  mType = kTypeGetCustomerPaymentPRofile
 		  mRequestHeader = kGetCustomerPaymentProfileHeader
 		  mJSONBodyToken= "" 
 		  mCustomerId = customerID
-		  mPaymentID = paymentID
+		  paymentProfileSerial = paymentID
 		End Sub
 	#tag EndMethod
 

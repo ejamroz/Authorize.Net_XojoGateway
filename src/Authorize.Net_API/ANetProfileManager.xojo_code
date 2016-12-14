@@ -33,8 +33,8 @@ Inherits ANetController
 		    
 		  End If
 		  
-		  if theRequest.getCustomerID() <> "" then 
-		    sendRequestBody.Value("customerPaymentProfileId") = theRequest.getCustomerID()
+		  if theRequest.getPaymentProfileID() <> "" then 
+		    sendRequestBody.Value("customerPaymentProfileId") = theRequest.getPaymentProfileID()
 		    
 		  end if
 		  

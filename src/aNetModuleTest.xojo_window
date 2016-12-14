@@ -9,7 +9,7 @@ Begin Window aNetModuleTest
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   372
+   Height          =   486
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -25,7 +25,7 @@ Begin Window aNetModuleTest
    Resizeable      =   True
    Title           =   "Test Window"
    Visible         =   True
-   Width           =   653
+   Width           =   920
    Begin Label Label2
       AutoDeactivate  =   True
       Bold            =   False
@@ -46,7 +46,7 @@ Begin Window aNetModuleTest
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   1
+      TabIndex        =   2
       TabPanelIndex   =   0
       Text            =   "Transaction Key:"
       TextAlign       =   0
@@ -54,13 +54,13 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   48
+      Top             =   73
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   99
    End
-   Begin TextField TextField2
+   Begin TextField TransactionKeyField
       AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
@@ -88,7 +88,7 @@ Begin Window aNetModuleTest
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      TabIndex        =   10
+      TabIndex        =   26
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "3g43A42jEa3J5Dw9"
@@ -96,13 +96,13 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   47
+      Top             =   72
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
       Width           =   151
    End
-   Begin PushButton PushButton1
+   Begin PushButton AuthAndCaptureButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -115,20 +115,20 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   28
+      Left            =   296
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   18
+      TabIndex        =   33
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   174
+      Top             =   285
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -145,12 +145,12 @@ Begin Window aNetModuleTest
       DataSource      =   ""
       Enabled         =   True
       Format          =   ""
-      Height          =   332
+      Height          =   343
       HelpTag         =   ""
       HideSelection   =   True
       Index           =   -2147483648
       Italic          =   False
-      Left            =   301
+      Left            =   559
       LimitText       =   0
       LineHeight      =   0.0
       LineSpacing     =   1.0
@@ -166,7 +166,7 @@ Begin Window aNetModuleTest
       ScrollbarHorizontal=   False
       ScrollbarVertical=   True
       Styled          =   True
-      TabIndex        =   19
+      TabIndex        =   59
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
@@ -174,11 +174,11 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   20
+      Top             =   122
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   332
+      Width           =   341
    End
    Begin Label Label10
       AutoDeactivate  =   True
@@ -200,7 +200,7 @@ Begin Window aNetModuleTest
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
-      TabIndex        =   20
+      TabIndex        =   1
       TabPanelIndex   =   0
       Text            =   "Merchant ID:"
       TextAlign       =   0
@@ -208,13 +208,13 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   20
+      Top             =   45
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   73
    End
-   Begin TextField TextField10
+   Begin TextField MerchantIDField
       AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
@@ -242,7 +242,7 @@ Begin Window aNetModuleTest
       Password        =   False
       ReadOnly        =   False
       Scope           =   0
-      TabIndex        =   21
+      TabIndex        =   25
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "5g7W2Waks"
@@ -250,13 +250,13 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   20
+      Top             =   45
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
       Width           =   151
    End
-   Begin PushButton PushButton2
+   Begin PushButton RefundButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -269,25 +269,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   28
+      Left            =   296
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   24
+      TabIndex        =   36
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   270
+      Top             =   381
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton3
+   Begin PushButton VoidButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -300,25 +300,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   28
+      Left            =   296
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   25
+      TabIndex        =   35
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   238
+      Top             =   349
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton4
+   Begin PushButton CreateProfileButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -331,25 +331,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   425
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   26
+      TabIndex        =   48
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   174
+      Top             =   285
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton5
+   Begin PushButton ChargeProfileButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -362,25 +362,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   28
+      Left            =   296
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   27
+      TabIndex        =   37
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   302
+      Top             =   413
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton6
+   Begin PushButton AddPaymentInfoButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -393,27 +393,27 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   425
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   28
+      TabIndex        =   50
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   238
+      Top             =   349
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
    Begin Label Label1
       AutoDeactivate  =   True
-      Bold            =   False
+      Bold            =   True
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -422,7 +422,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   54
+      Left            =   323
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -431,7 +431,7 @@ Begin Window aNetModuleTest
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   29
+      TabIndex        =   38
       TabPanelIndex   =   0
       Text            =   "Transactions"
       TextAlign       =   0
@@ -439,7 +439,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   104
+      Top             =   224
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -462,7 +462,7 @@ Begin Window aNetModuleTest
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   139
+      Left            =   408
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -473,7 +473,7 @@ Begin Window aNetModuleTest
       Password        =   False
       ReadOnly        =   True
       Scope           =   2
-      TabIndex        =   30
+      TabIndex        =   46
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "0"
@@ -481,7 +481,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   103
+      Top             =   223
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -498,7 +498,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   135
+      Left            =   404
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -507,7 +507,7 @@ Begin Window aNetModuleTest
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   31
+      TabIndex        =   45
       TabPanelIndex   =   0
       Text            =   "Success"
       TextAlign       =   1
@@ -515,7 +515,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   81
+      Top             =   204
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -538,7 +538,7 @@ Begin Window aNetModuleTest
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   199
+      Left            =   468
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -549,7 +549,7 @@ Begin Window aNetModuleTest
       Password        =   False
       ReadOnly        =   True
       Scope           =   2
-      TabIndex        =   32
+      TabIndex        =   55
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "0"
@@ -557,7 +557,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   102
+      Top             =   222
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -574,7 +574,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   200
+      Left            =   469
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -583,7 +583,7 @@ Begin Window aNetModuleTest
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   33
+      TabIndex        =   54
       TabPanelIndex   =   0
       Text            =   "Fail"
       TextAlign       =   1
@@ -591,7 +591,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   80
+      Top             =   203
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -599,7 +599,7 @@ Begin Window aNetModuleTest
    End
    Begin Label Label13
       AutoDeactivate  =   True
-      Bold            =   False
+      Bold            =   True
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -608,7 +608,7 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   54
+      Left            =   323
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -617,7 +617,7 @@ Begin Window aNetModuleTest
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   34
+      TabIndex        =   39
       TabPanelIndex   =   0
       Text            =   "Profiles"
       TextAlign       =   0
@@ -625,7 +625,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   129
+      Top             =   249
       Transparent     =   True
       Underline       =   False
       Visible         =   True
@@ -648,7 +648,7 @@ Begin Window aNetModuleTest
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   139
+      Left            =   408
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -659,7 +659,7 @@ Begin Window aNetModuleTest
       Password        =   False
       ReadOnly        =   True
       Scope           =   2
-      TabIndex        =   35
+      TabIndex        =   47
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "0"
@@ -667,7 +667,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   128
+      Top             =   248
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -690,7 +690,7 @@ Begin Window aNetModuleTest
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   199
+      Left            =   468
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -701,7 +701,7 @@ Begin Window aNetModuleTest
       Password        =   False
       ReadOnly        =   True
       Scope           =   2
-      TabIndex        =   36
+      TabIndex        =   56
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "0"
@@ -709,13 +709,13 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   128
+      Top             =   248
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
       Width           =   46
    End
-   Begin PushButton PushButton7
+   Begin PushButton GetPaymentInfoButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -728,30 +728,30 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   425
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   37
+      TabIndex        =   49
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   206
+      Top             =   317
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton8
+   Begin PushButton DeleteCustomerProfileButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   True
-      Caption         =   "Delete Profile"
+      Caption         =   "Delete Customer"
       Default         =   False
       Enabled         =   False
       Height          =   20
@@ -759,25 +759,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   425
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   38
+      TabIndex        =   53
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   334
+      Top             =   445
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton9
+   Begin PushButton UpdatePAymentInfoButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -790,25 +790,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   425
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   39
+      TabIndex        =   51
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   270
+      Top             =   381
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton10
+   Begin PushButton DeletePaymentInfoButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -821,25 +821,25 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   157
+      Left            =   425
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   40
+      TabIndex        =   52
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   302
+      Top             =   413
       Underline       =   False
       Visible         =   True
       Width           =   117
    End
-   Begin PushButton PushButton11
+   Begin PushButton AuthAndCaptureTrack2Button
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -852,20 +852,20 @@ Begin Window aNetModuleTest
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   28
+      Left            =   296
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   0
-      TabIndex        =   41
+      TabIndex        =   34
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   206
+      Top             =   317
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -882,269 +882,1900 @@ Begin Window aNetModuleTest
       Scope           =   0
       TabPanelIndex   =   0
    End
+   Begin Label Label14
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   4
+      TabPanelIndex   =   0
+      Text            =   "Firstname:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   134
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label15
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   5
+      TabPanelIndex   =   0
+      Text            =   "Lastname:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   162
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label16
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      Text            =   "Phone Number:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   190
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label17
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      Text            =   "Customer serial:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   218
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label18
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   3
+      TabPanelIndex   =   0
+      Text            =   "Customer Info"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   109
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField FirstnameField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Eve"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   135
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField LastnameField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   16
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Anderson"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   162
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField PhoneNumberField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   17
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "123-165-1897"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   189
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField CustomerSerialField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   18
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   215
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label19
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   29
+      TabPanelIndex   =   0
+      Text            =   "Credit Card:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   71
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label21
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   30
+      TabPanelIndex   =   0
+      Text            =   "Expiration:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   99
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label22
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   31
+      TabPanelIndex   =   0
+      Text            =   "Control Code:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   127
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label23
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   27
+      TabPanelIndex   =   0
+      Text            =   "Payment Info"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   20
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField CreditCardField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   393
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   41
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "4111111111111111"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   72
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField ExpirationField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   393
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   42
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   98
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField ControlCodeField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   393
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   43
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   124
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label24
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   32
+      TabPanelIndex   =   0
+      Text            =   "Track2:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   153
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField Track2Field
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   393
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   44
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "5301250070000191=08051010912345678901"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   150
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label25
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      Text            =   "Address"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   310
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label26
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      Text            =   "City"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   338
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label27
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      Text            =   "State"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   366
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label28
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      Text            =   "Zip Code:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   394
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label29
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      Text            =   "Billing Info"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   285
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField AddressField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   19
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "123 Cloud Ave"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   311
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField CityField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   20
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Springfield"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   338
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField StateField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   21
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "NE"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   365
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin TextField ZipCodeField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   22
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "45872"
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   391
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label30
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      Text            =   "Country"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   420
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField CountryField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   23
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   417
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label31
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   14
+      TabPanelIndex   =   0
+      Text            =   "Company Name:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   446
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField CompanyNameField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   24
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   443
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label32
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   0
+      TabPanelIndex   =   0
+      Text            =   "Merchant Info:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   20
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin Label Label33
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   559
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   57
+      TabPanelIndex   =   0
+      Text            =   "Transaction ID:"
+      TextAlign       =   1
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   37
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   107
+   End
+   Begin Label Label34
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   676
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   60
+      TabPanelIndex   =   0
+      Text            =   "Customer ID:"
+      TextAlign       =   1
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   37
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   107
+   End
+   Begin Label Label35
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   793
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   62
+      TabPanelIndex   =   0
+      Text            =   "Profile ID:"
+      TextAlign       =   1
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   37
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   107
+   End
+   Begin TextField TransactionIDField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   559
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   58
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   61
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   107
+   End
+   Begin TextField CustomerIDField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   676
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   61
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   61
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   107
+   End
+   Begin TextField ProfileIDField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   793
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   63
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   61
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   107
+   End
+   Begin Label Label20
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   28
+      TabPanelIndex   =   0
+      Text            =   "Amount:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   45
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   105
+   End
+   Begin TextField AmountField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   393
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   40
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   46
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label36
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   296
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   64
+      TabPanelIndex   =   0
+      Text            =   "Invoice Number:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   179
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField InvoiceNumberField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   393
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   65
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   176
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
+   Begin Label Label37
+      AutoDeactivate  =   True
+      Bold            =   True
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   559
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   66
+      TabPanelIndex   =   0
+      Text            =   "Response:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   99
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   107
+   End
+   Begin Label Label38
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   67
+      TabPanelIndex   =   0
+      Text            =   "Email:"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   249
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin TextField EmailAddressField
+      AcceptTabs      =   False
+      Alignment       =   0
+      AutoDeactivate  =   True
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
+      Border          =   True
+      CueText         =   ""
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Format          =   ""
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   117
+      LimitText       =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Mask            =   ""
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   68
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   246
+      Underline       =   False
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   142
+   End
 End
 #tag EndWindow
 
 #tag WindowCode
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  return mTxId
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mTxId = value
-			  if value <> "" then
-			    self.PushButton2.Enabled = true
-			    self.PushButton3.Enabled = true
-			    
-			  else
-			    self.PushButton2.Enabled = false
-			    self.PushButton3.Enabled = false
-			    
-			  end if
-			End Set
-		#tag EndSetter
-		aNetTxID As string
-	#tag EndComputedProperty
+	#tag Method, Flags = &h21
+		Private Function getBillingProfile() As BillingProfile
+		  dim theName as Name = getName()
+		  dim billingBuilder as new BillingProfileBuilder(theName)
+		  
+		  return billingBuilder._
+		  setAddress(AddressField.text)._
+		  setCity(CityField.text)._
+		  setState(StateField.text)._
+		  setZipCode(ZipCodeField.text)._
+		  setCountry(CountryField.text)._
+		  setPhoneNumber(PhoneNumberField.text)._
+		  createBillingProfile()
+		End Function
+	#tag EndMethod
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  return mCustomerPaymentProfile
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCustomerPaymentProfile = value
-			  if value <> "" then
-			    self.PushButton5.Enabled = true
-			    self.PushButton9.Enabled = true
-			    self.PushButton10.Enabled = true
-			    
-			  else
-			    self.PushButton5.Enabled = false
-			    self.PushButton9.Enabled = false
-			    self.PushButton10.Enabled = false
-			    
-			  end if
-			End Set
-		#tag EndSetter
-		customerPaymentProfileID As string
-	#tag EndComputedProperty
+	#tag Method, Flags = &h21
+		Private Function getCreditCard() As CreditCard
+		  return new CreditCard(CreditCardField.Text, ExpirationField.text, ControlCodeField.text) 
+		End Function
+	#tag EndMethod
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  return mCustomerProfile
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  mCustomerProfile = value
-			  if value <> "" then
-			    self.PushButton6.Enabled = true
-			    self.PushButton8.Enabled = true
-			    
-			  else
-			    self.PushButton6.Enabled = false
-			    self.PushButton8.Enabled = false
-			    
-			  end if
-			End Set
-		#tag EndSetter
-		customerProfileID As string
-	#tag EndComputedProperty
+	#tag Method, Flags = &h21
+		Private Function getCreditCard_Track2() As CreditCard
+		  return new CreditCard(Track2Field.text) 
+		End Function
+	#tag EndMethod
 
-	#tag Property, Flags = &h21
-		Private mCustomerPaymentProfile As string
-	#tag EndProperty
+	#tag Method, Flags = &h21
+		Private Function getCustomerInfoString() As String
+		  return FirstnameField.text + " " + LastnameField.text + "|" + PhoneNumberField.text
+		End Function
+	#tag EndMethod
 
-	#tag Property, Flags = &h21
-		Private mCustomerProfile As string
-	#tag EndProperty
+	#tag Method, Flags = &h21
+		Private Function getMerchantAuthoriztion() As MerchantAuthentication
+		  return new MerchantAuthentication(MerchantIDField.text, TransactionKeyField.text)
+		End Function
+	#tag EndMethod
 
-	#tag Property, Flags = &h21
-		Private mTxId As string
-	#tag EndProperty
+	#tag Method, Flags = &h21
+		Private Function getName() As Name
+		  return new Name(FirstnameField.text, LastnameField.text)
+		End Function
+	#tag EndMethod
 
 
 #tag EndWindowCode
 
-#tag Events PushButton1
+#tag Events AuthAndCaptureButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new CreditCard("4111111111111111", "0120")
-		  dim theName as new Name("Lucky", "Primm")
-		  dim billingBuilder as new BillingProfileBuilder(theName)
-		  dim billing as BillingProfile = billingBuilder._
-		  setAddress("435 cloude ave")._
-		  setCity("springdale")._
-		  setState("utah")._
-		  setZipCode("84767")._
-		  setCountry("USA")._
-		  setPhoneNumber("4537561991")._
-		  createBillingProfile()
-		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim cc as CreditCard = getCreditCard()
+		  dim billing as BillingProfile = getBillingProfile()
+		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), cc, billing, false, InvoiceNumberField.text)
 		  
 		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton2
+#tag Events RefundButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new CreditCard("1111", "0120")
-		  dim req as new RefundReq(10, cc, self.aNetTxID)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim cc as new CreditCard(right(CreditCardField.text, 4), ExpirationField.text) //WORKS WITH LAST 4
+		  dim req as new RefundReq(val(AmountField.text), cc, TransactionIDField.text)
+		  
 		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton3
+#tag Events VoidButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new VoidReq(self.aNetTxID)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim req as new VoidReq(TransactionIDField.text)
+		  
 		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton4
+#tag Events CreateProfileButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim customer as new CustomerProfile("123456802", "Test Test|4356622023", "nict@t.t")
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim customer as new CustomerProfile(CustomerSerialField.text, getCustomerInfoString(), EmailAddressField.text)
 		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
+		  
 		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton5
+#tag Events ChargeProfileButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim prof as new StoredPaymentProfile(customerProfileID, customerPaymentProfileID)
-		  dim req as new AuthorizeAndCaptureReq(30.00, prof, false)
-		  self.ANetTransactionManager1.processRequest(auth, req, "12345")
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim prof as new StoredPaymentProfile(CustomerIDField.text, ProfileIDField.text)
+		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), prof, false)
+		  
+		  self.ANetTransactionManager1.processRequest(auth, req, InvoiceNumberField.text)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton6
+#tag Events AddPaymentInfoButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim theName as new Name("Nina", "Simone")
-		  dim billingBuilder as new BillingProfileBuilder(theName)
-		  dim billing as BillingProfile = billingBuilder._
-		  setAddress("123 Ave")._
-		  setCity("Denver")._
-		  setState("Colorado")._
-		  setZipCode("80207")._
-		  createBillingProfile() 
-		  dim cc as new CreditCard("4111111111111111", "1220")
-		  dim req as new CreateCustomerPaymentProfileReq(customerProfileID, cc, billing, kValidationTest) 
-		  self.ANetProfileManager1.processRequest(auth, req)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim billing as BillingProfile = getBillingProfile()
+		  dim cc as CreditCard = getCreditCard()
+		  dim req as new CreateCustomerPaymentProfileReq(CustomerIDField.text, cc, billing, kValidationTest) 
+		  
+		  ANetProfileManager1.processRequest(auth, req)
 		  
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton7
+#tag Events GetPaymentInfoButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new GetCustomerPaymentProfileReq("1500413482", "1500278422") 
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim req as new GetCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text) 
+		  
 		  self.ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton8
+#tag Events DeleteCustomerProfileButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new DeleteCustomerProfileReq(customerProfileID) 
-		  self.ANetProfileManager1.processRequest(auth, req)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim req as new DeleteCustomerProfileReq(CustomerIDField.text) 
+		  
+		  ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton9
+#tag Events UpdatePAymentInfoButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim theName as new Name("Nina", "Simone")
-		  dim billingBuilder as new BillingProfileBuilder(theName)
-		  dim billing as BillingProfile = billingBuilder._
-		  setAddress("123 Ave")._
-		  setCity("Denver")._
-		  setState("Colorado")._
-		  setZipCode("80207")._
-		  createBillingProfile() 
-		  dim cc as new CreditCard("5111111111111111", "1220")
-		  dim req as new UpdateCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID, cc, billing, kValidationNone) 
-		  self.ANetProfileManager1.processRequest(auth, req)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim cc as CreditCard = getCreditCard()
+		  dim billing as BillingProfile = getBillingProfile()
+		  dim req as new UpdateCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text, cc, billing, kValidationTest) 
+		  
+		  ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton10
+#tag Events DeletePaymentInfoButton
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim req as new DeleteCustomerPaymentProfileReq(customerProfileID, customerPaymentProfileID) 
-		  self.ANetProfileManager1.processRequest(auth, req)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim req as new DeleteCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text) 
+		  
+		  ANetProfileManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events PushButton11
+#tag Events AuthAndCaptureTrack2Button
 	#tag Event
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  dim auth as new MerchantAuthentication(self.TextField10.Text, self.TextField2.text)
-		  dim cc as new CreditCard("5301250070000191=08051010912345678901")
-		  dim theName as new Name("Lucky", "Primm")
-		  dim billingBuilder as new BillingProfileBuilder(theName)
-		  dim billing as BillingProfile = billingBuilder._
-		  setAddress("435 cloude ave")._
-		  setCity("springdale")._
-		  setState("utah")._
-		  setZipCode("84767")._
-		  setCountry("USA")._
-		  setPhoneNumber("4537561991")._
-		  createBillingProfile()
-		  dim req as new AuthorizeAndCaptureReq(42.40, cc, billing, false, "1005")
-		  self.ANetTransactionManager1.processRequest(auth, req)
+		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
+		  dim cc as CreditCard = getCreditCard_Track2()
+		  dim billing as BillingProfile = getBillingProfile()
+		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), cc, billing, false, InvoiceNumberField.text)
+		  
+		  ANetTransactionManager1.processRequest(auth, req)
 		  
 		End Sub
 	#tag EndEvent
@@ -1168,8 +2799,8 @@ End
 		    
 		  end if
 		  
-		  //STORE TX ID
-		  aNetTxID = TransactionResponse(response).transactionID
+		  
+		  self.TransactionIDField.text = response.transactionID
 		  
 		End Sub
 	#tag EndEvent
@@ -1193,11 +2824,65 @@ End
 		    
 		  end if
 		  
-		  customerPaymentProfileID = ProfileResponse(response).paymentProfileId
-		  customerProfileID = ProfileResponse(response).ProfileID
+		  if response.customerProfileID <> "" then 
+		    CustomerIDField.text = response.customerProfileID
+		    
+		  end if
+		  
+		  if response.paymentProfileId <> "" then 
+		    ProfileIDField.text = response.paymentProfileId
+		    
+		  end if
 		  
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TransactionIDField
+	#tag Event
+		Sub TextChange()
+		  if me.text <> "" and me.text <> "0" then
+		    VoidButton.Enabled = true
+		    RefundButton.Enabled = true
+		    
+		  else
+		    VoidButton.Enabled = false
+		    RefundButton.Enabled = false 
+		    
+		  end if
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CustomerIDField
+	#tag Event
+		Sub TextChange()
+		  if me.text <> "" or me.Text <> "0" then
+		    AddPaymentInfoButton.Enabled = true
+		    DeleteCustomerProfileButton.Enabled = true
+		    
+		  else
+		    AddPaymentInfoButton.Enabled = false
+		    DeleteCustomerProfileButton.Enabled = false
+		    
+		  end if
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ProfileIDField
+	#tag Event
+		Sub TextChange()
+		  if me.text <> "" and me.Text <> "0" then
+		    ChargeProfileButton.Enabled = true
+		    DeletePaymentInfoButton.Enabled = true
+		    UpdatePAymentInfoButton.Enabled = true
+		    
+		  else
+		    DeletePaymentInfoButton.Enabled = false
+		    UpdatePAymentInfoButton.Enabled = false
+		    ChargeProfileButton.Enabled = false 
+		    
+		  end if
 		End Sub
 	#tag EndEvent
 #tag EndEvents

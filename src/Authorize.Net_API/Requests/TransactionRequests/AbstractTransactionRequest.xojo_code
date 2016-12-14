@@ -41,16 +41,6 @@ Implements ANetTransactionRequest
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getRequestType() As string
-		  // Part of the ANetTransactionRequest interface.
-		  
-		  return self.mType
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function getSentinalToken() As String
 		  // Part of the ANetTransactionRequest interface.
 		  

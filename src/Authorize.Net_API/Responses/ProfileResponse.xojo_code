@@ -26,6 +26,15 @@ Inherits AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  return self.data.Lookup("customerProfileId", "")
+			End Get
+		#tag EndGetter
+		customerProfileID As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return StringToText(right(data.Lookup("cardNumber", ""), 4))
 			End Get
 		#tag EndGetter
@@ -41,17 +50,14 @@ Inherits AbstractResponse
 		paymentProfileId As string
 	#tag EndComputedProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  return self.data.Lookup("customerProfileId", "")
-			End Get
-		#tag EndGetter
-		ProfileID As string
-	#tag EndComputedProperty
-
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="customerProfileID"
+			Group="Behavior"
+			Type="string"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="errorMessage"
 			Group="Behavior"
@@ -92,12 +98,6 @@ Inherits AbstractResponse
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="paymentProfileId"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ProfileID"
 			Group="Behavior"
 			Type="string"
 			EditorType="MultiLineEditor"

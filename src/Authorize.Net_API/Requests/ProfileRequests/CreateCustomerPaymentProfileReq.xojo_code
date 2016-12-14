@@ -3,19 +3,15 @@ Protected Class CreateCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
 		Sub constructor(custSerial as string, paymentInfo as AbstractPaymentType, billingInfo as BillingProfile, validationMode as string)
-		  //@param custSerial: The Anet customer profile id
-		  //@param billingInfo: The billing information for the payment method provided
-		  //@param paymentInfo: Information regarding payment, currently only CC's are accepted
-		  //@param validationMode: The level of validation required for the payment provided
-		  
 		  super.constructor()
 		  mType = kTypeCreatePaymentProfile
 		  mJSONBodyToken= kPaymentProfileToken
 		  mRequestHeader = kCreateCustomerPaymentProfileHeader
 		  mCustomerId = custSerial
+		  mValidation = validationMode
 		  self.billingInfo = billingInfo
 		  self.paymentInfo = paymentInfo
-		  mValidation = validationMode
+		  
 		End Sub
 	#tag EndMethod
 
