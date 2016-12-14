@@ -2594,13 +2594,32 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function getCreditCard() As CreditCard
-		  return new CreditCard(CreditCardField.Text, ExpirationField.text, ControlCodeField.text) 
+		  dim builder as new CreditCardBuilder()
+		  return builder._
+		  setCCNumber(CreditCardField.Text)._
+		  setExpirationDate(ExpirationField.Text)._
+		  setCVVCode(ControlCodeField.Text)._
+		  buildCreditCard()
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function getCreditCardUsingLast4() As CreditCard
+		  dim builder as new CreditCardBuilder()
+		  return builder._
+		  setCCNumber(right(CreditCardField.Text, 4))._
+		  setCVVCode(ControlCodeField.text)._
+		  setExpirationDate(ExpirationField.Text)._
+		  buildCreditCard()_
+		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Function getCreditCard_Track2() As CreditCard
-		  return new CreditCard(Track2Field.text) 
+		  dim builder as new CreditCardBuilder()
+		  return builder.setTrack2(Track2Field.text).buildCreditCard()
 		End Function
 	#tag EndMethod
 
@@ -2657,7 +2676,7 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
-		  dim cc as new CreditCard(right(CreditCardField.text, 4), ExpirationField.text) //WORKS WITH LAST 4
+		  dim cc as CreditCard = getCreditCardUsingLast4()
 		  dim req as new RefundReq(val(AmountField.text), cc, TransactionIDField.text)
 		  
 		  self.ANetTransactionManager1.processRequest(auth, req)

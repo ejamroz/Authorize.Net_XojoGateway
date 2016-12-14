@@ -2,25 +2,12 @@
 Protected Class CreditCard
 Inherits AbstractPaymentType
 	#tag Method, Flags = &h0
-		Sub constructor(track2 as string)
-		  //@param track2: Track 2 data off of the card, which needs to have 
-		  //    sentinal characters(; or ?) already removed
-		  
+		Sub constructor(builder as CreditCardBuilder)
 		  mTokenName = kPayWithCCToken
-		  mTrack2 = track2
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub constructor(cc as string, expirationDate as string, optional cvv as string)
-		  //@param cc: The credit card number
-		  //@param expirationDate: The expiration date for the card in form MMYY
-		  //@param cvv: [OPTIONAL] 3-digit code on back of card. Needed if wanting to use authorize.net's Card Code Verification (CCV) security feature
-		  
-		  mTokenName = kPayWithCCToken
-		  self.cc = cc
-		  self.expirationDate = expirationDate
-		  self.cvv = cvv
+		  self.ccNumber = builder.ccNumber
+		  self.expirationDate = builder.expirationDate
+		  self.cvvCode = builder.cvvCode
+		  self.track2Data = builder.track2Data
 		End Sub
 	#tag EndMethod
 
@@ -29,16 +16,15 @@ Inherits AbstractPaymentType
 		  dim jsonBody as new JSONItem()
 		  dim jsonToken as new JSONItem()
 		  
-		  //FORM TOKEN DATA
-		  if mTrack2 <> "" then //build token to only use track2 data
-		    jsonBody.Value("track2") = mTrack2
+		  if track2Data <> "" then 
+		    jsonBody.Value("track2") = track2Data
 		    jsonToken.Value(kPayUsingTrackData) = jsonBody
 		    
-		  else //use cc,exp, and CVV values 
-		    jsonBody.Value("cardNumber") = self.cc
+		  else 
+		    jsonBody.Value("cardNumber") = self.ccNumber
 		    jsonBody.Value("expirationDate") = self.expirationDate
-		    if self.cvv <> "" then 
-		      jsonBody.Value("cardCode") = self.cvv
+		    if self.cvvCode <> "" then 
+		      jsonBody.Value("cardCode") = self.cvvCode
 		      
 		    end if
 		    
@@ -46,7 +32,6 @@ Inherits AbstractPaymentType
 		    
 		  end if
 		  
-		  //FORM TOKEN
 		  return jsonToken
 		  
 		  
@@ -56,11 +41,11 @@ Inherits AbstractPaymentType
 
 
 	#tag Property, Flags = &h21
-		Private cc As string = "creditCard"
+		Private ccNumber As string = "creditCard"
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private cvv As string
+		Private cvvCode As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -70,7 +55,7 @@ Inherits AbstractPaymentType
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  if mTrack2 <> "" then
+			  if track2Data <> "" then
 			    return true
 			    
 			  end if
@@ -82,7 +67,7 @@ Inherits AbstractPaymentType
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
-		Private mTrack2 As string
+		Private track2Data As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
