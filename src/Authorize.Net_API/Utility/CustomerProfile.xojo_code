@@ -1,10 +1,11 @@
 #tag Class
 Protected Class CustomerProfile
 	#tag Method, Flags = &h0
-		Sub constructor(merchSerial as string, custInfo as string, email as string)
-		  self.merchantSerial = merchSerial
-		  description = custInfo
-		  self.email = email
+		Sub constructor(builder as CustomerProfileBuilder)
+		  merchantSerial = builder.merchantSerial
+		  description = builder.description
+		  email = builder.email
+		  billingInfo = builder.billingInfo
 		  
 		  
 		  
@@ -13,22 +14,19 @@ Protected Class CustomerProfile
 
 	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
-		  // Part of the Tokenizable interface.
-		  
 		  dim jsonBody as new JSONItem()
 		  
-		  //FORM TOKEN DATA
 		  jsonBody.Value("merchantCustomerId") = merchantSerial
 		  jsonBody.Value("description") = description
 		  jsonBody.Value("email") = email
 		  
-		  if billTo <> Nil then
-		    jsonBody.Value(billTo.kTokenName) = billTo.getJson()
+		  if billingInfo <> Nil then
+		    jsonBody.Value(billingInfo.kTokenName) = billingInfo.getJson()
 		    
 		  end if
 		  
+		  //TODO: ADD PAYMENT PROFILE 
 		  
-		  //FORM TOKEN
 		  return jsonBody
 		  
 		  
@@ -37,7 +35,7 @@ Protected Class CustomerProfile
 
 
 	#tag Property, Flags = &h21
-		Private billTo As BillingProfile
+		Private billingInfo As BillingProfile
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -53,7 +51,7 @@ Protected Class CustomerProfile
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentInfo As PaymentProfile
+		Private paymentInfo As AbstractPaymentType
 	#tag EndProperty
 
 

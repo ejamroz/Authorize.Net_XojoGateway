@@ -1,41 +1,29 @@
 #tag Class
-Protected Class StoredPaymentProfileBuilder
+Protected Class UpdateCustomerPaymentProfileBuilder
 	#tag Method, Flags = &h0
-		Function buildStoredPaymentProfile() As StoredPaymentProfile
-		  return new StoredPaymentProfile(self)
+		Function buildRequest() As UpdateCustomerPaymentProfileReq
+		  return new UpdateCustomerPaymentProfileReq(self)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub constructor()
-		  validationMode = kValidationTest
+		Sub constructor(customerID as string, paymentProfileID as string)
+		  self.customerID = customerID
+		  self.paymentProfileId = paymentProfileID
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setBillingInfo(billingInfo as BillingProfile) As StoredPaymentProfileBuilder
-		  self.billingInfo = billingInfo
+		Function setBillingInfo(billingInfo as BillingProfile) As UpdateCustomerPaymentProfileBuilder
+		  self.paymentInfo = paymentInfo
 		  return self 
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setCustomerSerial(customerSerial as String) As StoredPaymentProfileBuilder
-		  self.customerSerial = customerSerial
+		Function setPaymentInfo(paymentInfo as AbstractPaymentType) As UpdateCustomerPaymentProfileBuilder
+		  self.paymentInfo = paymentInfo
 		  return self 
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setPaymentProfileSerial(paymentProfileSerial as String) As StoredPaymentProfileBuilder
-		  self.paymentProfileSerial = paymentProfileSerial
-		  return self 
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setValidationMode(validationMode as String) As StoredPaymentProfileBuilder
-		  
 		End Function
 	#tag EndMethod
 
@@ -45,21 +33,21 @@ Protected Class StoredPaymentProfileBuilder
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		customerSerial As string
+		customerID As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		paymentProfileSerial As string
+		paymentInfo As AbstractPaymentType
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		validationMode As String
+		paymentProfileId As string
 	#tag EndProperty
 
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="customerSerial"
+			Name="billingInfo"
 			Group="Behavior"
 			Type="Integer"
 		#tag EndViewProperty

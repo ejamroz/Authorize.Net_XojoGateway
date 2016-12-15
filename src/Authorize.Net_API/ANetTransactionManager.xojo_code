@@ -25,7 +25,7 @@ Inherits ANetController
 		  jsonHead = theRequest.getRequestHeader()
 		  theRequestJSON = theRequest.getJSON()
 		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
-		  if refID <> "" then
+		  if refID <> "" then //WHY IS THIS HERE?
 		    sendRequestBody.Value("refId") = refID
 		    
 		  end if

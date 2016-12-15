@@ -1,12 +1,9 @@
 #tag Class
 Protected Class PaymentProfile
 	#tag Method, Flags = &h0
-		Sub constructor(payment as AbstractPaymentType, billing as BillingProfile)
-		  //@param payment: Object representing payment information
-		  //@param billing: Object representing the billing information 
-		  
-		  paymentInfo = payment
-		  billingInfo = billing
+		Sub constructor(paymentInfo as AbstractPaymentType)
+		  paymentInfo = paymentInfo
+		  billingInfo = paymentInfo.getBillingInfo()
 		End Sub
 	#tag EndMethod
 

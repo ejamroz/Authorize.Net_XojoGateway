@@ -4,18 +4,10 @@ Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
 		Sub constructor(txID as string)
 		  super.constructor()
-		  self.mType = kTypeCreateProfileFromTx
-		  mRequestHeader = kCreateCustProfileFromTxHeader
+		  self.requestType = kTypeCreateProfileFromTx
+		  requestHeaderKey = kCreateCustProfileFromTxHeader
 		  self.txID = txID
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getID() As String
-		  //@return: The txID
-		  
-		  return self.txID
-		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

@@ -3,14 +3,11 @@ Protected Class DeleteCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
 		Sub constructor(customerID as string, paymentID as string)
-		  //@param customerID: ANet customer serial
-		  //@param paymentID: ANet customer payment profile ID 
-		  
 		  Super.Constructor()
-		  mType = kTypeDeletePaymentProfile
-		  mRequestHeader = kDeletePaymentProfileRequestHeader
-		  mJSONBodyToken= ""
-		  mCustomerId = customerID
+		  requestType = kTypeDeletePaymentProfile
+		  requestHeaderKey = kDeletePaymentProfileRequestHeader
+		  requestBodyKey= ""
+		  aNetCustomerID = customerID
 		  paymentProfileSerial = paymentID
 		  
 		End Sub

@@ -4,10 +4,12 @@ Inherits AbstractPaymentType
 	#tag Method, Flags = &h0
 		Sub constructor(builder as CreditCardBuilder)
 		  mTokenName = kPayWithCCToken
-		  self.ccNumber = builder.ccNumber
-		  self.expirationDate = builder.expirationDate
-		  self.cvvCode = builder.cvvCode
-		  self.track2Data = builder.track2Data
+		  ccNumber = builder.ccNumber
+		  expirationDate = builder.expirationDate
+		  cvvCode = builder.cvvCode
+		  track2Data = builder.track2Data
+		  validationMode = builder.validationMode
+		  billingInfo = builder.billingInfo()
 		End Sub
 	#tag EndMethod
 

@@ -4,10 +4,11 @@ Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
 		Sub constructor(customerID as string, paymentID as string)
 		  Super.Constructor()
-		  mType = kTypeGetCustomerPaymentPRofile
-		  mRequestHeader = kGetCustomerPaymentProfileHeader
-		  mJSONBodyToken= "" 
-		  mCustomerId = customerID
+		  validationMode = ""
+		  requestType = kTypeGetCustomerPaymentPRofile
+		  requestHeaderKey = kGetCustomerPaymentProfileHeader
+		  requestBodyKey= "" 
+		  aNetCustomerID = customerID
 		  paymentProfileSerial = paymentID
 		End Sub
 	#tag EndMethod

@@ -7,18 +7,28 @@ Protected Class AbstractPaymentType
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function getBillingInfo() As BillingProfile
+		  return billingInfo
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getJson() As JSONItem
 		  
 		  
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function getValidationMode() As String
+		  return validationMode
+		End Function
+	#tag EndMethod
 
-	#tag Note, Name = Description
-		This is an abstract super class for all payment types. It can not be instantiated
-		
-	#tag EndNote
 
+	#tag Property, Flags = &h1
+		Protected billingInfo As BillingProfile
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -32,6 +42,10 @@ Protected Class AbstractPaymentType
 
 	#tag Property, Flags = &h1
 		Protected mTokenName As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
+		Protected validationMode As string
 	#tag EndProperty
 
 

@@ -6,10 +6,10 @@ Inherits AbstractProfileRequest
 		  //@param customerID: ANet customer serial
 		  
 		  Super.Constructor()
-		  mType = kTypeDeleteCustomerProfile
-		  mRequestHeader = kDeleteCustomerRequestHeader
-		  mJSONBodyToken= ""
-		  mCustomerId = customerID
+		  requestType = kTypeDeleteCustomerProfile
+		  requestHeaderKey = kDeleteCustomerRequestHeader
+		  requestBodyKey= ""
+		  aNetCustomerID = customerID
 		  
 		End Sub
 	#tag EndMethod

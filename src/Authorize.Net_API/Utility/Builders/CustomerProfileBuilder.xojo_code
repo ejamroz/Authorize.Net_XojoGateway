@@ -1,55 +1,36 @@
 #tag Class
-Protected Class CreditCardBuilder
+Protected Class CustomerProfileBuilder
 	#tag Method, Flags = &h0
-		Function buildCreditCard() As CreditCard
-		  return new CreditCard(self) 
+		Function buildCustomerProfile() As CustomerProfile
+		  return new CustomerProfile(self) 
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub constructor()
-		  validationMode = kValidationTest
+		Sub constructor(fullname as Name, merchantSerial as string)
+		  self.fullName = fullname
+		  self.merchantSerial = merchantSerial
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setBillingInfo(billingInfo as BillingProfile) As CreditCardBuilder
+		Function setBillingInfo(billingInfo as BillingProfile) As CustomerProfileBuilder
 		  self.billingInfo = billingInfo
 		  return self 
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setCCNumber(ccNumber as String) As CreditCardBuilder
-		  self.ccNumber = ccNumber
+		Function setEmail(email as String) As CustomerProfileBuilder
+		  self.email = email
 		  return self 
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setCVVCode(cvvCode as String) As CreditCardBuilder
-		  self.cvvCode = cvvCode
-		  return self
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setExpirationDate(expirationDate as String) As CreditCardBuilder
-		  self.expirationDate = expirationDate
-		  return self 
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setTrack2(track2 as string) As CreditCardBuilder
-		  self.track2Data = track2
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setValidationMode(validationMode as String) As CreditCardBuilder
-		  self.validationMode = validationMode
-		  return self 
+		Function setPhoneNumber(phoneNumber as String) As CustomerProfileBuilder
+		  self.phoneNumber = phoneNumber
+		  Return self
 		End Function
 	#tag EndMethod
 
@@ -58,30 +39,41 @@ Protected Class CreditCardBuilder
 		billingInfo As BillingProfile
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  if phoneNumber <> "" then
+			    return fullName.toString() + "|" + phoneNumber
+			    
+			  else
+			    return fullName.toString()
+			    
+			  end if
+			End Get
+		#tag EndGetter
+		description As string
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0
-		ccNumber As string
+		email As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private fullName As Name
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		cvvCode As string
+		merchantSerial As string
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		expirationDate As string
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		track2Data As string
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		validationMode As String
+	#tag Property, Flags = &h21
+		Private phoneNumber As string
 	#tag EndProperty
 
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="ccNumber"
+			Name="fullName"
 			Group="Behavior"
 			Type="Integer"
 		#tag EndViewProperty

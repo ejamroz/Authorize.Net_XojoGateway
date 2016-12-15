@@ -2,12 +2,12 @@
 Protected Class CreateCustomerProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custInfo as CustomerProfile,validation as string)
+		Sub constructor(custInfo as CustomerProfile)
 		  super.constructor()
-		  self.mType = kTypeCreateCustomerProfile
-		  mRequestHeader = kCreateCustomerProfileHeader
+		  self.requestType = kTypeCreateCustomerProfile
+		  requestHeaderKey = kCreateCustomerProfileHeader
 		  customerInfo = custInfo
-		  mValidation = validation
+		  
 		  
 		End Sub
 	#tag EndMethod

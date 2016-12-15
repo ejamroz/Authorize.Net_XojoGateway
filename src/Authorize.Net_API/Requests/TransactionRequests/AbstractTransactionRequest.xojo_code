@@ -4,7 +4,7 @@ Inherits AbstractRequest
 Implements ANetTransactionRequest
 	#tag Method, Flags = &h1
 		Protected Sub constructor()
-		  mJSONBodyToken= kRequestToken
+		  requestBodyKey= kRequestToken
 		End Sub
 	#tag EndMethod
 
@@ -34,7 +34,7 @@ Implements ANetTransactionRequest
 		Function getRequestHeader() As String
 		  // Part of the ANetTransactionRequest interface.
 		  
-		  return mRequestHeader
+		  return requestHeaderKey
 		  
 		  
 		End Function
@@ -44,7 +44,7 @@ Implements ANetTransactionRequest
 		Function getSentinalToken() As String
 		  // Part of the ANetTransactionRequest interface.
 		  
-		  return mJSONBodyToken
+		  return requestBodyKey
 		End Function
 	#tag EndMethod
 

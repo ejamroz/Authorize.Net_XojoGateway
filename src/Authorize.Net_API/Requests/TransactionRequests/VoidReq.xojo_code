@@ -7,8 +7,8 @@ Inherits AbstractTransactionRequest
 		  //@param refTransID: The ANet identifier of the original settled transaction 
 		  
 		  super.constructor()
-		  self.mType = kTypeVoidTransaction
-		  self.mRequestHeader = kTxRequestHeader
+		  self.requestType = kTypeVoidTransaction
+		  self.requestHeaderKey = kTxRequestHeader
 		  self.refTransId = refTransId
 		  
 		End Sub
@@ -19,7 +19,7 @@ Inherits AbstractTransactionRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = self.mType
+		  jsonBody.Value("transactionType") = self.requestType
 		  jsonBody.Value("refTransId") = self.refTransId
 		  
 		  return jsonBody

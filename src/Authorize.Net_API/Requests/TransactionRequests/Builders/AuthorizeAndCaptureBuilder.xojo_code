@@ -1,68 +1,53 @@
 #tag Class
-Protected Class StoredPaymentProfileBuilder
+Protected Class AuthorizeAndCaptureBuilder
 	#tag Method, Flags = &h0
-		Function buildStoredPaymentProfile() As StoredPaymentProfile
-		  return new StoredPaymentProfile(self)
+		Function buildRequest() As AuthorizeAndCaptureReq
+		  return new AuthorizeAndCaptureReq(self) 
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub constructor()
-		  validationMode = kValidationTest
+		Sub constructor(amount as double, paymentInfo as AbstractPaymentType)
+		  self.amountToCharge = str(amount)
+		  self.paymentInfo = paymentInfo
+		  isSavingProfile = false 
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setBillingInfo(billingInfo as BillingProfile) As StoredPaymentProfileBuilder
-		  self.billingInfo = billingInfo
-		  return self 
+		Function setInvoiceNumber(invoiceSerial as String) As AuthorizeAndCaptureBuilder
+		  self.invoiceSerial = invoiceSerial
+		  return self
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function setCustomerSerial(customerSerial as String) As StoredPaymentProfileBuilder
-		  self.customerSerial = customerSerial
-		  return self 
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setPaymentProfileSerial(paymentProfileSerial as String) As StoredPaymentProfileBuilder
-		  self.paymentProfileSerial = paymentProfileSerial
-		  return self 
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function setValidationMode(validationMode as String) As StoredPaymentProfileBuilder
-		  
+		Function setSaveProfile() As AuthorizeAndCaptureBuilder
+		  isSavingProfile = true
+		  return self
 		End Function
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h0
-		billingInfo As BillingProfile
+		amountToCharge As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		customerSerial As string
+		invoiceSerial As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		paymentProfileSerial As string
+		isSavingProfile As boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		validationMode As String
+		paymentInfo As AbstractPaymentType
 	#tag EndProperty
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="customerSerial"
-			Group="Behavior"
-			Type="Integer"
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -82,6 +67,11 @@ Protected Class StoredPaymentProfileBuilder
 			Visible=true
 			Group="ID"
 			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="paymentInfo"
+			Group="Behavior"
+			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"

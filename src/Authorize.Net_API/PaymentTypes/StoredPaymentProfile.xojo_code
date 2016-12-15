@@ -6,6 +6,8 @@ Inherits AbstractPaymentType
 		  mTokenName = kPayWithProfileToken
 		  customerProfile = builder.customerSerial
 		  paymentProfileID = builder.paymentProfileSerial
+		  validationMode = builder.validationMode
+		  billingInfo = builder.billingInfo
 		End Sub
 	#tag EndMethod
 

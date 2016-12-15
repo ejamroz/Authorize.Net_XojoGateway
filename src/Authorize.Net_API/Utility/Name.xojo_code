@@ -7,6 +7,12 @@ Protected Class Name
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function toString() As String
+		  return firstName + " " + lastName
+		End Function
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		firstName As String

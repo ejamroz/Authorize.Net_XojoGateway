@@ -2,23 +2,15 @@
 Protected Class AuthorizeAndCaptureReq
 Inherits AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as AbstractPaymentType, optional billing as BillingProfile, toSave as boolean, optional invoiceNum as string)
-		  //Creates a transactionRequest object which is needed when trying to 
-		  //    authenticate,capture,refund, or void a transaction
-		  //@param amount: The amount to act on e.g. to charge. This is a total and must include tax, shipping, etc
-		  //@param payType: The type of payment used in this transation
-		  //@param billing: [OPTIONAL] Billing profile for the payment 
-		  //@param toSave: if true, will create a customerProfile inside ANet's CIM system 
-		  //@param invoiceNumber: Merchant supplied transaction number 
-		  
+		Sub constructor(builder as AuthorizeAndCaptureBuilder)
 		  super.constructor()
-		  self.mType = kTypeAuthAndCapture
-		  self.mRequestHeader = kTxRequestHeader
-		  self.amount = str(amount)
-		  self.paymentType = payType
-		  self.billing = billing
-		  self.toSave = toSave
-		  self.invoiceNumber = invoiceNum
+		  self.requestType = kTypeAuthAndCapture
+		  self.requestHeaderKey = kTxRequestHeader
+		  self.amount = builder.amountToCharge
+		  self.paymentInfo = builder.paymentInfo
+		  self.billing = paymentInfo.getBillingInfo()
+		  self.toSave = builder.isSavingProfile
+		  self.invoiceNumber = builder.invoiceSerial
 		  
 		  
 		End Sub
@@ -40,9 +32,9 @@ Inherits AbstractTransactionRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = mType
+		  jsonBody.Value("transactionType") = requestType
 		  jsonBody.Value("amount") = self.amount
-		  jsonBody.Value(paymentType.JSONTokenName) = self.paymentType.getJson()
+		  jsonBody.Value(paymentInfo.JSONTokenName) = self.paymentInfo.getJson()
 		  if self.toSave then 
 		    jsonBody.value("profile") = super.generateProfile()
 		    
@@ -58,8 +50,8 @@ Inherits AbstractTransactionRequest
 		    
 		  end if
 		  
-		  if self.paymentType isa CreditCard and _
-		    CreditCard(self.paymentType).isUsingTrack2 then
+		  if self.paymentInfo isa CreditCard and _
+		    CreditCard(self.paymentInfo).isUsingTrack2 then
 		    dim jsonMerchant as new JSONItem()
 		    jsonMerchant.Value("marketType") = "2" //In person store front
 		    jsonMerchant.Value("deviceType") = "5" //Personal computer terminal 
@@ -87,7 +79,7 @@ Inherits AbstractTransactionRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentType As AbstractPaymentType
+		Private paymentInfo As AbstractPaymentType
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

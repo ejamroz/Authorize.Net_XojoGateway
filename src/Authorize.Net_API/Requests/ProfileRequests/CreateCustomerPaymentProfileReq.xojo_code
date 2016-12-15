@@ -2,15 +2,16 @@
 Protected Class CreateCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentInfo as AbstractPaymentType, billingInfo as BillingProfile, validationMode as string)
+		Sub constructor(custSerial as string, paymentInfo as AbstractPaymentType)
 		  super.constructor()
-		  mType = kTypeCreatePaymentProfile
-		  mJSONBodyToken= kPaymentProfileToken
-		  mRequestHeader = kCreateCustomerPaymentProfileHeader
-		  mCustomerId = custSerial
-		  mValidation = validationMode
-		  self.billingInfo = billingInfo
+		  requestType = kTypeCreatePaymentProfile
+		  requestBodyKey = kPaymentProfileToken
+		  requestHeaderKey = kCreateCustomerPaymentProfileHeader
+		  aNetCustomerID = custSerial
 		  self.paymentInfo = paymentInfo
+		  validationMode = paymentInfo.getValidationMode()
+		  billingInfo = paymentInfo.getBillingInfo()
+		  
 		  
 		End Sub
 	#tag EndMethod

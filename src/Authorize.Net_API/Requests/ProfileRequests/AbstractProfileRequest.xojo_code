@@ -4,7 +4,8 @@ Inherits AbstractRequest
 Implements ANetProfileRequest
 	#tag Method, Flags = &h1
 		Protected Sub constructor()
-		  mJSONBodyToken= kProfileToken
+		  requestBodyKey= kProfileToken
+		  validationMode = kValidationNone
 		End Sub
 	#tag EndMethod
 
@@ -12,7 +13,7 @@ Implements ANetProfileRequest
 		Function getCustomerID() As String
 		  // Part of the ANetProfileRequest interface.
 		  
-		  return mCustomerId
+		  return aNetCustomerID
 		End Function
 	#tag EndMethod
 
@@ -34,7 +35,7 @@ Implements ANetProfileRequest
 		Function getRequestHeader() As String
 		  // Part of the ANetProfileRequest interface.
 		  
-		  return mRequestHeader
+		  return requestHeaderKey
 		End Function
 	#tag EndMethod
 
@@ -42,7 +43,7 @@ Implements ANetProfileRequest
 		Function getSentinalToken() As String
 		  // Part of the ANetProfileRequest interface.
 		  
-		  return mJSONBodyToken
+		  return requestBodyKey
 		End Function
 	#tag EndMethod
 
@@ -50,21 +51,21 @@ Implements ANetProfileRequest
 		Function getValidationMode() As String
 		  // Part of the ANetProfileRequest interface.
 		  
-		  return mValidation
+		  return validationMode
 		End Function
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h1
-		Protected mCustomerId As String
-	#tag EndProperty
-
-	#tag Property, Flags = &h1
-		Protected mValidation As string
+		Protected aNetCustomerID As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
 		Protected paymentProfileSerial As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
+		Protected validationMode As string
 	#tag EndProperty
 
 

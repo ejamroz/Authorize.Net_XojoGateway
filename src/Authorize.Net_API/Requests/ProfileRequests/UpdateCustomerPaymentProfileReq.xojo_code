@@ -2,22 +2,17 @@
 Protected Class UpdateCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentSerial as string, paymentInfo as AbstractPaymentType, billingInfo as BillingProfile, validationMode as string)
-		  //@param custSerial: ANet customer ID
-		  //@param paymentSerial: ANet payment profile ID
-		  //@param billingInfo: The billing information for the payment method provided
-		  //@param paymentInfo: Information regarding payment, currently only CC's are accepted
-		  //@param validationMode: The level of validation required for the payment provided
-		  
+		Sub constructor(builder as UpdateCustomerPaymentProfileBuilder)
 		  super.constructor()
-		  mType = kTypeUpdateCustomerPaymentProfile
-		  mJSONBodyToken= kPaymentProfileToken
-		  mRequestHeader = kUpdateCustomerPaymentProfileRequestHeader
-		  mCustomerId = custSerial
-		  self.billingInfo = billingInfo
-		  self.paymentInfo = paymentInfo
-		  mValidation = validationMode
-		  mCustomerPaymentProfile = paymentSerial
+		  requestType = kTypeUpdateCustomerPaymentProfile
+		  requestBodyKey= kPaymentProfileToken
+		  requestHeaderKey = kUpdateCustomerPaymentProfileRequestHeader
+		  aNetCustomerID = builder.customerID
+		  billingInfo = builder.billingInfo
+		  paymentInfo = builder.paymentInfo
+		  customerPaymentProfileID = builder.paymentProfileId
+		  validationMode = paymentInfo.getValidationMode()
+		  
 		End Sub
 	#tag EndMethod
 
@@ -26,9 +21,17 @@ Inherits AbstractProfileRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("billTo") = billingInfo.getJson
-		  jsonBody.Value("payment") = paymentInfo.getJson
-		  jsonBody.Value("customerPaymentProfileId") = mCustomerPaymentProfile
+		  if billingInfo <> Nil then 
+		    jsonBody.Value("billTo") = billingInfo.getJson
+		    
+		  end if
+		  
+		  if paymentInfo <> Nil then 
+		    jsonBody.Value("payment") = paymentInfo.getJson
+		    
+		  end if
+		  
+		  jsonBody.Value("customerPaymentProfileId") = customerPaymentProfileID
 		  
 		  //FORM TOKEN
 		  return jsonBody
@@ -45,7 +48,7 @@ Inherits AbstractProfileRequest
 		#tag Note
 			This is a private inaccessable version of mPaymentID
 		#tag EndNote
-		Private mCustomerPaymentProfile As string
+		Private customerPaymentProfileID As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

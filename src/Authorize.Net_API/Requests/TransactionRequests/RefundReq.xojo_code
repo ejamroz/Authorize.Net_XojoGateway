@@ -2,7 +2,7 @@
 Protected Class RefundReq
 Inherits AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, payType as AbstractPaymentType, refTransId as string)
+		Sub constructor(refTransId as string, amount as double, payType as AbstractPaymentType)
 		  // Calling the overridden superclass constructor.
 		  //@param amount: The amount to refund, this number must <= original transaction amount
 		  //@param payType: The payment to refund, if credit, it must be the same card that was used
@@ -10,11 +10,12 @@ Inherits AbstractTransactionRequest
 		  //@param refTransID: The ANet identifier of the original settled transaction 
 		  
 		  super.constructor()
-		  self.mType = kTypeRefund 
-		  self.mRequestHeader = kTxRequestHeader
+		  requestType = kTypeRefund 
+		  requestHeaderKey = kTxRequestHeader
+		  self.refTransId = refTransId
 		  self.amount = amount
 		  self.payType = payType
-		  self.refTransId = refTransId
+		  
 		End Sub
 	#tag EndMethod
 
@@ -23,7 +24,7 @@ Inherits AbstractTransactionRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("transactionType") = self.mType
+		  jsonBody.Value("transactionType") = self.requestType
 		  jsonBody.Value("amount") = self.amount
 		  jsonBody.Value(super.kPayToken) = self.payType.getJson()
 		  jsonBody.Value("refTransId") = self.refTransId

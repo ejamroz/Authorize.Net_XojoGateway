@@ -15,31 +15,21 @@ Protected Class AbstractRequest
 
 
 	#tag Property, Flags = &h1
-		Protected mJSONBodyToken As string
+		Protected requestBodyKey As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected mRequestHeader As string
+		Protected requestHeaderKey As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h1
-		Protected mType As string
+		Protected requestType As string
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return mType
-			  
-			End Get
-		#tag EndGetter
-		requestType As string
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0
-		#tag Getter
-			Get
-			  return mJSONBodyToken
+			  return requestBodyKey
 			  
 			End Get
 		#tag EndGetter

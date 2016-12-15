@@ -722,7 +722,7 @@ Begin Window aNetModuleTest
       Cancel          =   False
       Caption         =   "Get Payment Info"
       Default         =   False
-      Enabled         =   True
+      Enabled         =   False
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -1178,7 +1178,7 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   142
    End
-   Begin TextField CustomerSerialField
+   Begin TextField MerchantCustomerSerialField
       AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
@@ -2599,6 +2599,7 @@ End
 		  setCCNumber(CreditCardField.Text)._
 		  setExpirationDate(ExpirationField.Text)._
 		  setCVVCode(ControlCodeField.Text)._
+		  setBillingInfo(getBillingProfile())._
 		  buildCreditCard()
 		  
 		End Function
@@ -2611,6 +2612,7 @@ End
 		  setCCNumber(right(CreditCardField.Text, 4))._
 		  setCVVCode(ControlCodeField.text)._
 		  setExpirationDate(ExpirationField.Text)._
+		  setBillingInfo(getBillingProfile())._
 		  buildCreditCard()_
 		  
 		End Function
@@ -2624,8 +2626,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function getCustomerInfoString() As String
-		  return FirstnameField.text + " " + LastnameField.text + "|" + PhoneNumberField.text
+		Private Function getCustomerProfile() As CustomerProfile
+		  dim builder as new CustomerProfileBuilder(getName(), MerchantCustomerSerialField.text)
+		  return builder._
+		  setEmail(EmailAddressField.Text)._
+		  setPhoneNumber(PhoneNumberField.text)._
+		  buildCustomerProfile()
 		End Function
 	#tag EndMethod
 
@@ -2663,7 +2669,10 @@ End
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
 		  dim cc as CreditCard = getCreditCard()
 		  dim billing as BillingProfile = getBillingProfile()
-		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), cc, billing, false, InvoiceNumberField.text)
+		  dim builder as new AuthorizeAndCaptureBuilder(val(AmountField.text), cc)
+		  dim req as AuthorizeAndCaptureReq = builder._
+		  setInvoiceNumber(InvoiceNumberField.text)._
+		  buildRequest()
 		  
 		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
@@ -2677,7 +2686,7 @@ End
 		  
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
 		  dim cc as CreditCard = getCreditCardUsingLast4()
-		  dim req as new RefundReq(val(AmountField.text), cc, TransactionIDField.text)
+		  dim req as new RefundReq(TransactionIDField.text, val(AmountField.text), cc)
 		  
 		  self.ANetTransactionManager1.processRequest(auth, req)
 		  
@@ -2703,8 +2712,8 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
-		  dim customer as new CustomerProfile(CustomerSerialField.text, getCustomerInfoString(), EmailAddressField.text)
-		  dim req as new CreateCustomerProfileReq(customer, kValidationNone) //There is no CC info so no validation is possible
+		  dim customer as CustomerProfile = getCustomerProfile()
+		  dim req as new CreateCustomerProfileReq(customer) 
 		  
 		  self.ANetProfileManager1.processRequest(auth, req)
 		  
@@ -2717,10 +2726,11 @@ End
 		  self.TextArea1.Text = ""
 		  
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
-		  dim prof as StoredPaymentProfile = getStoredPaymentProfile()
-		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), prof, false)
+		  dim storedProfile as StoredPaymentProfile = getStoredPaymentProfile()
+		  dim builder as new AuthorizeAndCaptureBuilder(val(AmountField.text), storedProfile) 
+		  dim req as AuthorizeAndCaptureReq = builder.buildRequest()
 		  
-		  self.ANetTransactionManager1.processRequest(auth, req, InvoiceNumberField.text)
+		  self.ANetTransactionManager1.processRequest(auth, req, InvoiceNumberField.text) //TODO: DO WE NEED THIS, INVOICE?
 		  
 		End Sub
 	#tag EndEvent
@@ -2733,7 +2743,7 @@ End
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
 		  dim billing as BillingProfile = getBillingProfile()
 		  dim cc as CreditCard = getCreditCard()
-		  dim req as new CreateCustomerPaymentProfileReq(CustomerIDField.text, cc, billing, kValidationTest) 
+		  dim req as new CreateCustomerPaymentProfileReq(CustomerIDField.text, cc) 
 		  
 		  ANetProfileManager1.processRequest(auth, req)
 		  
@@ -2775,7 +2785,8 @@ End
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
 		  dim cc as CreditCard = getCreditCard()
 		  dim billing as BillingProfile = getBillingProfile()
-		  dim req as new UpdateCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text, cc, billing, kValidationTest) 
+		  dim builder as new UpdateCustomerPaymentProfileBuilder(CustomerIDField.Text, ProfileIDField.Text)
+		  dim req as UpdateCustomerPaymentProfileReq = builder.setPaymentInfo(cc).buildRequest() //XXX: WHAT TO DO IF BILLING IS NESTED IN PAYMENT INFO?
 		  
 		  ANetProfileManager1.processRequest(auth, req)
 		  
@@ -2803,7 +2814,10 @@ End
 		  dim auth as MerchantAuthentication = getMerchantAuthoriztion()
 		  dim cc as CreditCard = getCreditCard_Track2()
 		  dim billing as BillingProfile = getBillingProfile()
-		  dim req as new AuthorizeAndCaptureReq(val(AmountField.text), cc, billing, false, InvoiceNumberField.text)
+		  dim builder as new AuthorizeAndCaptureBuilder(val(AmountField.text), cc)
+		  dim req as AuthorizeAndCaptureReq = builder._
+		  setInvoiceNumber(InvoiceNumberField.text)._
+		  buildRequest()
 		  
 		  ANetTransactionManager1.processRequest(auth, req)
 		  
@@ -2890,10 +2904,12 @@ End
 		  if me.text <> "" or me.Text <> "0" then
 		    AddPaymentInfoButton.Enabled = true
 		    DeleteCustomerProfileButton.Enabled = true
+		    GetPaymentInfoButton.Enabled = true
 		    
 		  else
 		    AddPaymentInfoButton.Enabled = false
 		    DeleteCustomerProfileButton.Enabled = false
+		    GetPaymentInfoButton.Enabled = false 
 		    
 		  end if
 		End Sub
