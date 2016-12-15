@@ -36,6 +36,16 @@ Protected Class ANetController
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function generateCrentialsError() As InvalidControllerStateException
+		  dim err as new InvalidControllerStateException()
+		  err.Reason = "No ANet authentication credentials have been set"
+		  err.ErrorNumber = 1
+		  
+		  return err 
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub handleError(sender as xojo.Net.HTTPSocket, err as RuntimeException)
 		  //Event handler for the aNetSocket. Stores the error code and message for access
@@ -108,6 +118,12 @@ Protected Class ANetController
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub setAuthentication(credentials as MerchantAuthentication)
+		  self.credentials = credentials
+		End Sub
+	#tag EndMethod
+
 
 	#tag Hook, Flags = &h0
 		Event Error(err as xojo.Net.NetException)
@@ -131,6 +147,10 @@ Protected Class ANetController
 
 	#tag Property, Flags = &h21
 		Private aNetSocket As xojo.Net.HTTPSocket
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
+		Protected credentials As MerchantAuthentication
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

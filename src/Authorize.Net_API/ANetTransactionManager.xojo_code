@@ -16,30 +16,34 @@ Inherits ANetController
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub processRequest(auth as MerchantAuthentication, theRequest as ANetTransactionRequest, optional refID as string)
-		  dim jsonHead as string
-		  dim theRequestJSON as new JSONItem()
-		  dim sendRequestBody as new JSONItem()
-		  dim sendRequest as new JSONItem()
+		Sub processRequest(theRequest as ANetTransactionRequest)
+		  //@Throws: UnsupportedOperationException, InvalidControllerStateException
 		  
-		  jsonHead = theRequest.getRequestHeader()
-		  theRequestJSON = theRequest.getJSON()
-		  sendRequestBody.Value(kMerchantToken) = auth.getJson()
-		  if refID <> "" then //WHY IS THIS HERE?
-		    sendRequestBody.Value("refId") = refID
+		  if credentials <> Nil then 
+		    dim jsonHead as string
+		    dim theRequestJSON as new JSONItem()
+		    dim sendRequestBody as new JSONItem()
+		    dim sendRequest as new JSONItem()
+		    
+		    jsonHead = theRequest.getRequestHeader()
+		    theRequestJSON = theRequest.getJSON()
+		    sendRequestBody.Value(kMerchantToken) = credentials.getJson()
+		    sendRequestBody.Value(theRequest.getSentinalToken()) = theRequestJSON
+		    
+		    sendRequest.Value(theRequest.getRequestHeader()) = sendRequestBody
+		    
+		    try 
+		      self.send(sendRequest)
+		      
+		    catch err as UnsupportedOperationException
+		      raise err
+		      
+		    end try
+		    
+		  else
+		    raise generateCrentialsError()
 		    
 		  end if
-		  sendRequestBody.Value(theRequest.getSentinalToken()) = theRequestJSON
-		  
-		  sendRequest.Value(theRequest.getRequestHeader()) = sendRequestBody
-		  
-		  try 
-		    self.send(sendRequest)
-		    
-		  catch err as UnsupportedOperationException
-		    raise err
-		    
-		  end try
 		  
 		End Sub
 	#tag EndMethod
