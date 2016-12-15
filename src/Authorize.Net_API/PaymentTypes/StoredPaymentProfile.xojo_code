@@ -1,6 +1,6 @@
 #tag Class
 Protected Class StoredPaymentProfile
-Inherits AbstractPaymentType
+Inherits PaymentSource
 	#tag Method, Flags = &h0
 		Sub constructor(builder as StoredPaymentProfileBuilder)
 		  mTokenName = kPayWithProfileToken

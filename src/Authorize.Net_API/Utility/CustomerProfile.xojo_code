@@ -21,7 +21,7 @@ Protected Class CustomerProfile
 		  jsonBody.Value("email") = email
 		  
 		  if billingInfo <> Nil then
-		    jsonBody.Value(billingInfo.kTokenName) = billingInfo.getJson()
+		    jsonBody.Value("billTo") = billingInfo.getJson()
 		    
 		  end if
 		  
@@ -51,12 +51,8 @@ Protected Class CustomerProfile
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentInfo As AbstractPaymentType
+		Private paymentInfo As PaymentSource
 	#tag EndProperty
-
-
-	#tag Constant, Name = kTokenName, Type = String, Dynamic = False, Default = \"customer", Scope = Public
-	#tag EndConstant
 
 
 	#tag ViewBehavior

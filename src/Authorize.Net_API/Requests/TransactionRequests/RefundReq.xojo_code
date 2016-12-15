@@ -2,7 +2,7 @@
 Protected Class RefundReq
 Inherits AbstractTransactionRequest
 	#tag Method, Flags = &h0
-		Sub constructor(refTransId as string, amount as double, payType as AbstractPaymentType)
+		Sub constructor(refTransId as string, amount as double, payType as PaymentSource)
 		  // Calling the overridden superclass constructor.
 		  //@param amount: The amount to refund, this number must <= original transaction amount
 		  //@param payType: The payment to refund, if credit, it must be the same card that was used
@@ -40,7 +40,7 @@ Inherits AbstractTransactionRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private payType As AbstractPaymentType
+		Private payType As PaymentSource
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

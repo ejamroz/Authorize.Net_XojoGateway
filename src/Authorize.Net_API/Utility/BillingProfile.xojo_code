@@ -19,7 +19,6 @@ Protected Class BillingProfile
 		Function getJson() As JSONItem
 		  dim jsonBody as new JSONItem()
 		  
-		  //FORM TOKEN DATA
 		  if firstName <> "" then 
 		    jsonBody.value("firstName") = self.firstName
 		    
@@ -65,7 +64,6 @@ Protected Class BillingProfile
 		    
 		  end if
 		  
-		  //FORM TOKEN
 		  return jsonBody
 		  
 		  
@@ -108,10 +106,6 @@ Protected Class BillingProfile
 	#tag Property, Flags = &h21
 		Private zipCode As string
 	#tag EndProperty
-
-
-	#tag Constant, Name = kTokenName, Type = String, Dynamic = False, Default = \"billTo", Scope = Public
-	#tag EndConstant
 
 
 	#tag ViewBehavior

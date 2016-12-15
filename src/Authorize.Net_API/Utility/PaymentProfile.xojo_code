@@ -1,7 +1,7 @@
 #tag Class
 Protected Class PaymentProfile
 	#tag Method, Flags = &h0
-		Sub constructor(paymentInfo as AbstractPaymentType)
+		Sub constructor(paymentInfo as PaymentSource)
 		  paymentInfo = paymentInfo
 		  billingInfo = paymentInfo.getBillingInfo()
 		End Sub
@@ -26,7 +26,7 @@ Protected Class PaymentProfile
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentInfo As AbstractPaymentType
+		Private paymentInfo As PaymentSource
 	#tag EndProperty
 
 

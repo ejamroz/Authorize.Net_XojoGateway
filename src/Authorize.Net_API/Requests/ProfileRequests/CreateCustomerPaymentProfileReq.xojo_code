@@ -2,7 +2,7 @@
 Protected Class CreateCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(custSerial as string, paymentInfo as AbstractPaymentType)
+		Sub constructor(custSerial as string, paymentInfo as PaymentSource)
 		  super.constructor()
 		  requestType = kTypeCreatePaymentProfile
 		  requestBodyKey = kPaymentProfileToken
@@ -36,7 +36,7 @@ Inherits AbstractProfileRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentInfo As AbstractPaymentType
+		Private paymentInfo As PaymentSource
 	#tag EndProperty
 
 

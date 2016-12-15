@@ -1,5 +1,5 @@
 #tag Class
-Protected Class AbstractPaymentType
+Protected Class PaymentSource
 	#tag Method, Flags = &h21
 		Private Sub constructor()
 		  

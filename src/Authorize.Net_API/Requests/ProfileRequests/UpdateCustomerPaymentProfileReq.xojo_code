@@ -2,15 +2,15 @@
 Protected Class UpdateCustomerPaymentProfileReq
 Inherits AbstractProfileRequest
 	#tag Method, Flags = &h0
-		Sub constructor(builder as UpdateCustomerPaymentProfileBuilder)
+		Sub constructor(customerID as string, paymentProfileId as string, paymentInfo as PaymentSource)
 		  super.constructor()
 		  requestType = kTypeUpdateCustomerPaymentProfile
 		  requestBodyKey= kPaymentProfileToken
 		  requestHeaderKey = kUpdateCustomerPaymentProfileRequestHeader
-		  aNetCustomerID = builder.customerID
-		  billingInfo = builder.billingInfo
-		  paymentInfo = builder.paymentInfo
-		  customerPaymentProfileID = builder.paymentProfileId
+		  aNetCustomerID = customerID
+		  customerPaymentProfileID = paymentProfileId
+		  self.paymentInfo = paymentInfo
+		  billingInfo = paymentInfo.getBillingInfo()
 		  validationMode = paymentInfo.getValidationMode()
 		  
 		End Sub
@@ -52,7 +52,7 @@ Inherits AbstractProfileRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentInfo As AbstractPaymentType
+		Private paymentInfo As PaymentSource
 	#tag EndProperty
 
 

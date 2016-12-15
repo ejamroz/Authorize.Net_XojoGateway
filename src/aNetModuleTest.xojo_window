@@ -772,7 +772,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   445
+      Top             =   446
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -2704,7 +2704,13 @@ End
 		  setInvoiceNumber(InvoiceNumberField.text)._
 		  buildRequest()
 		  
-		  self.ANetTransactionManager1.processRequest(req)
+		    try
+		        self.ANetTransactionManager1.processRequest(req)
+		        
+		    catch err as InvalidControllerStateException
+		        MsgBox err.Reason
+		        
+		    end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2717,7 +2723,13 @@ End
 		  dim cc as CreditCard = getCreditCardUsingLast4()
 		  dim req as new RefundReq(TransactionIDField.text, val(AmountField.text), cc)
 		  
-		  self.ANetTransactionManager1.processRequest(req)
+		    try
+		        self.ANetTransactionManager1.processRequest(req)
+		        
+		    catch err as InvalidControllerStateException
+		        MsgBox err.Reason
+		        
+		    end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2729,7 +2741,13 @@ End
 		  
 		  dim req as new VoidReq(TransactionIDField.text)
 		  
-		  self.ANetTransactionManager1.processRequest(req)
+		    try
+		        self.ANetTransactionManager1.processRequest(req)
+		        
+		    catch err as InvalidControllerStateException
+		        MsgBox err.Reason
+		        
+		    end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2739,11 +2757,16 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  
 		  dim customer as CustomerProfile = getCustomerProfile()
 		  dim req as new CreateCustomerProfileReq(customer) 
 		  
-		  self.ANetProfileManager1.processRequest(req)
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		        
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		        
+		  end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2757,7 +2780,13 @@ End
 		  dim builder as new AuthorizeAndCaptureBuilder(val(AmountField.text), storedProfile) 
 		  dim req as AuthorizeAndCaptureReq = builder.buildRequest()
 		  
-		  self.ANetTransactionManager1.processRequest(req)
+		  try
+		    self.ANetTransactionManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2767,12 +2796,17 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  
 		  dim billing as BillingProfile = getBillingProfile()
 		  dim cc as CreditCard = getCreditCard()
 		  dim req as new CreateCustomerPaymentProfileReq(CustomerIDField.text, cc) 
 		  
-		  ANetProfileManager1.processRequest(req)
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		  
 		  
 		End Sub
@@ -2786,8 +2820,13 @@ End
 		  
 		  dim req as new GetCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text) 
 		  
-		  self.ANetProfileManager1.processRequest(req)
-		  
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2796,11 +2835,15 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  
 		  dim req as new DeleteCustomerProfileReq(CustomerIDField.text) 
 		  
-		  ANetProfileManager1.processRequest(req)
-		  
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2809,14 +2852,16 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  
 		  dim cc as CreditCard = getCreditCard()
-		  dim billing as BillingProfile = getBillingProfile()
-		  dim builder as new UpdateCustomerPaymentProfileBuilder(CustomerIDField.Text, ProfileIDField.Text)
-		  dim req as UpdateCustomerPaymentProfileReq = builder.setPaymentInfo(cc).buildRequest() //XXX: WHAT TO DO IF BILLING IS NESTED IN PAYMENT INFO?
+		  dim req as new UpdateCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text, cc)
 		  
-		  ANetProfileManager1.processRequest(req)
-		  
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -2825,11 +2870,15 @@ End
 		Sub Action()
 		  self.TextArea1.Text = ""
 		  
-		  
 		  dim req as new DeleteCustomerPaymentProfileReq(CustomerIDField.text, ProfileIDField.text) 
 		  
-		  ANetProfileManager1.processRequest(req)
-		  
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		End Sub
 	#tag EndEvent
 #tag EndEvents

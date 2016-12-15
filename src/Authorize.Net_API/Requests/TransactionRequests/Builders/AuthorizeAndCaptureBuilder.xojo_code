@@ -7,7 +7,7 @@ Protected Class AuthorizeAndCaptureBuilder
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub constructor(amount as double, paymentInfo as AbstractPaymentType)
+		Sub constructor(amount as double, paymentInfo as PaymentSource)
 		  self.amountToCharge = str(amount)
 		  self.paymentInfo = paymentInfo
 		  isSavingProfile = false 
@@ -43,7 +43,7 @@ Protected Class AuthorizeAndCaptureBuilder
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		paymentInfo As AbstractPaymentType
+		paymentInfo As PaymentSource
 	#tag EndProperty
 
 

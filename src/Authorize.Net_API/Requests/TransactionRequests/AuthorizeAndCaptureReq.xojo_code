@@ -79,7 +79,7 @@ Inherits AbstractTransactionRequest
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private paymentInfo As AbstractPaymentType
+		Private paymentInfo As PaymentSource
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
