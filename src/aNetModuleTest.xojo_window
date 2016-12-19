@@ -91,7 +91,7 @@ Begin Window aNetModuleTest
       TabIndex        =   26
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "3g43A42jEa3J5Dw9"
+      Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
@@ -245,7 +245,7 @@ Begin Window aNetModuleTest
       TabIndex        =   25
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "5g7W2Waks"
+      Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
