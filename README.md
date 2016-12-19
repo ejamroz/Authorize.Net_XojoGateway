@@ -4,7 +4,7 @@ A module for  integrating Xojo applications with Authorize.net's CIM and payment
 ## Usage
 To use ANet's API you must either have a merchant account or a [sandbox account](https://developer.authorize.net/hello_world/sandbox/) with them. Once you have a mechant login and transaction key you will be able to test their API. See the code in the aNetModuleTest window for examples. Each button demostrates a different capability. There is dummy data already hard coded in, so feel to change it to see what happens. 
 
-All relavent source code is contained within the ANetAPI module.
+All relavent source code is contained within the ANetAPI folder. I have included a test window that allows you to go through all current abilities and see how they work and what respnses look like. 
 
 ## Current Abilities
 * Charge a credit card
