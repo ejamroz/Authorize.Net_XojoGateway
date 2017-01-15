@@ -2704,13 +2704,13 @@ End
 		  setInvoiceNumber(InvoiceNumberField.text)._
 		  buildRequest()
 		  
-		    try
-		        self.ANetTransactionManager1.processRequest(req)
-		        
-		    catch err as InvalidControllerStateException
-		        MsgBox err.Reason
-		        
-		    end try
+		  try
+		    self.ANetTransactionManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2723,13 +2723,13 @@ End
 		  dim cc as CreditCard = getCreditCardUsingLast4()
 		  dim req as new RefundReq(TransactionIDField.text, val(AmountField.text), cc)
 		  
-		    try
-		        self.ANetTransactionManager1.processRequest(req)
-		        
-		    catch err as InvalidControllerStateException
-		        MsgBox err.Reason
-		        
-		    end try
+		  try
+		    self.ANetTransactionManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2741,13 +2741,13 @@ End
 		  
 		  dim req as new VoidReq(TransactionIDField.text)
 		  
-		    try
-		        self.ANetTransactionManager1.processRequest(req)
-		        
-		    catch err as InvalidControllerStateException
-		        MsgBox err.Reason
-		        
-		    end try
+		  try
+		    self.ANetTransactionManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		  
 		End Sub
 	#tag EndEvent
@@ -2762,10 +2762,10 @@ End
 		  
 		  try
 		    self.ANetProfileManager1.processRequest(req)
-		        
+		    
 		  catch err as InvalidControllerStateException
 		    MsgBox err.Reason
-		        
+		    
 		  end try
 		  
 		End Sub
@@ -3018,12 +3018,6 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="aNetTxID"
-		Group="Behavior"
-		Type="string"
-		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="BackColor"
 		Visible=true
 		Group="Background"
@@ -3050,18 +3044,6 @@ End
 		Group="OS X (Carbon)"
 		InitialValue="False"
 		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="customerPaymentProfileID"
-		Group="Behavior"
-		Type="string"
-		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="customerProfileID"
-		Group="Behavior"
-		Type="string"
-		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Frame"

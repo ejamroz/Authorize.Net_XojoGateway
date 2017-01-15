@@ -50,18 +50,18 @@ Inherits AbstractTransactionRequest
 		    
 		  end if
 		  
-		  if self.paymentInfo isa CreditCard and _
-		    CreditCard(self.paymentInfo).isUsingTrack2 then
+		  if self.paymentInfo isa CreditCard then 
 		    dim jsonMerchant as new JSONItem()
-		    jsonMerchant.Value("marketType") = "2" //In person store front
-		    jsonMerchant.Value("deviceType") = "5" //Personal computer terminal 
+		    const kInPersonTransaction = "2"
+		    const kPersonalComputerTerminal = "5"
+		    jsonMerchant.Value("marketType") = kInPersonTransaction
+		    jsonMerchant.Value("deviceType") = kPersonalComputerTerminal
 		    jsonBody.Value("retail") = jsonMerchant
 		    
 		  end if
 		  
 		  //FORM TOKEN
 		  return jsonBody
-		  
 		End Function
 	#tag EndMethod
 
@@ -111,12 +111,6 @@ Inherits AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="requestType"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"

@@ -3,11 +3,8 @@ Protected Class ANetController
 	#tag Method, Flags = &h1
 		Protected Sub constructor()
 		  aNetSocket = new Xojo.Net.HTTPSocket()
-		  #IF DebugBuild then 
-		    gateway = kTxSandbox
-		    
-		  #ELSE
-		    gateway = kTxLive
+		  #IF not DebugBuild then 
+		    processLiveRequests = true
 		    
 		  #ENDIF
 		  
@@ -153,8 +150,23 @@ Protected Class ANetController
 		Protected credentials As MerchantAuthentication
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  if isProcessingLiveRequests then 
+			    return kTxLive
+			    
+			  else
+			    return kTxSandbox
+			    
+			  end if
+			End Get
+		#tag EndGetter
 		Private gateway As Text
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		isProcessingLiveRequests As boolean = false
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

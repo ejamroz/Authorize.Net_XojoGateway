@@ -43,6 +43,7 @@ Protected Class CreditCardBuilder
 	#tag Method, Flags = &h0
 		Function setTrack2(track2 as string) As CreditCardBuilder
 		  self.track2Data = track2
+		  return self 
 		End Function
 	#tag EndMethod
 
@@ -83,7 +84,18 @@ Protected Class CreditCardBuilder
 		#tag ViewProperty
 			Name="ccNumber"
 			Group="Behavior"
-			Type="Integer"
+			Type="string"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="cvvCode"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="expirationDate"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -117,6 +129,16 @@ Protected Class CreditCardBuilder
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="track2Data"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="validationMode"
+			Group="Behavior"
+			Type="String"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
