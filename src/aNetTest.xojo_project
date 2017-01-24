@@ -1,5 +1,5 @@
 Type=Desktop
-RBProjectVersion=2016.03
+RBProjectVersion=2016.041
 MinIDEVersion=20070100
 Class=TestResult;XojoUnit/TestFramework/TestResult.xojo_code;&h6A76B7FF;&h27A1C7FF;false
 Class=Assert;XojoUnit/TestFramework/Assert.xojo_code;&h7FB6DFFF;&h27A1C7FF;false
@@ -97,5 +97,6 @@ OSXBundleID=com.serialbliss.anettest
 DebuggerCommandLine=
 UseGDIPlus=False
 UseBuildsFolder=True
+CopyRedistNextToWindowsEXE=False
 IsWebProject=False
 OptimizationLevel=0

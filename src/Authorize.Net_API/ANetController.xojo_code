@@ -4,7 +4,7 @@ Protected Class ANetController
 		Protected Sub constructor()
 		  aNetSocket = new Xojo.Net.HTTPSocket()
 		  #IF not DebugBuild then 
-		    processLiveRequests = true
+		    isProcessingLiveRequests = true
 		    
 		  #ENDIF
 		  
@@ -153,7 +153,7 @@ Protected Class ANetController
 	#tag ComputedProperty, Flags = &h21
 		#tag Getter
 			Get
-			  if isProcessingLiveRequests then 
+			  if isProcessingLiveRequests then
 			    return kTxLive
 			    
 			  else
@@ -198,6 +198,12 @@ Protected Class ANetController
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="isProcessingLiveRequests"
+			Group="Behavior"
+			InitialValue="false"
+			Type="boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
