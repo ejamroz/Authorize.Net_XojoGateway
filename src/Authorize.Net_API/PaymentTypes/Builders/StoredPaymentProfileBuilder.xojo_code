@@ -35,7 +35,8 @@ Protected Class StoredPaymentProfileBuilder
 
 	#tag Method, Flags = &h0
 		Function setValidationMode(validationMode as String) As StoredPaymentProfileBuilder
-		  
+		  self.validationMode = validationMode
+		  return self 
 		End Function
 	#tag EndMethod
 
@@ -61,7 +62,8 @@ Protected Class StoredPaymentProfileBuilder
 		#tag ViewProperty
 			Name="customerSerial"
 			Group="Behavior"
-			Type="Integer"
+			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -84,6 +86,11 @@ Protected Class StoredPaymentProfileBuilder
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="paymentProfileSerial"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
@@ -95,6 +102,11 @@ Protected Class StoredPaymentProfileBuilder
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="validationMode"
+			Group="Behavior"
+			Type="String"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

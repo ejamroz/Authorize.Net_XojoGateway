@@ -8,7 +8,7 @@ Protected Class CustomerProfileBuilder
 
 	#tag Method, Flags = &h0
 		Sub constructor(fullname as Name, merchantSerial as string)
-		  self.fullName = fullname
+		  customerName = fullname
 		  self.merchantSerial = merchantSerial
 		End Sub
 	#tag EndMethod
@@ -39,14 +39,18 @@ Protected Class CustomerProfileBuilder
 		billingInfo As BillingProfile
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private customerName As Name
+	#tag EndProperty
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
 			  if phoneNumber <> "" then
-			    return fullName.toString() + "|" + phoneNumber
+			    return customerName.fullName + "|" + phoneNumber
 			    
 			  else
-			    return fullName.toString()
+			    return customerName.fullName
 			    
 			  end if
 			End Get
@@ -56,10 +60,6 @@ Protected Class CustomerProfileBuilder
 
 	#tag Property, Flags = &h0
 		email As string
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private fullName As Name
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -73,9 +73,14 @@ Protected Class CustomerProfileBuilder
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="fullName"
+			Name="description"
 			Group="Behavior"
-			Type="Integer"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="email"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -90,6 +95,11 @@ Protected Class CustomerProfileBuilder
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="merchantSerial"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"

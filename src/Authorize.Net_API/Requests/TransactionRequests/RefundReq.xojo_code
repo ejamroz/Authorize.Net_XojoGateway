@@ -28,6 +28,15 @@ Inherits AbstractTransactionRequest
 		  jsonBody.Value("amount") = self.amount
 		  jsonBody.Value(super.kPayToken) = self.payType.getJson()
 		  jsonBody.Value("refTransId") = self.refTransId
+		  if self.payType isa CreditCard then 
+		    dim jsonMerchant as new JSONItem()
+		    const kInPersonTransaction = "2"
+		    const kPersonalComputerTerminal = "5"
+		    jsonMerchant.Value("marketType") = kInPersonTransaction
+		    jsonMerchant.Value("deviceType") = kPersonalComputerTerminal
+		    jsonBody.Value("retail") = jsonMerchant
+		    
+		  end if
 		  
 		  return jsonBody
 		  
@@ -68,12 +77,6 @@ Inherits AbstractTransactionRequest
 			Visible=true
 			Group="ID"
 			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="requestType"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="sentinalToken"
