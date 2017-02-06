@@ -18,6 +18,27 @@ Protected Class Name
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  if mFirstName <> "" and mLastName <> "" then
+			    return mLastName + ", " + mFirstName
+			    
+			  elseif mFirstName <> "" then
+			    return mFirstName
+			    
+			  elseif mLastName <> "" then
+			    return mLastName
+			    
+			  else
+			    return kNamePLaceholder
+			    
+			  end if
+			End Get
+		#tag EndGetter
+		directoryName As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return mFirstName
 			End Get
 		#tag EndGetter
@@ -30,14 +51,14 @@ Protected Class Name
 			  if mFirstName <> "" and mLastName <> "" then
 			    return mFirstName + " " + mLastName
 			    
-			  elseif mFirstName <> "" then 
+			  elseif mFirstName <> "" then
 			    return mFirstName
 			    
 			  elseif mLastName <> "" then
 			    return mLastName
 			    
 			  else
-			    return "New Customer"
+			    return kNamePLaceholder
 			    
 			  end if
 			End Get
@@ -64,7 +85,21 @@ Protected Class Name
 	#tag EndProperty
 
 
+	#tag Constant, Name = kNamePLaceholder, Type = String, Dynamic = False, Default = \"No Name", Scope = Public
+	#tag EndConstant
+
+
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="firstname"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="fullName"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -73,22 +108,16 @@ Protected Class Name
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="lastname"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Left"
 			Visible=true
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mFirstName"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mLastName"
-			Group="Behavior"
-			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"

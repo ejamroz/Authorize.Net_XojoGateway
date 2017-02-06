@@ -26,6 +26,33 @@ Inherits AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
+			  dim builder as new BillingProfileBuilder(customerName)
+			  return builder._
+			  setAddress(data.Lookup("address", ""))._
+			  setCity(data.Lookup("city", ""))._
+			  setState(data.Lookup("state", ""))._
+			  setZipCode(data.Lookup("zip", ""))._
+			  setCountry(data.Lookup("country", ""))._
+			  setPhoneNumber(data.Lookup("phoneNumber", ""))._
+			  setCompany(data.Lookup("company", ""))._
+			  createBillingProfile()
+			End Get
+		#tag EndGetter
+		BillingInfo As BillingProfile
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return new Name(data.Lookup("firstName", ""), data.Lookup("lastName", "")) 
+			End Get
+		#tag EndGetter
+		customerName As Name
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
 			  return self.data.Lookup("customerProfileId", "")
 			End Get
 		#tag EndGetter
@@ -98,12 +125,6 @@ Inherits AbstractResponse
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="paymentProfileId"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="requestType"
 			Group="Behavior"
 			Type="string"
 			EditorType="MultiLineEditor"
