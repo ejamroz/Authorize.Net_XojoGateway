@@ -872,12 +872,14 @@ Begin Window aNetModuleTest
    End
    Begin ANetTransactionManager ANetTransactionManager1
       Index           =   -2147483648
+      isProcessingLiveRequests=   False
       LockedInPosition=   False
       Scope           =   0
       TabPanelIndex   =   0
    End
    Begin ANetProfileManager ANetProfileManager1
       Index           =   -2147483648
+      isProcessingLiveRequests=   False
       LockedInPosition=   False
       Scope           =   0
       TabPanelIndex   =   0
@@ -3013,6 +3015,7 @@ End
 		Sub Action()
 		  ANetTransactionManager1.setAuthentication(getMerchantAuthoriztion())
 		  ANetProfileManager1.setAuthentication(getMerchantAuthoriztion())
+		  me.Default = false 
 		End Sub
 	#tag EndEvent
 #tag EndEvents
