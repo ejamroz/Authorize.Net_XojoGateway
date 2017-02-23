@@ -111,7 +111,7 @@ Protected Class AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return data.Lookup("errorText", "")
+			  return data.Lookup("Text", "")
 			End Get
 		#tag EndGetter
 		errorMessage As string
@@ -120,7 +120,7 @@ Protected Class AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return data.Lookup("errorCode", "0")
+			  return data.Lookup("code", "0")
 			End Get
 		#tag EndGetter
 		lastErrorCode As string
@@ -176,12 +176,6 @@ Protected Class AbstractResponse
 			Visible=true
 			Group="ID"
 			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="requestType"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="statusMessage"

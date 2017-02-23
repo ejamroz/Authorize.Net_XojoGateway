@@ -2,15 +2,15 @@
 Protected Class BillingProfile
 	#tag Method, Flags = &h0
 		Sub constructor(builder as BillingProfileBuilder)
-		  self.firstname = builder.firstName
-		  self.lastName = builder.lastName
-		  self.address = builder.address
-		  self.city = builder.city
-		  self.state = builder.state
-		  self.zipCode = builder.zipCode
-		  self.country = builder.country
-		  self.phoneNumber = builder.phoneNumber
-		  self.companyName = builder.companyName
+		  mfirstname = builder.firstName
+		  mLastName = builder.lastName
+		  mAddress = builder.address
+		  mCity = builder.city
+		  mState = builder.state
+		  mZipCode = builder.zipCode
+		  mCountry = builder.country
+		  mPhoneNumber = builder.phoneNumber
+		  mCompanyName = builder.companyName
 		  
 		End Sub
 	#tag EndMethod
@@ -19,48 +19,48 @@ Protected Class BillingProfile
 		Function getJson() As JSONItem
 		  dim jsonBody as new JSONItem()
 		  
-		  if firstName <> "" then 
-		    jsonBody.value("firstName") = self.firstName
+		  if mfirstName <> "" then 
+		    jsonBody.value("firstName") = mFirstName
 		    
 		  end if
 		  
-		  if lastName <> "" then 
-		    jsonBody.value("lastName") = self.lastName
+		  if mlastName <> "" then 
+		    jsonBody.value("lastName") = mLastName
 		    
 		  end if
 		  
-		  if companyName <> "" then 
-		    jsonBody.value("company") = self.companyName
+		  if mCompanyName <> "" then 
+		    jsonBody.value("company") = mCompanyName
 		    
 		  end if
 		  
-		  if address <> "" then 
-		    jsonBody.value("address") = self.address
+		  if mAddress <> "" then 
+		    jsonBody.value("address") = mAddress
 		    
 		  end if
 		  
-		  if city <> "" then 
-		    jsonBody.value("city") = self.city
+		  if mCity <> "" then 
+		    jsonBody.value("city") = mCity
 		    
 		  end if
 		  
-		  if state <> "" then 
-		    jsonBody.value("state") = self.state
+		  if mState <> "" then 
+		    jsonBody.value("state") = mState
 		    
 		  end if
 		  
-		  if zipCode <> "" then 
-		    jsonBody.value("zip") = self.zipCode
+		  if mZipCode <> "" then 
+		    jsonBody.value("zip") = mZipCode
 		    
 		  end if
 		  
-		  if country <> "" then 
-		    jsonBody.value("country") = self.country
+		  if mCountry <> "" then 
+		    jsonBody.value("country") = mCountry
 		    
 		  end if
 		  
-		  if phoneNumber <> "" then 
-		    jsonBody.value("phoneNumber") = self.phoneNumber
+		  if mPhoneNumber <> "" then 
+		    jsonBody.value("phoneNumber") = mPhoneNumber
 		    
 		  end if
 		  
@@ -71,50 +71,167 @@ Protected Class BillingProfile
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mAddress
+			  
+			End Get
+		#tag EndGetter
+		address As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCity
+			End Get
+		#tag EndGetter
+		city As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCompanyName
+			  
+			End Get
+		#tag EndGetter
+		company As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCountry
+			  
+			End Get
+		#tag EndGetter
+		country As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mFirstName
+			End Get
+		#tag EndGetter
+		firstName As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mLastName
+			  
+			End Get
+		#tag EndGetter
+		lastName As string
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
-		Private address As String
+		Private mAddress As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private city As string
+		Private mCity As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private companyName As string
+		Private mCompanyName As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private country As string
+		Private mCountry As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private firstName As string
+		Private mFirstName As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private lastName As string
+		Private mLastName As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private phoneNumber As string
+		Private mPhoneNumber As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private state As string
+		Private mState As string
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private zipCode As string
+		Private mZipCode As string
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mPhoneNumber
+			  
+			End Get
+		#tag EndGetter
+		pjoneNumber As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mState
+			End Get
+		#tag EndGetter
+		state As string
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mZipCode
+			  
+			End Get
+		#tag EndGetter
+		zip As string
+	#tag EndComputedProperty
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="address"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="city"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="company"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="country"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="firstName"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="lastName"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -130,6 +247,16 @@ Protected Class BillingProfile
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="pjoneNumber"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="state"
+			Group="Behavior"
+			Type="string"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
@@ -141,6 +268,11 @@ Protected Class BillingProfile
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="zip"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
