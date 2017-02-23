@@ -85,7 +85,7 @@ Protected Class ANetController
 		    dim json as text = TextEncoding.UTF8.ConvertDataToText(content)
 		    return ParseJSON(json)
 		    
-		  catch e as JSONException
+		  catch e as InvalidJSONException
 		    dim err as new xojo.Net.NetException()
 		    err.ErrorNumber = 128794
 		    err.Reason = "Unable to parse ANet response. Please manually check the status of your last request using their online portal"

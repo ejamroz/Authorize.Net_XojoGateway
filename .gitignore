@@ -2,3 +2,4 @@
 /.DS_store
 /src/.DS_store
 /src/*.obsolete*
+src/.aNetTest.xojo_uistate
