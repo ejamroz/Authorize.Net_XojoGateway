@@ -1,6 +1,10 @@
 # Authorize.Net_XojoGateway
 A module for  integrating Xojo applications with Authorize.net's CIM and payment gateways using their JSON API. More information about their APIs [here](http://developer.authorize.net/api/reference/). This was designed for a project with certain limitations, so I have not integrated their full API (Apple Pay, PayPal, etc). Hopefully when I get some time I will get around to doing that, or if you want to help out feel free to fork and add!
 
+## Support
+* The current version has only been tested on an OSX system 
+* Version 1.0.5 does not have reverse compatability with earlier versions
+
 ## Usage
 To use ANet's API you must either have a merchant account or a [sandbox account](https://developer.authorize.net/hello_world/sandbox/) with them. Once you have a mechant login and transaction key you will be able to test their API. See the code in the aNetModuleTest window for examples. Each button demostrates a different capability. There is dummy data already hard coded in, so feel to change it to see what happens. 
 
@@ -22,4 +26,5 @@ All relavent source code is contained within the ANetAPI folder. I have included
 
 ## Coming soon
 * Have accounts store more than one CC
+
 
