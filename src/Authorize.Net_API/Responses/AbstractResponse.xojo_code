@@ -111,7 +111,14 @@ Protected Class AbstractResponse
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  return data.Lookup("Text", "")
+			  dim msg as string = data.Lookup("Text", "") 
+			  dim additionalDetails as string = data.Lookup("errorText", "")
+			  if additionalDetails <> "" then
+			    msg = msg + " " + additionalDetails
+			    
+			  end if
+			  
+			  return msg 
 			End Get
 		#tag EndGetter
 		errorMessage As string
