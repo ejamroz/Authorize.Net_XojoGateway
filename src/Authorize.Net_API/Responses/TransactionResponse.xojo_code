@@ -9,6 +9,28 @@ Inherits AbstractResponse
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function isSuccess() As boolean
+		  //@Override
+		  //@return: True if the request was a success and false otherwise
+		  
+		  const kNoError = "1"
+		  if data.HasKey("responseCode") then
+		    if data.Value("responseCode") = kNoError then
+		      return true
+		      
+		    else
+		      return false
+		      
+		    end if
+		    
+		  end if
+		  
+		  return super.isSuccess()
+		  
+		End Function
+	#tag EndMethod
+
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -104,6 +126,7 @@ Inherits AbstractResponse
 			Name="cardType"
 			Group="Behavior"
 			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="errorMessage"
@@ -141,6 +164,7 @@ Inherits AbstractResponse
 			Name="merchantTransactionId"
 			Group="Behavior"
 			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
@@ -149,20 +173,16 @@ Inherits AbstractResponse
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="requestType"
+			Name="responseCode"
 			Group="Behavior"
 			Type="string"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="responseCode"
-			Group="Behavior"
-			Type="string"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="responseMessage"
 			Group="Behavior"
 			Type="string"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="StatusMessage"
