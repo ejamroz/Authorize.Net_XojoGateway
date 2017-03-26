@@ -406,7 +406,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   349
+      Top             =   366
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -741,7 +741,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   317
+      Top             =   339
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -803,7 +803,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   381
+      Top             =   393
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -834,7 +834,7 @@ Begin Window aNetModuleTest
       TextFont        =   "System"
       TextSize        =   12.0
       TextUnit        =   0
-      Top             =   413
+      Top             =   420
       Underline       =   False
       Visible         =   True
       Width           =   117
@@ -2605,6 +2605,37 @@ Begin Window aNetModuleTest
       Visible         =   True
       Width           =   80
    End
+   Begin PushButton GetProfileButton
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Get Profile"
+      Default         =   False
+      Enabled         =   False
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   425
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   70
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   12.0
+      TextUnit        =   0
+      Top             =   312
+      Underline       =   False
+      Visible         =   True
+      Width           =   117
+   End
 End
 #tag EndWindow
 
@@ -2983,11 +3014,13 @@ End
 		    AddPaymentInfoButton.Enabled = true
 		    DeleteCustomerProfileButton.Enabled = true
 		    GetPaymentInfoButton.Enabled = true
+		    GetProfileButton.Enabled = true
 		    
 		  else
 		    AddPaymentInfoButton.Enabled = false
 		    DeleteCustomerProfileButton.Enabled = false
 		    GetPaymentInfoButton.Enabled = false 
+		    GetProfileButton.Enabled = false 
 		    
 		  end if
 		End Sub
@@ -3016,6 +3049,23 @@ End
 		  ANetTransactionManager1.setAuthentication(getMerchantAuthoriztion())
 		  ANetProfileManager1.setAuthentication(getMerchantAuthoriztion())
 		  me.Default = false 
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events GetProfileButton
+	#tag Event
+		Sub Action()
+		  self.TextArea1.Text = ""
+		  
+		  dim req as new GetCustomerProfileReq(CustomerIDField.text) 
+		  
+		  try
+		    self.ANetProfileManager1.processRequest(req)
+		    
+		  catch err as InvalidControllerStateException
+		    MsgBox err.Reason
+		    
+		  end try
 		End Sub
 	#tag EndEvent
 #tag EndEvents
