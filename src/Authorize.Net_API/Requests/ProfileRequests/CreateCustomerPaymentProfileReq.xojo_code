@@ -21,7 +21,10 @@ Inherits AbstractProfileRequest
 		  dim jsonBody as new JSONItem()
 		  
 		  //FORM TOKEN DATA
-		  jsonBody.Value("billTo") = billingInfo.getJson
+		  if billingInfo <> Nil then
+		    jsonBody.Value("billTo") = billingInfo.getJson
+		    
+		  end if
 		  jsonBody.Value("payment") = paymentInfo.getJson
 		  
 		  //FORM TOKEN
@@ -46,12 +49,6 @@ Inherits AbstractProfileRequest
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="customerId"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
@@ -72,18 +69,6 @@ Inherits AbstractProfileRequest
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="paymentProfileID"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="requestType"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="sentinalToken"
 			Group="Behavior"
 			Type="string"
@@ -101,12 +86,6 @@ Inherits AbstractProfileRequest
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="validationMode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
