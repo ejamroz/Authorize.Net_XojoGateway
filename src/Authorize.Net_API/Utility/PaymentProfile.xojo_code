@@ -13,7 +13,10 @@ Protected Class PaymentProfile
 		  
 		  dim jsonBody as new JSONItem()
 		  
-		  jsonBody.Value("billTo") = billingInfo.getJson()
+		  if billingInfo <> Nil then
+		    jsonBody.Value("billTo") = billingInfo.getJson()
+		    
+		  end if
 		  jsonBody.Value("payment") = paymentInfo.getJson()
 		  
 		  return jsonBody
