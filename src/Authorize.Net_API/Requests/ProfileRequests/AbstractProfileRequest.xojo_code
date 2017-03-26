@@ -87,6 +87,9 @@ Implements ANetProfileRequest
 	#tag Constant, Name = kGetCustomerPaymentProfileHeader, Type = String, Dynamic = False, Default = \"getCustomerPaymentProfileRequest", Scope = Protected
 	#tag EndConstant
 
+	#tag Constant, Name = kGetCustomerProfileHeader, Type = String, Dynamic = False, Default = \"getCustomerProfileRequest", Scope = Protected
+	#tag EndConstant
+
 	#tag Constant, Name = kUpdateCustomerPaymentProfileRequestHeader, Type = String, Dynamic = False, Default = \"updateCustomerPaymentProfileRequest", Scope = Protected
 	#tag EndConstant
 
@@ -95,12 +98,6 @@ Implements ANetProfileRequest
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="customerId"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -122,18 +119,6 @@ Implements ANetProfileRequest
 			Type="String"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="paymentProfileID"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="requestType"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="sentinalToken"
 			Group="Behavior"
 			Type="string"
@@ -151,12 +136,6 @@ Implements ANetProfileRequest
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="validationMode"
-			Group="Behavior"
-			Type="string"
-			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

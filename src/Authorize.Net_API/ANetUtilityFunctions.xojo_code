@@ -46,6 +46,9 @@ Protected Module ANetUtilityFunctions
 	#tag Constant, Name = kTypeGetCustomerPaymentPRofile, Type = String, Dynamic = False, Default = \"getCustomerPaymentProfile", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kTypeGetCustomerProfile, Type = String, Dynamic = False, Default = \"getCustomerProfile", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kTypeRefund, Type = String, Dynamic = False, Default = \"refundTransaction", Scope = Public
 	#tag EndConstant
 
