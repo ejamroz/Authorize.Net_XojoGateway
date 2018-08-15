@@ -1,5 +1,5 @@
 # Authorize.Net_XojoGateway
-A module for  integrating Xojo applications with Authorize.net's CIM and payment gateways using their JSON API. More information about their APIs [here](http://developer.authorize.net/api/reference/). This was designed for a project with certain limitations, so I have not integrated their full API (Apple Pay, PayPal, etc). Hopefully when I get some time I will get around to doing that, or if you want to help out feel free to fork and add!
+A module for integrating Xojo applications with Authorize.net's CIM and payment gateways using their JSON API. More information about their APIs [here](http://developer.authorize.net/api/reference/). This was designed for a project with certain limitations, so I have not integrated their full API (Apple Pay, PayPal, etc). Hopefully when I get some time I will get around to doing that, or if you want to help out feel free to fork and add!
 
 ## Support
 * The current version has only been tested on an OSX system 
